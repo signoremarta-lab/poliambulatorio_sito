@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dott. Leonardo Anselmi | Poliambulatorio De Vitis</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <div class="container nav">
+    <a href="#" class="logo" aria-label="Poliambulatorio De Vitis">
+      <img src="assets/logo_trasparente.png" alt="" aria-hidden="true">
+      <span class="logo-text">
+        <span class="logo-kicker">POLIAMBULATORIO</span>
+        <span class="logo-name">De Vitis</span>
+      </span>
+    </a>
+
+    <nav>
+      <a href="home.html">Specialisti</a>
+      <a href="home.html">Approccio</a>
+      <a href="home.html">Contatti</a>
+      <a href="prenota.html" class="btn">Prenota</a>
+    </nav>
+  </div>
+</header>
+
+<section class="doctor-profile">
+  <div class="container profile-grid">
+
+    <div class="profile-main">
+      <div class="profile-header">
+        <img src="assets/medico-1.jpg" alt="Dott. Leonardo Anselmi">
+
+        <div>
+          <span class="eyebrow">Neurochirurgo</span>
+          <h1>Dott. Leonardo Anselmi</h1>
+          <p>Specialista in neurochirurgia e patologie della colonna vertebrale.</p>
+        </div>
+      </div>
+
+      <div class="profile-box">
+        <h2>Informazioni</h2>
+        <p>
+          Il Dott. Leonardo Anselmi si occupa di diagnosi e trattamento
+          delle principali patologie neurochirurgiche, con particolare attenzione
+          a ernie discali, lombalgia, cervicalgia e disturbi della colonna.
+        </p>
+      </div>
+
+      <div class="profile-box">
+        <h2>Prestazioni</h2>
+        <ul>
+          <li>Prima visita neurochirurgica</li>
+          <li>Visita di controllo</li>
+          <li>Valutazione patologie della colonna</li>
+          <li>Consulenza specialistica</li>
+        </ul>
+      </div>
+    </div>
+
+    <aside class="booking-box" id="prenotazione">
+      <h3>Prenota una visita</h3>
+      <p>Contatta il poliambulatorio per disponibilità e appuntamenti.</p>
+
+      <form class="mini-form">
+        <input type="text" placeholder="Nome e cognome" required>
+        <input type="tel" placeholder="Telefono" required>
+        <input type="email" placeholder="Email">
+
+        <div class="booking-section">
+            <label>Data disponibile</label>
+
+            <div class="days-grid">
+
+                <button type="button" class="day-slot">
+                    <span>Mar</span>
+                    <strong>15</strong>
+                </button>
+
+                <button type="button" class="day-slot">
+                    <span>Mer</span>
+                    <strong>16</strong>
+                </button>
+
+                <button type="button" class="day-slot">
+                    <span>Gio</span>
+                    <strong>17</strong>
+                </button>
+
+                <button type="button" class="day-slot">
+                    <span>Ven</span>
+                    <strong>18</strong>
+                </button>
+
+                <button type="button" class="day-slot">
+                    <span>Sab</span>
+                    <strong>19</strong>
+                </button>
+
+                <button type="button" class="day-slot">
+                    <span>Lun</span>
+                    <strong>21</strong>
+                </button>
+
+            </div>
+        </div>
+
+        <div class="booking-section">
+            <label>Orari disponibili</label>
+
+            <div class="hours-grid">
+            <button type="button" class="slot">09:00</button>
+            <button type="button" class="slot">09:30</button>
+            <button type="button" class="slot">10:00</button>
+            <button type="button" class="slot">10:30</button>
+            <button type="button" class="slot">11:00</button>
+            <button type="button" class="slot">11:30</button>
+            </div>
+        </div>
+
+        <button class="btn booking-btn">
+            Prenota una visita
+        </button>
+
+        </aside>
+
+  </div>
+</section>
+
+<footer>
+  <div class="container footer">
+    <div>© Poliambulatorio De Vitis</div>
+    <div>info@devitis.it · +39 000 000000</div>
+  </div>
+</footer>
+
+<script>
+document.querySelectorAll('.day-slot').forEach(button => {
+  button.addEventListener('click', () => {
+    document.querySelectorAll('.day-slot').forEach(b => {
+      b.classList.remove('selected');
+    });
+
+    button.classList.add('selected');
+  });
+});
+
+document.querySelectorAll('.slot').forEach(button => {
+  button.addEventListener('click', () => {
+    document.querySelectorAll('.slot').forEach(b => {
+      b.classList.remove('selected');
+    });
+
+    button.classList.add('selected');
+  });
+});
+</script>
+
+</body>
+</html>
