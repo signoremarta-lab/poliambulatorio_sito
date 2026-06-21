@@ -65,67 +65,32 @@
       <h3>Prenota una visita</h3>
       <p>Contatta il poliambulatorio per disponibilità e appuntamenti.</p>
 
-      <form class="mini-form">
-        <input type="text" placeholder="Nome e cognome" required>
-        <input type="tel" placeholder="Telefono" required>
-        <input type="email" placeholder="Email">
+      <form class="mini-form" id="bookingForm">
+        <input type="text" name="name" placeholder="Nome e cognome" required>
+        <input type="tel" name="phone" placeholder="Telefono" required>
+        <input type="email" name="email" placeholder="Email" required>
 
-        <div class="booking-section">
-            <label>Data disponibile</label>
+        <input type="hidden" name="doctor" value="leonardo-anselmi">
 
-            <div class="days-grid">
+        <label>Data</label>
+        <input type="date" name="date" required>
 
-                <button type="button" class="day-slot">
-                    <span>Mar</span>
-                    <strong>15</strong>
-                </button>
+        <label>Orario</label>
+        <input type="time" name="time" step="1800" required>
 
-                <button type="button" class="day-slot">
-                    <span>Mer</span>
-                    <strong>16</strong>
-                </button>
+        <label>
+          <input type="checkbox" required>
+          Ho letto l’informativa privacy e acconsento al trattamento dei dati.
+        </label>
 
-                <button type="button" class="day-slot">
-                    <span>Gio</span>
-                    <strong>17</strong>
-                </button>
-
-                <button type="button" class="day-slot">
-                    <span>Ven</span>
-                    <strong>18</strong>
-                </button>
-
-                <button type="button" class="day-slot">
-                    <span>Sab</span>
-                    <strong>19</strong>
-                </button>
-
-                <button type="button" class="day-slot">
-                    <span>Lun</span>
-                    <strong>21</strong>
-                </button>
-
-            </div>
-        </div>
-
-        <div class="booking-section">
-            <label>Orari disponibili</label>
-
-            <div class="hours-grid">
-            <button type="button" class="slot">09:00</button>
-            <button type="button" class="slot">09:30</button>
-            <button type="button" class="slot">10:00</button>
-            <button type="button" class="slot">10:30</button>
-            <button type="button" class="slot">11:00</button>
-            <button type="button" class="slot">11:30</button>
-            </div>
-        </div>
-
-        <button class="btn booking-btn">
-            Prenota una visita
+        <button class="btn booking-btn" type="submit">
+          Prenota una visita
         </button>
+      </form>
 
-        </aside>
+      <p id="bookingMessage"></p>
+
+    </aside>
 
   </div>
 </section>
@@ -156,6 +121,37 @@ document.querySelectorAll('.slot').forEach(button => {
 
     button.classList.add('selected');
   });
+});
+</script>
+
+<script>
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwQ1P8OEp2Pifna63fOvcooqw1ZZVLyJYR0G9ATeNxMZ9Uu2Wpgz32kIpi4GlT33qR5/exec";
+
+document.getElementById("bookingForm").addEventListener("submit", async function(e) {
+  e.preventDefault();
+
+  const message = document.getElementById("bookingMessage");
+  message.textContent = "Invio prenotazione in corso...";
+
+  const formData = new FormData(this);
+  const data = Object.fromEntries(formData);
+
+  try {
+    await fetch(SCRIPT_URL, {
+      method: "POST",
+      mode: "no-cors",
+      headers: {
+        "Content-Type": "text/plain"
+      },
+      body: JSON.stringify(data)
+    });
+
+    message.textContent = "Richiesta inviata. Se l’orario è disponibile, la prenotazione verrà registrata.";
+    this.reset();
+
+  } catch (error) {
+    message.textContent = "Errore di connessione. Riprova più tardi.";
+  }
 });
 </script>
 
