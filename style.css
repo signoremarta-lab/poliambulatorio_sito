@@ -372,7 +372,7 @@ footer {
 
 .profile-grid {
   display: grid;
-  grid-template-columns: 1fr 360px;
+  grid-template-columns: minmax(0, 1fr) minmax(390px, 480px);
   gap: 40px;
   align-items: start;
 }
@@ -463,6 +463,28 @@ footer {
   cursor: pointer;
 }
 
+.privacy-consent {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+.privacy-consent input {
+  width: 16px;
+  height: 16px;
+  flex: 0 0 auto;
+  margin-top: 3px;
+  padding: 0;
+  accent-color: var(--accent);
+}
+
+.privacy-consent a {
+  color: var(--text);
+}
+
 .booking-box {
   position: sticky;
   top: 120px;
@@ -524,6 +546,82 @@ footer {
   font-family: var(--font-body);
 }
 
+.availability-calendar {
+  display: grid;
+  gap: 12px;
+  margin-top: 4px;
+}
+
+.availability-stage {
+  display: grid;
+  grid-template-columns: 36px minmax(0, 1fr) 36px;
+  gap: 8px;
+  align-items: start;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border);
+}
+
+.availability-days {
+  display: grid;
+  grid-template-columns: repeat(var(--visible-days), minmax(0, 1fr));
+  gap: 8px;
+  min-width: 0;
+}
+
+.availability-day {
+  display: grid;
+  gap: 10px;
+  justify-items: center;
+  min-width: 0;
+}
+
+.availability-day-heading {
+  min-height: 58px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  line-height: 1.15;
+}
+
+.availability-day-heading span {
+  color: var(--text);
+  font-size: 18px;
+}
+
+.availability-day-heading strong {
+  color: var(--muted);
+  font-size: 15px;
+  font-weight: 300;
+}
+
+.availability-nav {
+  width: 36px;
+  height: 36px;
+  margin-top: 11px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 50%;
+  background: rgba(162, 197, 216, .32);
+  color: var(--accent);
+  cursor: pointer;
+  font-size: 34px;
+  line-height: 1;
+  transition: .2s;
+}
+
+.availability-nav:hover:not(:disabled) {
+  background: var(--logo);
+  transform: translateY(-1px);
+}
+
+.availability-nav:disabled {
+  opacity: .32;
+  cursor: default;
+}
+
 .dates-grid,
 .hours-grid {
   display: grid;
@@ -550,6 +648,82 @@ footer {
 .booking-btn {
   width: 100%;
   text-align: center;
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.availability-calendar .slot {
+  width: 100%;
+  min-height: 44px;
+  padding: 9px 8px;
+  border: 1px solid transparent;
+  border-radius: 100px;
+  background: rgba(61, 89, 25, .11);
+  color: var(--text);
+  cursor: pointer;
+  font-family: var(--font-body);
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1;
+  transition: .2s;
+}
+
+.availability-calendar .slot:hover:not(:disabled):not(.selected) {
+  background: rgba(61, 89, 25, .18);
+  transform: translateY(-1px);
+}
+
+.availability-calendar .slot.selected {
+  background: var(--accent);
+  color: white;
+  border-color: var(--accent);
+}
+
+.availability-calendar .slot.is-unavailable {
+  background: transparent;
+  color: var(--muted);
+  cursor: not-allowed;
+  font-weight: 700;
+  opacity: .9;
+  text-decoration: line-through;
+}
+
+.slot-placeholder {
+  width: 100%;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--muted);
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.show-more-times {
+  width: 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 8px 0 0;
+  border: none;
+  background: transparent;
+  color: var(--accent);
+  cursor: pointer;
+  font-family: var(--font-body);
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.show-more-times span {
+  font-size: 22px;
+  line-height: 1;
+}
+
+.availability-message {
+  margin: 0;
+  color: var(--muted);
 }
 
 .slot.selected {
@@ -625,6 +799,10 @@ footer {
     position: static;
   }
 
+  .availability-stage {
+    grid-template-columns: 34px minmax(0, 1fr) 34px;
+  }
+
   .profile-header {
     flex-direction: column;
     align-items: flex-start;
@@ -677,6 +855,30 @@ footer {
 
   .grid {
     grid-template-columns: 1fr;
+  }
+
+  .availability-stage {
+    gap: 6px;
+  }
+
+  .availability-days {
+    gap: 6px;
+  }
+
+  .availability-nav {
+    width: 32px;
+    height: 32px;
+    font-size: 30px;
+  }
+
+  .availability-day-heading span {
+    font-size: 16px;
+  }
+
+  .availability-calendar .slot,
+  .slot-placeholder {
+    min-height: 42px;
+    font-size: 16px;
   }
 
   .footer {

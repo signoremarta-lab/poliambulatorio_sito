@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
+  <base target="_top">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dott. Leonardo Anselmi | Poliambulatorio De Vitis</title>
@@ -63,24 +64,28 @@
 
     <aside class="booking-box" id="prenotazione">
       <h3>Prenota una visita</h3>
-      <p>Contatta il poliambulatorio per disponibilità e appuntamenti.</p>
 
       <form class="mini-form" id="bookingForm">
-        <input type="text" name="name" placeholder="Nome e cognome" required>
+        <input type="text" name="firstName" placeholder="Nome" required>
+        <input type="text" name="lastName" placeholder="Cognome" required>
         <input type="tel" name="phone" placeholder="Telefono" required>
         <input type="email" name="email" placeholder="Email" required>
 
+        <input type="text" name="website" id="website" style="display:none">
+
         <input type="hidden" name="doctor" value="leonardo-anselmi">
 
-        <label>Data</label>
-        <input type="date" name="date" required>
+        <div id="availableSlots" class="availability-calendar" aria-live="polite"></div>
 
-        <label>Orario</label>
-        <input type="time" name="time" step="1800" required>
+        <input type="hidden" name="date" id="selectedDate" required>
+        <input type="hidden" name="time" id="selectedTime" required>
 
-        <label>
+        <label class="privacy-consent">
           <input type="checkbox" required>
-          Ho letto l’informativa privacy e acconsento al trattamento dei dati.
+          <span>
+            Dichiaro di aver letto l'
+            <a href="privacy-policy.html" target="_blank">Informativa Privacy</a>.
+          </span>
         </label>
 
         <button class="btn booking-btn" type="submit">
@@ -103,29 +108,7 @@
 </footer>
 
 <script>
-document.querySelectorAll('.day-slot').forEach(button => {
-  button.addEventListener('click', () => {
-    document.querySelectorAll('.day-slot').forEach(b => {
-      b.classList.remove('selected');
-    });
-
-    button.classList.add('selected');
-  });
-});
-
-document.querySelectorAll('.slot').forEach(button => {
-  button.addEventListener('click', () => {
-    document.querySelectorAll('.slot').forEach(b => {
-      b.classList.remove('selected');
-    });
-
-    button.classList.add('selected');
-  });
-});
-</script>
-
-<script>
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwQ1P8OEp2Pifna63fOvcooqw1ZZVLyJYR0G9ATeNxMZ9Uu2Wpgz32kIpi4GlT33qR5/exec";
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycby1ISRB6p5Zdr1OoK6Zr-y14GIP82Mo9Igpr7D3HUA6uE0iv7B-sHC9315jIlZ1VEra/exec";
 
 document.getElementById("bookingForm").addEventListener("submit", async function(e) {
   e.preventDefault();
@@ -136,23 +119,420 @@ document.getElementById("bookingForm").addEventListener("submit", async function
   const formData = new FormData(this);
   const data = Object.fromEntries(formData);
 
+  if (!data.date || !data.time) {
+    message.textContent = "Seleziona un giorno e un orario disponibili.";
+    return;
+  }
+
   try {
     await fetch(SCRIPT_URL, {
       method: "POST",
       mode: "no-cors",
       headers: {
-        "Content-Type": "text/plain"
+        "Content-Type": "text/plain;charset=utf-8"
       },
       body: JSON.stringify(data)
     });
 
-    message.textContent = "Richiesta inviata. Se l’orario è disponibile, la prenotazione verrà registrata.";
+    message.textContent = "Richiesta inviata. Controlla il calendario o il foglio prenotazioni.";
     this.reset();
+    clearSelectedSlot();
 
   } catch (error) {
     message.textContent = "Errore di connessione. Riprova più tardi.";
   }
 });
+</script>
+
+<script>
+const availabilityState = {
+  days: [],
+  rowCount: 0,
+  pageStart: 0,
+  expanded: false,
+  visibleRows: 4
+};
+
+function handleSlots(result) {
+  const container = document.getElementById("availableSlots");
+  container.innerHTML = "";
+
+  if (!result.success) {
+    showAvailabilityMessage(container, "Errore: " + (result.message || "impossibile caricare le disponibilità."));
+    return;
+  }
+
+  if (!result.slots || result.slots.length === 0) {
+    showAvailabilityMessage(container, "Nessuna disponibilità al momento.");
+    return;
+  }
+
+  const grouped = groupSlotsByDate(result.slots);
+  availabilityState.days = grouped.days;
+  availabilityState.rowCount = grouped.rowCount;
+  availabilityState.pageStart = 0;
+  availabilityState.expanded = false;
+
+  renderAvailabilityCalendar();
+}
+
+function showAvailabilityMessage(container, text) {
+  container.innerHTML = "";
+
+  const message = document.createElement("p");
+  message.className = "availability-message";
+  message.textContent = text;
+  container.appendChild(message);
+}
+
+function groupSlotsByDate(slots) {
+  const daysMap = new Map();
+
+  slots.forEach(slot => {
+    const dateInfo = parseSlotDate(slot.date);
+    const timeInfo = normalizeSlotTime(slot.time);
+    const key = dateInfo.key;
+
+    if (!daysMap.has(key)) {
+      daysMap.set(key, {
+        key,
+        rawDate: slot.date,
+        date: dateInfo.date,
+        labelWeekday: dateInfo.weekday,
+        labelDate: dateInfo.dayMonth,
+        slotList: []
+      });
+    }
+
+    daysMap.get(key).slotList.push({
+      rawDate: slot.date,
+      rawTime: slot.time,
+      time: timeInfo.value,
+      sortValue: timeInfo.sortValue,
+      available: isSlotAvailable(slot)
+    });
+  });
+
+  const days = buildDisplayDays(daysMap);
+  days.forEach(day => {
+    day.slotList.sort((a, b) => a.sortValue - b.sortValue);
+  });
+
+  return {
+    days,
+    rowCount: Math.max(...days.map(day => day.slotList.length), 0)
+  };
+}
+
+function buildDisplayDays(daysMap) {
+  const days = Array.from(daysMap.values()).sort(sortDays);
+  const datedDays = days.filter(day => day.date);
+
+  if (!datedDays.length) {
+    return days;
+  }
+
+  const dayByKey = new Map(days.map(day => [day.key, day]));
+  const firstDate = new Date(datedDays[0].date);
+  const lastDate = new Date(datedDays[datedDays.length - 1].date);
+  const minimumLastDate = new Date(firstDate);
+  minimumLastDate.setDate(minimumLastDate.getDate() + 3);
+
+  if (lastDate < minimumLastDate) {
+    lastDate.setTime(minimumLastDate.getTime());
+  }
+
+  const displayDays = [];
+  const cursor = new Date(firstDate);
+
+  while (cursor <= lastDate) {
+    const key = formatDateKey(cursor);
+    displayDays.push(dayByKey.get(key) || createEmptyDay(cursor));
+    cursor.setDate(cursor.getDate() + 1);
+  }
+
+  return displayDays.concat(days.filter(day => !day.date));
+}
+
+function createEmptyDay(date) {
+  const labels = formatDateLabels(date);
+
+  return {
+    key: formatDateKey(date),
+    rawDate: formatDateKey(date),
+    date: new Date(date),
+    labelWeekday: labels.weekday,
+    labelDate: labels.dayMonth,
+    slotList: []
+  };
+}
+
+function renderAvailabilityCalendar() {
+  const container = document.getElementById("availableSlots");
+
+  if (!availabilityState.days.length) {
+    return;
+  }
+
+  const daysPerPage = getDaysPerPage(container);
+  const maxStart = Math.max(0, availabilityState.days.length - daysPerPage);
+  availabilityState.pageStart = Math.min(availabilityState.pageStart, maxStart);
+
+  const visibleDays = availabilityState.days.slice(
+    availabilityState.pageStart,
+    availabilityState.pageStart + daysPerPage
+  );
+  const visibleRowCount = availabilityState.expanded
+    ? availabilityState.rowCount
+    : Math.min(availabilityState.rowCount, availabilityState.visibleRows);
+
+  container.innerHTML = "";
+  container.style.setProperty("--visible-days", visibleDays.length || 1);
+
+  const stage = document.createElement("div");
+  stage.className = "availability-stage";
+
+  const prevButton = createNavButton("Giorni precedenti", "prev", () => {
+    availabilityState.pageStart = Math.max(0, availabilityState.pageStart - daysPerPage);
+    renderAvailabilityCalendar();
+  });
+  prevButton.disabled = availabilityState.pageStart === 0;
+
+  const daysGrid = document.createElement("div");
+  daysGrid.className = "availability-days";
+
+  visibleDays.forEach(day => {
+    const dayColumn = document.createElement("div");
+    dayColumn.className = "availability-day";
+
+    const heading = document.createElement("div");
+    heading.className = "availability-day-heading";
+
+    const weekday = document.createElement("span");
+    weekday.textContent = day.labelWeekday;
+
+    const date = document.createElement("strong");
+    date.textContent = day.labelDate;
+
+    heading.append(weekday, date);
+    dayColumn.appendChild(heading);
+
+    for (let slotIndex = 0; slotIndex < visibleRowCount; slotIndex++) {
+      const slot = day.slotList[slotIndex];
+
+      if (!slot) {
+        const missing = document.createElement("span");
+        missing.className = "slot-placeholder";
+        missing.textContent = "-";
+        dayColumn.appendChild(missing);
+        continue;
+      }
+
+      const button = document.createElement("button");
+      button.type = "button";
+      button.className = slot.available ? "slot" : "slot is-unavailable";
+      button.textContent = slot.time;
+      button.disabled = !slot.available;
+
+      if (
+        slot.rawDate === document.getElementById("selectedDate").value &&
+        slot.rawTime === document.getElementById("selectedTime").value
+      ) {
+        button.classList.add("selected");
+      }
+
+      if (slot.available) {
+        button.addEventListener("click", () => selectSlot(button, slot));
+      }
+
+      dayColumn.appendChild(button);
+    }
+
+    daysGrid.appendChild(dayColumn);
+  });
+
+  const nextButton = createNavButton("Giorni successivi", "next", () => {
+    availabilityState.pageStart = Math.min(maxStart, availabilityState.pageStart + daysPerPage);
+    renderAvailabilityCalendar();
+  });
+  nextButton.disabled = availabilityState.pageStart >= maxStart;
+
+  stage.append(prevButton, daysGrid, nextButton);
+  container.appendChild(stage);
+
+  if (availabilityState.rowCount > availabilityState.visibleRows) {
+    const moreButton = document.createElement("button");
+    moreButton.type = "button";
+    moreButton.className = "show-more-times";
+    moreButton.setAttribute("aria-expanded", String(availabilityState.expanded));
+    moreButton.innerHTML = availabilityState.expanded
+      ? 'Mostra meno orari <span aria-hidden="true">⌃</span>'
+      : 'Mostra più orari <span aria-hidden="true">⌄</span>';
+    moreButton.addEventListener("click", () => {
+      availabilityState.expanded = !availabilityState.expanded;
+      renderAvailabilityCalendar();
+    });
+    container.appendChild(moreButton);
+  }
+}
+
+function createNavButton(label, direction, onClick) {
+  const button = document.createElement("button");
+  button.type = "button";
+  button.className = "availability-nav";
+  button.setAttribute("aria-label", label);
+  button.innerHTML = direction === "prev" ? "‹" : "›";
+  button.addEventListener("click", onClick);
+  return button;
+}
+
+function selectSlot(button, slot) {
+  document.querySelectorAll(".availability-calendar .slot").forEach(b => {
+    b.classList.remove("selected");
+  });
+
+  button.classList.add("selected");
+  document.getElementById("selectedDate").value = slot.rawDate;
+  document.getElementById("selectedTime").value = slot.rawTime;
+  document.getElementById("bookingMessage").textContent = "";
+}
+
+function clearSelectedSlot() {
+  document.querySelectorAll(".availability-calendar .slot").forEach(button => {
+    button.classList.remove("selected");
+  });
+
+  document.getElementById("selectedDate").value = "";
+  document.getElementById("selectedTime").value = "";
+}
+
+function parseSlotDate(value) {
+  const rawValue = String(value || "").trim();
+  let date = null;
+
+  const isoMatch = rawValue.match(/^(\d{4})-(\d{1,2})-(\d{1,2})/);
+  const italianMatch = rawValue.match(/^(\d{1,2})[\/.-](\d{1,2})[\/.-](\d{2,4})$/);
+
+  if (isoMatch) {
+    date = new Date(Number(isoMatch[1]), Number(isoMatch[2]) - 1, Number(isoMatch[3]));
+  } else if (italianMatch) {
+    const year = Number(italianMatch[3].length === 2 ? "20" + italianMatch[3] : italianMatch[3]);
+    date = new Date(year, Number(italianMatch[2]) - 1, Number(italianMatch[1]));
+  } else {
+    const parsed = new Date(rawValue);
+    if (!Number.isNaN(parsed.getTime())) {
+      date = parsed;
+    }
+  }
+
+  if (!date || Number.isNaN(date.getTime())) {
+    return {
+      key: rawValue,
+      date: null,
+      weekday: rawValue,
+      dayMonth: ""
+    };
+  }
+
+  return {
+    key: formatDateKey(date),
+    date,
+    ...formatDateLabels(date)
+  };
+}
+
+function formatDateKey(date) {
+  return [
+    date.getFullYear(),
+    String(date.getMonth() + 1).padStart(2, "0"),
+    String(date.getDate()).padStart(2, "0")
+  ].join("-");
+}
+
+function formatDateLabels(date) {
+  const dayMonth = new Intl.DateTimeFormat("it-IT", { day: "numeric", month: "short" })
+    .format(date)
+    .replace(".", "");
+
+  return {
+    weekday: capitalize(
+      new Intl.DateTimeFormat("it-IT", { weekday: "short" })
+        .format(date)
+        .replace(".", "")
+    ) + ",",
+    dayMonth: dayMonth.replace(/(^|\s)([a-z])/g, (match, prefix, letter) => prefix + letter.toUpperCase())
+  };
+}
+
+function normalizeSlotTime(value) {
+  const rawValue = String(value || "").trim();
+  const match = rawValue.match(/(\d{1,2})[:.](\d{2})/);
+
+  if (!match) {
+    return {
+      value: rawValue,
+      sortValue: Number.MAX_SAFE_INTEGER
+    };
+  }
+
+  const hours = Number(match[1]);
+  const minutes = Number(match[2]);
+
+  return {
+    value: String(hours).padStart(2, "0") + ":" + String(minutes).padStart(2, "0"),
+    sortValue: hours * 60 + minutes
+  };
+}
+
+function isSlotAvailable(slot) {
+  const booleanFields = [slot.available, slot.isAvailable, slot.disponibile];
+  const hasUnavailableFlag = booleanFields.some(value => {
+    if (value === false) return true;
+    if (typeof value === "string") {
+      return ["false", "no", "non disponibile", "occupato", "prenotato"].includes(value.toLowerCase());
+    }
+    return false;
+  });
+
+  const status = String(slot.status || slot.state || "").toLowerCase();
+  return !hasUnavailableFlag && !["unavailable", "busy", "booked", "non disponibile", "occupato", "prenotato"].includes(status);
+}
+
+function sortDays(a, b) {
+  if (a.date && b.date) {
+    return a.date - b.date;
+  }
+
+  return a.key.localeCompare(b.key);
+}
+
+function getDaysPerPage(container) {
+  const width = container.getBoundingClientRect().width;
+  if (width < 340) return 2;
+  if (width < 440) return 3;
+  return 4;
+}
+
+function capitalize(value) {
+  return value.charAt(0).toUpperCase() + value.slice(1);
+}
+
+function loadSlots() {
+  const container = document.getElementById("availableSlots");
+  showAvailabilityMessage(container, "Caricamento disponibilità...");
+
+  const doctor = "leonardo-anselmi";
+  const script = document.createElement("script");
+
+  script.src = SCRIPT_URL
+    + "?doctor=" + encodeURIComponent(doctor)
+    + "&callback=handleSlots";
+
+  document.body.appendChild(script);
+}
+
+loadSlots();
+window.addEventListener("resize", renderAvailabilityCalendar);
 </script>
 
 </body>
