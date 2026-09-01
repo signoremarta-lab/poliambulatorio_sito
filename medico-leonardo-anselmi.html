@@ -521,12 +521,13 @@ function loadSlots() {
   const container = document.getElementById("availableSlots");
   showAvailabilityMessage(container, "Caricamento disponibilità...");
 
-  const doctor = "leonardo-anselmi";
-  const script = document.createElement("script");
+  const doctor = document.querySelector('input[name="doctor"]').value;
 
+  const script = document.createElement("script");
   script.src = SCRIPT_URL
     + "?doctor=" + encodeURIComponent(doctor)
-    + "&callback=handleSlots";
+    + "&callback=handleSlots"
+    + "&t=" + Date.now();
 
   document.body.appendChild(script);
 }

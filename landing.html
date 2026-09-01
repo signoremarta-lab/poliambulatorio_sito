@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>De Vitis Poliambulatorio | Prossima apertura</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet" >
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/drinking-code/HK-Grotesk-Web/font.min.css" >
+
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&display=swap");
+
+    body {
+    font-family: "Montserrat", sans-serif;
+    }
+
+    .brand-name,
+    h1 {
+    font-family: "HK Grotesk", Arial, sans-serif;
+    }
+
+    .brand-subtitle,
+    .opening {
+    font-family: "Montserrat", sans-serif;
+    }
+
+    :root {
+      --blue: #082845;
+      --light-blue: #6498BE;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+    }
+
+    .landing {
+      min-height: 100vh;
+      width: 100%;
+      position: relative;
+      overflow: hidden;
+
+      background-image: url("assets/sfondo.png");
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center top;
+
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+    }
+
+    .content {
+      width: 100%;
+      max-width: 1400px;
+      text-align: center;
+
+      /* Questo è il punto chiave:
+         sposta tutto più in basso come nella seconda immagine */
+      padding-top: clamp(300px, 52vh, 560px);
+      padding-left: 20px;
+      padding-right: 20px;
+      padding-bottom: 80px;
+    }
+
+    .brand {
+    display: grid;
+    grid-template-columns: auto auto;
+    align-items: center;
+    justify-content: center;
+    column-gap: 18px;
+
+    margin: 0 auto 42px;
+    width: fit-content;
+    }
+
+    .brand img {
+    width: clamp(54px, 5.3vw, 82px);
+    height: auto;
+    display: block;
+    object-fit: contain;
+    }
+
+    .brand-text {
+    --brand-name-size: clamp(46px, 5.2vw, 78px);
+    width: max-content;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    line-height: 1;
+    text-align: left;
+    }
+
+    .brand-name {
+    font-family: "HK Grotesk", Arial, sans-serif;
+    color: #082845;
+    font-size: var(--brand-name-size);
+    font-weight: 700;
+    line-height: 0.95;
+    width: auto;
+    white-space: nowrap;
+    text-align: center;
+    text-align-last: auto;
+    letter-spacing: 0;
+    }
+
+    .brand-subtitle {
+    font-family: "Montserrat", sans-serif;
+
+    margin-top: 8px;
+    color: #6498BE;
+
+    font-size: calc(var(--brand-name-size) * 0.3315);
+    font-weight: 600;
+
+    width: auto;
+    white-space: nowrap;
+
+    text-align: center;
+    text-align-last: auto;
+
+    letter-spacing: 0;
+    }
+
+    h1 {
+    font-family: "HK Grotesk", Arial, sans-serif;
+
+    color: #082845;
+    font-size: clamp(34px, 4vw, 70px);
+    font-weight: 700;
+    line-height: 1.12;
+    letter-spacing: -0.025em;
+    max-width: 1300px;
+    margin: 0 auto 34px;
+    }
+
+    .opening {
+      color: var(--blue);
+      font-size: clamp(24px, 2.4vw, 56px);
+      font-weight: 400;
+      letter-spacing: 0.12em;
+      line-height: 1.2;
+    }
+
+    /* QR opzionale */
+    .qr {
+      position: absolute;
+      right: clamp(20px, 4vw, 48px);
+      bottom: clamp(20px, 4vw, 48px);
+      width: clamp(72px, 8vw, 120px);
+      height: auto;
+    }
+
+    @media (max-width: 900px) {
+      .content {
+        padding-top: clamp(260px, 48vh, 420px);
+      }
+
+      .brand {
+        gap: 14px;
+        margin-bottom: 30px;
+      }
+
+      .brand-subtitle {
+        margin-top: 6px;
+      }
+
+      h1 {
+        max-width: 900px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .landing {
+        background-position: center top;
+      }
+
+      .content {
+        padding-top: clamp(220px, 44vh, 340px);
+        padding-bottom: 60px;
+      }
+
+      .brand {
+        gap: 12px;
+        margin-bottom: 24px;
+      }
+
+      .brand-text {
+        align-items: center;
+      }
+
+      h1 {
+        margin-bottom: 22px;
+      }
+
+      .qr {
+        width: 72px;
+        right: 16px;
+        bottom: 16px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .content {
+        padding-top: 210px;
+      }
+
+      .brand {
+        gap: 10px;
+      }
+
+      .brand img {
+        width: 34px;
+      }
+
+      .brand-text {
+        --brand-name-size: 40px;
+      }
+
+      h1 {
+        font-size: 28px;
+      }
+
+      .opening {
+        font-size: 22px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <main class="landing">
+    <div class="content">
+
+      <div class="brand">
+        <img src="assets/logo_trasparente.png" alt="Logo De Vitis">
+        <div class="brand-text">
+          <div class="brand-name">De Vitis</div>
+          <div class="brand-subtitle">POLIAMBULATORIO</div>
+        </div>
+      </div>
+
+      <h1>La salute ha un nuovo punto di riferimento.</h1>
+      <p class="opening">Prossima apertura.</p>
+    </div>
+
+  </main>
+
+</body>
+</html>
