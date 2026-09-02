@@ -1,262 +1,176 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>De Vitis Poliambulatorio | Prossima apertura</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet" >
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/drinking-code/HK-Grotesk-Web/font.min.css" >
+  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
 
   <style>
-    @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&display=swap");
-
-    body {
-    font-family: "Montserrat", sans-serif;
-    }
-
-    .brand-name,
-    h1 {
-    font-family: "HK Grotesk", Arial, sans-serif;
-    }
-
-    .brand-subtitle,
-    .opening {
-    font-family: "Montserrat", sans-serif;
-    }
-
-    :root {
-      --blue: #082845;
-      --light-blue: #6498BE;
+    :root { 
+        --blue: #082845; 
+        --light-blue: #6498be; 
+        --green: #496b22; 
     }
 
     * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+        box-sizing: border-box; 
+        margin: 0;
+         padding: 0; 
     }
 
-    html,
-    body {
-      width: 100%;
-      height: 100%;
+    body, .landing {
+        min-height: 100vh; 
+        background: #f7f7f3; 
+        font-family: "Montserrat", sans-serif; 
     }
 
-    .landing {
-      min-height: 100vh;
-      width: 100%;
-      position: relative;
-      overflow: hidden;
-
-      background-image: url("assets/sfondo.png");
-      background-repeat: no-repeat;
-      background-size: cover;
-      background-position: center top;
-
-      display: flex;
-      justify-content: center;
-      align-items: flex-start;
+    .hero { 
+        width: 100%; 
+        background: url("assets/sfondo.png") center top / cover no-repeat; 
     }
 
-    .content {
-      width: 100%;
-      max-width: 1400px;
-      text-align: center;
-
-      /* Questo è il punto chiave:
-         sposta tutto più in basso come nella seconda immagine */
-      padding-top: clamp(300px, 52vh, 560px);
-      padding-left: 20px;
-      padding-right: 20px;
-      padding-bottom: 80px;
+    .content { 
+        max-width: 1900px; 
+        margin: auto;
+        padding: clamp(306px, calc(32vw - 24px), 631px) 24px 42px;
+        text-align: center; 
     }
 
-    .brand {
-    display: grid;
-    grid-template-columns: auto auto;
-    align-items: center;
-    justify-content: center;
-    column-gap: 18px;
-
-    margin: 0 auto 42px;
-    width: fit-content;
+    .brand { 
+        --brand-size: clamp(54px, 5.4vw, 110px);
+        display: flex; 
+        align-items: center; 
+        gap: 18px; 
+        width: fit-content; 
+        margin: 0 auto 28px;
     }
 
-    .brand img {
-    width: clamp(54px, 5.3vw, 82px);
-    height: auto;
-    display: block;
-    object-fit: contain;
+    .brand img { 
+        display: block; 
+        width: calc(var(--brand-size) * .724 + 5.6px);
+        height: auto; 
     }
 
-    .brand-text {
-    --brand-name-size: clamp(46px, 5.2vw, 78px);
-    width: max-content;
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
-    line-height: 1;
-    text-align: left;
+    .brand-text { 
+        display: flex; 
+        flex-direction: column; 
+        align-items: center; 
     }
 
-    .brand-name {
-    font-family: "HK Grotesk", Arial, sans-serif;
-    color: #082845;
-    font-size: var(--brand-name-size);
-    font-weight: 700;
-    line-height: 0.95;
-    width: auto;
-    white-space: nowrap;
-    text-align: center;
-    text-align-last: auto;
-    letter-spacing: 0;
-    }
+    .brand-name { color: var(--blue); font: 400 var(--brand-size)/.9 "Bodoni Moda", Georgia, serif; white-space: nowrap; }
+    .brand-subtitle { margin-top: 10px; color: var(--light-blue); font-size: calc(var(--brand-size) * .3215); line-height: 1.2; letter-spacing: .08em; white-space: nowrap; }
 
-    .brand-subtitle {
-    font-family: "Montserrat", sans-serif;
+    h1 { width: min(100%, 1114px); margin: 0 auto 26px; color: var(--blue); font-size: clamp(38px, 3.8vw, 75px); font-weight: 600; line-height: 1.15; white-space: nowrap; }
+    .intro { max-width: 1500px; margin: auto; color: var(--blue); font-size: clamp(18px, 1.55vw, 30px); line-height: 1.4; letter-spacing: .08em; }
+    .opening { display: inline-block; margin-top: 30px; padding: 8px 30px 10px; border: 1.5px solid var(--green); border-radius: 999px; color: var(--green); font-size: clamp(20px, 1.5vw, 29px); line-height: 1.1; }
+    .opening strong { font-weight: 600; }
 
-    margin-top: 8px;
-    color: #6498BE;
+    .details { max-width: 1162px; margin: auto; padding: 56px 24px 76px; color: var(--blue); }
+    .newsletter { max-width: 816px; margin: 60px auto 0; text-align: left; }
+    .signup { display: grid; grid-template-columns: 1fr 366px; height: 54px; overflow: hidden; border: 1px solid #111; border-radius: 10px; background: #fff; }
+    .signup label { display: flex; align-items: center; gap: 8px; padding: 0 16px; color: #777; }
+    .signup input { width: 100%; border: 0; outline: 0; font: inherit; color: var(--blue); }
+    .signup button { margin: 2px; border: 0; border-radius: 7px; background: #426718; color: #fff; font: inherit; cursor: pointer; }
+    .privacy { margin: 6px 8px 0; color: #777; font-size: 12px; }
 
-    font-size: calc(var(--brand-name-size) * 0.3315);
-    font-weight: 600;
+    .card { border: 1px solid #deded8; border-radius: 8px; background: rgba(255,255,255,.92); box-shadow: 0 10px 30px rgba(24,40,20,.09); }
+    .story { display: grid; grid-template-columns: 54px 1.4fr 1px 1fr; gap: 22px; min-height: 344px; padding: 26px; }
+    .icon-circle { display: grid; place-items: center; width: 50px; height: 50px; flex: 0 0 50px; border-radius: 50%; background: #cbd3c3; color: var(--green); }
+    .icon { width: 28px; height: 28px; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+    .story h2, .location h2 { font: 400 32px/1.2 "Bodoni Moda", Georgia, serif; letter-spacing: .12em; }
+    .story h2 { white-space: nowrap; }
+    .story-copy p { margin-top: 18px; font-size: 14px; line-height: 1.38; letter-spacing: .03em; }
+    .divider { background: #111; }
+    .quote { position: relative; display: grid; place-items: center; padding: 42px 24px 22px; font: italic 400 34px/1.35 "Bodoni Moda", Georgia, serif; letter-spacing: .1em; text-align: center; }
+    .quote::before { content: "“"; position: absolute; top: -20px; left: 16px; color: #cbd3c3; font: 120px/1 Georgia, serif; }
+    .quote::after { content: ""; position: absolute; right: 12px; bottom: 34px; left: 12px; height: 1px; background: #aaa; }
 
-    width: auto;
-    white-space: nowrap;
-
-    text-align: center;
-    text-align-last: auto;
-
-    letter-spacing: 0;
-    }
-
-    h1 {
-    font-family: "HK Grotesk", Arial, sans-serif;
-
-    color: #082845;
-    font-size: clamp(34px, 4vw, 70px);
-    font-weight: 700;
-    line-height: 1.12;
-    letter-spacing: -0.025em;
-    max-width: 1300px;
-    margin: 0 auto 34px;
-    }
-
-    .opening {
-      color: var(--blue);
-      font-size: clamp(24px, 2.4vw, 56px);
-      font-weight: 400;
-      letter-spacing: 0.12em;
-      line-height: 1.2;
-    }
-
-    /* QR opzionale */
-    .qr {
-      position: absolute;
-      right: clamp(20px, 4vw, 48px);
-      bottom: clamp(20px, 4vw, 48px);
-      width: clamp(72px, 8vw, 120px);
-      height: auto;
-    }
-
-    @media (max-width: 900px) {
-      .content {
-        padding-top: clamp(260px, 48vh, 420px);
-      }
-
-      .brand {
-        gap: 14px;
-        margin-bottom: 30px;
-      }
-
-      .brand-subtitle {
-        margin-top: 6px;
-      }
-
-      h1 {
-        max-width: 900px;
-      }
-    }
+    .location { margin-top: 48px; padding: 28px 27px 52px; text-align: center; }
+    .location-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 13px; margin-top: 20px; }
+    .place { display: flex; align-items: center; min-height: 99px; padding: 10px 14px; border: 1px solid #111; border-radius: 8px; text-align: left; }
+    .place div:last-child { margin-left: 14px; }
+    .place h3 { font-size: 19px; font-weight: 400; letter-spacing: .08em; }
+    .place p { margin-top: 3px; font-size: 12px; line-height: 1.35; }
 
     @media (max-width: 640px) {
-      .landing {
-        background-position: center top;
-      }
-
-      .content {
-        padding-top: clamp(220px, 44vh, 340px);
-        padding-bottom: 60px;
-      }
-
-      .brand {
-        gap: 12px;
-        margin-bottom: 24px;
-      }
-
-      .brand-text {
-        align-items: center;
-      }
-
-      h1 {
-        margin-bottom: 22px;
-      }
-
-      .qr {
-        width: 72px;
-        right: 16px;
-        bottom: 16px;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .content {
-        padding-top: 210px;
-      }
-
-      .brand {
-        gap: 10px;
-      }
-
-      .brand img {
-        width: 34px;
-      }
-
-      .brand-text {
-        --brand-name-size: 40px;
-      }
-
-      h1 {
-        font-size: 28px;
-      }
-
-      .opening {
-        font-size: 22px;
-      }
+      .content { padding-top: clamp(245px, 42vw, 340px); }
+      .brand { gap: 10px; margin-bottom: 30px; }
+      h1 { margin-bottom: 24px; white-space: normal; }
+      .intro br { display: none; }
+      .signup { grid-template-columns: 1fr; height: auto; }
+      .signup label, .signup button { min-height: 45px; }
+      .story { grid-template-columns: 50px 1fr; }
+      .story h2 { white-space: normal; }
+      .divider { display: none; }
+      .quote { grid-column: 1 / -1; min-height: 220px; }
+      .location-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
-
   <main class="landing">
-    <div class="content">
+    <section class="hero">
+      <div class="content">
+        <div class="brand">
+          <img src="assets/logo_trasparente.png" alt="Logo De Vitis">
+          <div class="brand-text">
+            <div class="brand-name">De Vitis</div>
+            <div class="brand-subtitle">POLIAMBULATORIO</div>
+          </div>
+        </div>
 
-      <div class="brand">
-        <img src="assets/logo_trasparente.png" alt="Logo De Vitis">
-        <div class="brand-text">
-          <div class="brand-name">De Vitis</div>
-          <div class="brand-subtitle">POLIAMBULATORIO</div>
+        <h1>La salute ha un nuovo punto di riferimento.</h1>
+        <p class="intro">Dall’esperienza del Laboratorio De Vitis, un nuovo punto di riferimento per<br>
+          visite specialistiche e servizi sanitari a Lecce.</p>
+        <p class="opening">Apertura prevista: <strong>Novembre</strong></p>
+
+        <div class="newsletter">
+          <form class="signup">
+            <label>✉ <input type="email" placeholder="Inserisci la tua mail" aria-label="Indirizzo email"></label>
+            <button type="submit">Avvisami quando ci sono novità</button>
+          </form>
+          <p class="privacy">🔒︎ I tuoi dati sono al sicuro. Li useremo solo per aggiornarti sul Poliambulatorio De Vitis.</p>
         </div>
       </div>
+    </section>
 
-      <h1>La salute ha un nuovo punto di riferimento.</h1>
-      <p class="opening">Prossima apertura.</p>
+    <div class="details">
+      <section class="story card">
+        <span class="icon-circle" aria-hidden="true">
+          <svg class="icon" viewBox="0 0 24 24"><path d="M6 3v5a5 5 0 0 0 10 0V3M6 3H4m12 0h2M11 13v3a4 4 0 0 0 8 0v-1"/><circle cx="19" cy="12" r="2"/></svg>
+        </span>
+        <div class="story-copy">
+          <h2>Perché nasce il poliambulatorio</h2>
+          <p>Il nostro poliambulatorio nasce per offrire un’esperienza di cura semplice, innovativa e vicina alle persone.</p>
+          <p>Crediamo in una medicina capace di evolvere, senza perdere il valore dell’ascolto, della competenza e del rapporto umano.<br>Per questo mettiamo a disposizione professionalità diverse che lavorano con un obiettivo comune: prendersi cura di ogni persona in modo completo e consapevole.</p>
+          <p>Esperienza e innovazione si incontrano per dare forma a un nuovo modo di vivere la salute.</p>
+        </div>
+        <span class="divider" aria-hidden="true"></span>
+        <blockquote class="quote">La salute ha un<br>nuovo punto di<br>riferimento</blockquote>
+      </section>
+
+      <section class="location card">
+        <h2>Dove siamo</h2>
+        <div class="location-grid">
+          <article class="place">
+            <span class="icon-circle" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24"><path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg></span>
+            <div><h3>Posizione</h3><p>Via Cicolella, 3<br>Lecce (LE) - 73100</p></div>
+          </article>
+          <article class="place">
+            <span class="icon-circle" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24"><path d="m5 11 2-5h10l2 5M4 11h16v7H4zM7 18v2m10-2v2"/><circle cx="7" cy="14.5" r="1"/><circle cx="17" cy="14.5" r="1"/></svg></span>
+            <div><h3>Parcheggio</h3><p>Parcheggi gratuiti disponibili<br>nelle vicinanze.</p></div>
+          </article>
+          <article class="place">
+            <span class="icon-circle" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24"><path d="M12 22V3M5 5h14l2 3-2 3H5L3 8zM7 14h12l2 3-2 3H7l-2-3z"/></svg></span>
+            <div><h3>Indicazioni</h3><p>Facilmente raggiungibile dallo<br>sbocco della Lecce-Maglie.</p></div>
+          </article>
+        </div>
+      </section>
     </div>
-
   </main>
-
 </body>
 </html>
