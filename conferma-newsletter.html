@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+
+<html lang="it">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1"
+  >
+
+
+  <title>
+    Conferma iscrizione | Poliambulatorio De Vitis
+  </title>
+
+
+  <style>
+
+    :root {
+
+      --blue:
+        #082845;
+
+      --green:
+        #496b22;
+
+      --background:
+        #f7f7f3;
+
+      --border:
+        #deded8;
+
+    }
+
+
+    * {
+
+      box-sizing:
+        border-box;
+
+    }
+
+
+    body {
+
+      margin:
+        0;
+
+      min-height:
+        100vh;
+
+      display:
+        flex;
+
+      flex-direction:
+        column;
+
+      background:
+        var(--background);
+
+      color:
+        var(--blue);
+
+      font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    }
+
+
+    main {
+
+      flex:
+        1;
+
+      display:
+        grid;
+
+      place-items:
+        center;
+
+      padding:
+        40px 24px;
+
+    }
+
+
+    .card {
+
+      width:
+        min(
+          100%,
+          600px
+        );
+
+      padding:
+        clamp(
+          30px,
+          6vw,
+          52px
+        );
+
+      background:
+        #ffffff;
+
+      border:
+        1px solid
+        var(--border);
+
+      border-radius:
+        12px;
+
+      box-shadow:
+        0 10px 30px
+        rgba(
+          24,
+          40,
+          20,
+          .08
+        );
+
+      text-align:
+        center;
+
+    }
+
+
+    .icon {
+
+      width:
+        64px;
+
+      height:
+        64px;
+
+      display:
+        grid;
+
+      place-items:
+        center;
+
+      margin:
+        0 auto 24px;
+
+      border-radius:
+        50%;
+
+      background:
+        #edf2e8;
+
+      color:
+        var(--green);
+
+      font-size:
+        30px;
+
+    }
+
+
+    h1 {
+
+      margin:
+        0 0 18px;
+
+      color:
+        var(--blue);
+
+      font-size:
+        clamp(
+          28px,
+          5vw,
+          38px
+        );
+
+      line-height:
+        1.2;
+
+    }
+
+
+    p {
+
+      margin:
+        0;
+
+      color:
+        #4d5c69;
+
+      font-size:
+        16px;
+
+      line-height:
+        1.65;
+
+    }
+
+
+    .loader {
+
+      width:
+        34px;
+
+      height:
+        34px;
+
+      margin:
+        26px auto 0;
+
+      border:
+        3px solid
+        #d9dfd4;
+
+      border-top-color:
+        var(--green);
+
+      border-radius:
+        50%;
+
+      animation:
+        spin .8s linear infinite;
+
+    }
+
+
+    @keyframes spin {
+
+      to {
+
+        transform:
+          rotate(
+            360deg
+          );
+
+      }
+
+    }
+
+
+    .home-link {
+
+      display:
+        inline-block;
+
+      margin-top:
+        28px;
+
+      padding:
+        11px 22px;
+
+      border:
+        1px solid
+        var(--green);
+
+      border-radius:
+        7px;
+
+      color:
+        var(--green);
+
+      text-decoration:
+        none;
+
+      font-weight:
+        600;
+
+    }
+
+
+    .home-link:hover {
+
+      background:
+        var(--green);
+
+      color:
+        #ffffff;
+
+    }
+
+
+    .legal-footer {
+
+      padding:
+        18px 24px;
+
+      background:
+        var(--border);
+
+      color: var(--blue)
+
+      text-align:
+        center;
+
+      font-size:
+        11px;
+
+      line-height:
+        1.7;
+
+    }
+
+
+    .legal-footer a {
+
+      color: var(--blue);
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+
+  <main>
+
+
+    <section
+      class="card"
+      aria-live="polite"
+    >
+
+
+      <div
+        class="icon"
+        id="statusIcon"
+        aria-hidden="true"
+      >
+
+        …
+
+      </div>
+
+
+      <h1
+        id="statusTitle"
+      >
+
+        Conferma in corso...
+
+      </h1>
+
+
+      <p
+        id="statusMessage"
+      >
+
+        Stiamo verificando la tua iscrizione.
+
+      </p>
+
+
+      <div
+        class="loader"
+        id="loader"
+        aria-hidden="true"
+      ></div>
+
+
+      <a
+        href="/landing.html"
+        class="home-link"
+        id="homeLink"
+        hidden
+      >
+
+        Torna al sito
+
+      </a>
+
+
+    </section>
+
+
+  </main>
+
+
+
+  <footer
+    class="legal-footer"
+  >
+
+    © 2026 Poliambulatorio De Vitis
+
+    ·
+
+    <a
+      href="/privacy-policy.html"
+    >
+      Privacy Policy
+    </a>
+
+    ·
+
+    <a
+      href="/cookie-policy.html"
+    >
+      Cookie Policy
+    </a>
+
+  </footer>
+
+
+
+  <script>
+
+
+  /* =======================================================
+     CONFIGURAZIONE
+     ======================================================= */
+
+  const APPS_SCRIPT_URL =
+
+    "https://script.google.com/macros/s/AKfycbxqGK99Ns9e2EjOwh5d7qVnQplO9iL9NSz9K1AFBmY2zsu3UF-p9ajbPROoWFRXvx4l-Q/exec";
+
+
+
+  const titleElement =
+
+    document.getElementById(
+      "statusTitle"
+    );
+
+
+  const messageElement =
+
+    document.getElementById(
+      "statusMessage"
+    );
+
+
+  const iconElement =
+
+    document.getElementById(
+      "statusIcon"
+    );
+
+
+  const loaderElement =
+
+    document.getElementById(
+      "loader"
+    );
+
+
+  const homeLink =
+
+    document.getElementById(
+      "homeLink"
+    );
+
+
+
+  /* =======================================================
+     TOKEN DALL'URL
+     ======================================================= */
+
+  const params =
+
+    new URLSearchParams(
+      window.location.search
+    );
+
+
+  const token =
+
+    params.get(
+      "token"
+    );
+
+
+
+  /* =======================================================
+     CALLBACK JSONP
+     ======================================================= */
+
+  window.newsletterConfirmationCallback =
+
+    function(result) {
+
+
+      /*
+       * La risposta è arrivata:
+       * possiamo eliminare il loader.
+       */
+
+      loaderElement.style.display =
+        "none";
+
+
+      homeLink.hidden =
+        false;
+
+
+
+      if (
+        result &&
+        result.success
+      ) {
+
+
+        iconElement.textContent =
+          "✓";
+
+
+        titleElement.textContent =
+
+          result.title ||
+
+          "Iscrizione confermata";
+
+
+        messageElement.textContent =
+
+          result.message ||
+
+          "La tua iscrizione è stata confermata.";
+
+
+        return;
+
+      }
+
+
+
+      /*
+       * Risposta negativa.
+       */
+
+      iconElement.textContent =
+        "!";
+
+
+      titleElement.textContent =
+
+        result &&
+        result.title
+
+          ? result.title
+
+          : "Impossibile confermare";
+
+
+      messageElement.textContent =
+
+        result &&
+        result.message
+
+          ? result.message
+
+          : "Non è stato possibile confermare l'iscrizione.";
+
+    };
+
+
+
+  /* =======================================================
+     AVVIO
+     ======================================================= */
+
+  function startConfirmation() {
+
+
+    if (
+      !token
+    ) {
+
+
+      showLocalError(
+
+        "Collegamento non valido",
+
+        "Il link di conferma è incompleto: manca il token di iscrizione."
+
+      );
+
+
+      return;
+
+    }
+
+
+
+    if (
+      !APPS_SCRIPT_URL ||
+      APPS_SCRIPT_URL.includes(
+        "INCOLLA_QUI"
+      )
+    ) {
+
+
+      showLocalError(
+
+        "Configurazione incompleta",
+
+        "Il servizio di conferma non è ancora configurato correttamente."
+
+      );
+
+
+      return;
+
+    }
+
+
+
+    /*
+     * Creiamo uno script esterno.
+     *
+     * Questa è una richiesta JSONP:
+     * non apre Apps Script come pagina e
+     * non richiede fetch/CORS.
+     */
+
+    const script =
+
+      document.createElement(
+        "script"
+      );
+
+
+
+    const callbackName =
+
+      "newsletterConfirmationCallback";
+
+
+
+    script.src =
+
+      APPS_SCRIPT_URL
+
+      + "?action=confirm"
+
+      + "&token="
+
+      + encodeURIComponent(
+          token
+        )
+
+      + "&callback="
+
+      + encodeURIComponent(
+          callbackName
+        )
+
+      + "&_="
+
+      + Date.now();
+
+
+
+    script.async =
+      true;
+
+
+
+    /*
+     * Se Apps Script è irraggiungibile.
+     */
+
+    script.onerror =
+
+      function() {
+
+
+        showLocalError(
+
+          "Errore di connessione",
+
+          "Non è stato possibile verificare l'iscrizione. Riprova tra qualche minuto."
+
+        );
+
+      };
+
+
+
+    document.body.appendChild(
+      script
+    );
+
+
+
+    /*
+     * Timeout di sicurezza:
+     * 15 secondi.
+     */
+
+    setTimeout(
+      function() {
+
+
+        if (
+          loaderElement.style.display !==
+          "none"
+        ) {
+
+
+          showLocalError(
+
+            "Tempo scaduto",
+
+            "La verifica sta impiegando troppo tempo. Ricarica la pagina e riprova."
+
+          );
+
+        }
+
+
+      },
+      15000
+    );
+
+  }
+
+
+
+  /* =======================================================
+     ERRORE LOCALE
+     ======================================================= */
+
+  function showLocalError(
+    title,
+    message
+  ) {
+
+
+    loaderElement.style.display =
+      "none";
+
+
+    iconElement.textContent =
+      "!";
+
+
+    titleElement.textContent =
+      title;
+
+
+    messageElement.textContent =
+      message;
+
+
+    homeLink.hidden =
+      false;
+
+  }
+
+
+
+  startConfirmation();
+
+
+  </script>
+
+
+</body>
+
+</html>

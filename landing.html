@@ -96,6 +96,35 @@
     .place h3 { font-size: 19px; font-weight: 400; letter-spacing: .08em; }
     .place p { margin-top: 3px; font-size: 12px; line-height: 1.35; }
 
+    .signup-wrapper {
+        width: 100%;
+    }
+
+    .newsletter-consent {
+        display: flex;
+        align-items: flex-start;
+        gap: 8px;
+        margin: 10px 8px 0;
+        color: #777;
+        font-size: 12px;
+        line-height: 1.45;
+    }
+
+    .newsletter-consent input {
+        width: auto;
+        margin-top: 3px;
+        flex: 0 0 auto;
+    }
+
+    .newsletter-consent a {
+        color: var(--blue);
+        text-decoration: underline;
+    }
+
+    .newsletter-consent a:hover {
+        color: var(--green);
+    }
+
     /* Footer legale */
     .legal-footer {
         background: #e5e0d8;
@@ -178,25 +207,70 @@
         <p class="opening">Apertura prevista: <strong>Novembre</strong></p>
 
         <div class="newsletter">
-          <form class="signup" id="newsletterForm">
-            <label>
-              ✉
+
+          <form
+            class="signup-wrapper"
+            id="newsletterForm"
+          >
+
+            <div class="signup">
+
+              <label>
+
+                ✉
+
+                <input
+                  type="email"
+                  id="email"
+                  placeholder="Inserisci la tua mail"
+                  aria-label="Indirizzo email"
+                  autocomplete="email"
+                  required
+                >
+
+              </label>
+
+
+              <button type="submit">
+                Avvisami quando ci sono novità
+              </button>
+
+            </div>
+
+
+            <label class="newsletter-consent">
+
               <input
-                type="email"
-                id="email"
-                placeholder="Inserisci la tua mail"
-                aria-label="Indirizzo email"
+                type="checkbox"
+                id="newsletterConsent"
                 required
               >
+
+              <span>
+                Acconsento a ricevere via email aggiornamenti
+                e novità sul Poliambulatorio De Vitis.
+                Ho letto
+                <a
+                  href="/privacy-policy.html"
+                  target="_blank"
+                  rel="noopener"
+                >
+                  l'Informativa Privacy
+                </a>.
+              </span>
+
             </label>
 
-            <button type="submit">
-              Avvisami quando ci sono novità
-            </button>
+
+            <p
+              id="newsletterMessage"
+              class="privacy"
+              role="status"
+              aria-live="polite"
+            ></p>
+
           </form>
 
-          <p id="newsletterMessage" class="privacy"></p>
-          <p class="privacy">🔒︎ I tuoi dati sono al sicuro. Li useremo solo per aggiornarti sul Poliambulatorio De Vitis.</p>
         </div>
       </div>
     </section>
@@ -259,56 +333,301 @@
   </footer>
 
   <script>
-  const form = document.getElementById("newsletterForm");
-  const message = document.getElementById("newsletterMessage");
+
+  const form =
+    document.getElementById(
+      "newsletterForm"
+    );
+
+
+  const message =
+    document.getElementById(
+      "newsletterMessage"
+    );
+
+
+  const emailInput =
+    document.getElementById(
+      "email"
+    );
+
+
+  const consentInput =
+    document.getElementById(
+      "newsletterConsent"
+    );
+
 
   const APPS_SCRIPT_URL =
-    "https://script.google.com/macros/s/AKfycbz5MjctwXt5g4xhoTlypMnU_vPq6bEQA1mueAlnE7wCjv9_S0Dyn-3ZmiIRzh3wGUApxQ/exec";
+    "https://script.google.com/macros/s/AKfycbxqGK99Ns9e2EjOwh5d7qVnQplO9iL9NSz9K1AFBmY2zsu3UF-p9ajbPROoWFRXvx4l-Q/exec";
 
-  form.addEventListener("submit", async (event) => {
-    event.preventDefault();
 
-    const emailInput = document.getElementById("email");
-    const email = emailInput.value.trim();
-    const button = form.querySelector("button");
 
-    if (!email) {
-      message.textContent = "Inserisci un indirizzo email.";
-      return;
-    }
+  form.addEventListener(
+    "submit",
+    async function(event) {
 
-    button.disabled = true;
-    button.textContent = "Invio...";
-    message.textContent = "";
+      event.preventDefault();
 
-    try {
-      await fetch(APPS_SCRIPT_URL, {
-        method: "POST",
-        mode: "no-cors",
-        headers: {
-          "Content-Type": "text/plain;charset=utf-8"
-        },
-        body: JSON.stringify({
-          email: email
-        })
-      });
 
-      message.textContent =
-        "✓ Grazie! Ti aggiorneremo sulle novità.";
 
-      form.reset();
+      const email =
+        emailInput
+          .value
+          .trim()
+          .toLowerCase();
 
-    } catch (error) {
-      console.error(error);
 
-      message.textContent =
-        "Si è verificato un errore. Riprova.";
-    } finally {
-      button.disabled = false;
+      const button =
+        form.querySelector(
+          'button[type="submit"]'
+        );
+
+
+
+      /* =====================================================
+        CONTROLLO EMAIL
+        ===================================================== */
+
+      if (
+        !email
+      ) {
+
+        showMessage(
+          "Inserisci un indirizzo email.",
+          "error"
+        );
+
+
+        emailInput.focus();
+
+        return;
+
+      }
+
+
+      if (
+        !isValidEmail(email)
+      ) {
+
+        showMessage(
+          "Inserisci un indirizzo email valido.",
+          "error"
+        );
+
+
+        emailInput.focus();
+
+        return;
+
+      }
+
+
+
+      /* =====================================================
+        CONTROLLO CONSENSO
+        ===================================================== */
+
+      if (
+        !consentInput.checked
+      ) {
+
+        showMessage(
+          "Per iscriverti è necessario prestare il consenso.",
+          "error"
+        );
+
+
+        consentInput.focus();
+
+        return;
+
+      }
+
+
+
+      /* =====================================================
+        BLOCCO FORM
+        ===================================================== */
+
+      button.disabled =
+        true;
+
+
+      emailInput.disabled =
+        true;
+
+
+      consentInput.disabled =
+        true;
+
+
       button.textContent =
-        "Avvisami quando ci sono novità";
+        "Invio...";
+
+
+      showMessage(
+        "",
+        ""
+      );
+
+
+
+      try {
+
+
+        await fetch(
+
+          APPS_SCRIPT_URL,
+
+          {
+
+            method:
+              "POST",
+
+            mode:
+              "no-cors",
+
+            headers: {
+
+              "Content-Type":
+                "text/plain;charset=utf-8"
+
+            },
+
+            body:
+              JSON.stringify({
+
+                email:
+                  email,
+
+                consent:
+                  true
+
+              })
+
+          }
+
+        );
+
+
+
+        /*
+        * La richiesta iniziale è stata inviata.
+        *
+        * L'iscrizione NON è ancora ACTIVE:
+        * l'utente deve cliccare la mail.
+        */
+
+        showMessage(
+
+          "✓ Ti abbiamo inviato un'email. Aprila e clicca su “Conferma iscrizione” per completare la procedura.",
+
+          "success"
+
+        );
+
+
+
+        emailInput.value =
+          "";
+
+
+        consentInput.checked =
+          false;
+
+
+
+      } catch (error) {
+
+
+        console.error(
+          "Errore newsletter:",
+          error
+        );
+
+
+        showMessage(
+
+          "Non è stato possibile inviare la richiesta. Riprova.",
+
+          "error"
+
+        );
+
+
+      } finally {
+
+
+        button.disabled =
+          false;
+
+
+        emailInput.disabled =
+          false;
+
+
+        consentInput.disabled =
+          false;
+
+
+        button.textContent =
+          "Avvisami quando ci sono novità";
+
+      }
+
     }
-  });
+  );
+
+
+
+  function isValidEmail(
+    email
+  ) {
+
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+      .test(
+        email
+      );
+
+  }
+
+
+
+  function showMessage(
+    text,
+    type
+  ) {
+
+    message.textContent =
+      text;
+
+
+    message.style.color =
+      "";
+
+
+    if (
+      type === "success"
+    ) {
+
+      message.style.color =
+        "#496b22";
+
+    }
+
+
+    if (
+      type === "error"
+    ) {
+
+      message.style.color =
+        "#9b2c2c";
+
+    }
+
+  }
+
   </script>
 
 </body>
