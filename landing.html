@@ -84,11 +84,9 @@
     .story h2, .location h2 { font: 400 32px/1.2 "Bodoni Moda", Georgia, serif; letter-spacing: .12em; }
     .story h2 { white-space: nowrap; }
     .story-copy p { margin-top: 18px; font-size: 14px; line-height: 1.38; letter-spacing: .03em; }
-    .divider { background: #111; }
+    .divider { background: #cbd3c3; }
     .quote { position: relative; display: grid; place-items: center; padding: 42px 24px 22px; font: italic 400 30px/1.35 "Bodoni Moda", Georgia, serif; letter-spacing: .1em; text-align: center; }
     .quote::before { content: "“"; position: absolute; top: -20px; left: 16px; color: #cbd3c3; font: 120px/1 Georgia, serif; }
-    .quote::after { content: ""; position: absolute; right: 12px; bottom: 34px; left: 12px; height: 1px; background: #aaa; }
-
     .location { margin-top: 48px; padding: 28px 27px 52px; text-align: center; }
     .location-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 13px; margin-top: 20px; }
     .place { display: flex; align-items: center; min-height: 99px; padding: 10px 14px; border: 1px solid #111; border-radius: 8px; text-align: left; }
@@ -166,26 +164,75 @@
         opacity: .45;
     }
 
-    @media (max-width: 640px) {
-      .content { padding-top: clamp(245px, 42vw, 340px); }
-      .brand { gap: 10px; margin-bottom: 30px; }
-      h1 { margin-bottom: 24px; white-space: normal; }
+    @media (max-width: 960px) {
+      .content { padding-top: clamp(270px, 48vw, 440px); }
+      h1 { max-width: 720px; white-space: normal; }
+      .intro { max-width: 720px; letter-spacing: .05em; }
       .intro br { display: none; }
-      .signup { grid-template-columns: 1fr; height: auto; }
-      .signup label, .signup button { min-height: 45px; }
-      .story { grid-template-columns: 50px 1fr; }
+      .newsletter { margin-top: 44px; }
+      .signup { grid-template-columns: minmax(0, 1fr) minmax(240px, 38%); }
+      .details { padding-top: 44px; padding-bottom: 60px; }
+      .story { grid-template-columns: 50px 1fr; min-height: 0; }
       .story h2 { white-space: normal; }
-      .divider { display: none; }
-      .quote { grid-column: 1 / -1; min-height: 220px; }
+      .divider {
+        display: block;
+        grid-column: 1 / -1;
+        width: 100%;
+        height: 1px;
+        margin-top: 8px;
+      }
+      .quote { grid-column: 1 / -1; min-height: 180px; margin-top: 0; }
+      .quote::after { display: none; }
+      .location { margin-top: 32px; }
       .location-grid { grid-template-columns: 1fr; }
-      .legal-footer {
-            padding: 18px 16px;
-            font-size: 10px;
-        }
+      .place { min-height: 88px; }
+    }
 
-      .legal-footer-company {
-          line-height: 1.7;
-        }
+    @media (max-width: 640px) {
+      .hero { background-size: 100% auto; }
+      .content { padding: clamp(205px, 58vw, 260px) 18px 32px; }
+      .brand {
+        --brand-size: clamp(46px, 14vw, 58px);
+        gap: 9px;
+        margin-bottom: 24px;
+      }
+      .brand-subtitle { margin-top: 7px; }
+      h1 { margin-bottom: 18px; font-size: clamp(31px, 9.2vw, 40px); line-height: 1.08; }
+      .intro { font-size: clamp(15px, 4.25vw, 18px); line-height: 1.55; letter-spacing: .025em; }
+      .opening { margin-top: 22px; padding: 8px 20px 9px; font-size: 17px; }
+      .newsletter { margin-top: 34px; }
+      .signup { grid-template-columns: 1fr; height: auto; border-radius: 9px; }
+      .signup label { min-height: 50px; padding: 0 14px; }
+      .signup button { min-height: 48px; margin: 0 3px 3px; padding: 0 12px; }
+      .newsletter-consent { margin: 10px 2px 0; font-size: 11px; }
+      .privacy { margin-right: 2px; margin-left: 2px; }
+      .details { padding: 32px 16px 44px; }
+      .card { box-shadow: 0 6px 20px rgba(24,40,20,.07); }
+      .story { grid-template-columns: 40px 1fr; gap: 14px; padding: 20px 18px; }
+      .icon-circle { width: 40px; height: 40px; flex-basis: 40px; }
+      .icon { width: 23px; height: 23px; }
+      .story h2, .location h2 { font-size: 25px; line-height: 1.15; letter-spacing: .07em; }
+      .story-copy p { margin-top: 14px; font-size: 13px; line-height: 1.55; letter-spacing: .015em; }
+      .quote { min-height: 150px; padding: 34px 14px 20px; font-size: 23px; line-height: 1.35; letter-spacing: .06em; }
+      .quote::before { top: -10px; left: 6px; font-size: 88px; }
+      .quote::after { right: 6px; bottom: 18px; left: 6px; }
+      .location { margin-top: 24px; padding: 22px 18px 24px; }
+      .location-grid { gap: 10px; margin-top: 16px; }
+      .place { min-height: 76px; padding: 10px 12px; }
+      .place div:last-child { margin-left: 11px; }
+      .place h3 { font-size: 16px; letter-spacing: .05em; }
+      .place p { font-size: 11px; }
+      .legal-footer { padding: 18px 16px; font-size: 10px; }
+      .legal-footer-company { line-height: 1.7; }
+    }
+
+    @media (max-width: 360px) {
+      .content { padding-right: 14px; padding-left: 14px; }
+      .brand { --brand-size: 43px; }
+      h1 { font-size: 29px; }
+      .details { padding-right: 12px; padding-left: 12px; }
+      .story { grid-template-columns: 1fr; }
+      .story .icon-circle { margin-bottom: 2px; }
     }
   </style>
 </head>
