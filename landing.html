@@ -361,12 +361,12 @@
     <div class="legal-footer-inner">
 
         <div class="legal-footer-company">
-            © 2026 [RAGIONE SOCIALE COMPLETA] ·
-            P. IVA [PARTITA IVA] ·
-            C.F. [CODICE FISCALE] ·
-            Sede legale: [INDIRIZZO SEDE LEGALE] ·
+            © 2026 TUMARE S.R.L. ·
+            P. IVA 05465060753 ·
+            C.F. 05465060753 ·
+            Sede legale: Piazza Luodovico Ariosto 23, 73100 Lecce(LE) ·
             REA [NUMERO REA] ·
-            Registro Imprese di [CITTÀ] n. [NUMERO ISCRIZIONE] ·
+            Registro Imprese di Lecce n. [NUMERO ISCRIZIONE] ·
             Capitale sociale € [IMPORTO] i.v.
         </div>
 
@@ -386,29 +386,23 @@
       "newsletterForm"
     );
 
-
   const message =
     document.getElementById(
       "newsletterMessage"
     );
-
 
   const emailInput =
     document.getElementById(
       "email"
     );
 
-
   const consentInput =
     document.getElementById(
       "newsletterConsent"
     );
 
-
   const APPS_SCRIPT_URL =
     "https://script.google.com/macros/s/AKfycbxqGK99Ns9e2EjOwh5d7qVnQplO9iL9NSz9K1AFBmY2zsu3UF-p9ajbPROoWFRXvx4l-Q/exec";
-
-
 
   form.addEventListener(
     "submit",
@@ -416,25 +410,18 @@
 
       event.preventDefault();
 
-
-
       const email =
         emailInput
           .value
           .trim()
           .toLowerCase();
 
-
       const button =
         form.querySelector(
           'button[type="submit"]'
         );
 
-
-
-      /* =====================================================
-        CONTROLLO EMAIL
-        ===================================================== */
+      /* controllo email */
 
       if (
         !email
@@ -445,13 +432,11 @@
           "error"
         );
 
-
         emailInput.focus();
 
         return;
 
       }
-
 
       if (
         !isValidEmail(email)
@@ -469,11 +454,7 @@
 
       }
 
-
-
-      /* =====================================================
-        CONTROLLO CONSENSO
-        ===================================================== */
+      /* controllo consenso */
 
       if (
         !consentInput.checked
@@ -491,11 +472,7 @@
 
       }
 
-
-
-      /* =====================================================
-        BLOCCO FORM
-        ===================================================== */
+      /* blocco form */
 
       button.disabled =
         true;
@@ -518,10 +495,7 @@
         ""
       );
 
-
-
       try {
-
 
         await fetch(
 
@@ -557,14 +531,7 @@
 
         );
 
-
-
-        /*
-        * La richiesta iniziale è stata inviata.
-        *
-        * L'iscrizione NON è ancora ACTIVE:
-        * l'utente deve cliccare la mail.
-        */
+        /* La richiesta iniziale è stata inviata. L'iscrizione NON è ancora ACTIVE: l'utente deve cliccare la mail. */
 
         showMessage(
 
@@ -574,8 +541,6 @@
 
         );
 
-
-
         emailInput.value =
           "";
 
@@ -583,16 +548,12 @@
         consentInput.checked =
           false;
 
-
-
       } catch (error) {
-
 
         console.error(
           "Errore newsletter:",
           error
         );
-
 
         showMessage(
 
@@ -602,21 +563,16 @@
 
         );
 
-
       } finally {
-
 
         button.disabled =
           false;
 
-
         emailInput.disabled =
           false;
 
-
         consentInput.disabled =
           false;
-
 
         button.textContent =
           "Avvisami quando ci sono novità";
@@ -625,8 +581,6 @@
 
     }
   );
-
-
 
   function isValidEmail(
     email
@@ -639,8 +593,6 @@
 
   }
 
-
-
   function showMessage(
     text,
     type
@@ -649,10 +601,8 @@
     message.textContent =
       text;
 
-
     message.style.color =
       "";
-
 
     if (
       type === "success"
@@ -662,7 +612,6 @@
         "#496b22";
 
     }
-
 
     if (
       type === "error"
