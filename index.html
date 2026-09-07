@@ -30,7 +30,9 @@
 
     .hero { 
         width: 100%; 
-        background: url("assets/sfondo.png") center top / cover no-repeat; 
+        background:
+          linear-gradient(to bottom, rgba(247, 247, 243, 0) 55%, #f7f7f3 100%) center top / 100% 100% no-repeat,
+          url("assets/sfondo.png") center top / cover no-repeat;
     }
 
     .content { 
@@ -189,7 +191,7 @@
     }
 
     @media (max-width: 640px) {
-      .hero { background-size: 100% auto; }
+      .hero { background-size: 100% 70.69vw, 100% auto; }
       .content { padding: clamp(205px, 58vw, 260px) 18px 32px; }
       .brand {
         --brand-size: clamp(46px, 14vw, 58px);
