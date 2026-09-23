@@ -9,7 +9,7 @@
   --border: #e5e0d8;
   --logo: #A2C5D8;
   --font-body: "Montserrat", system-ui, sans-serif;
-  --font-heading: "Didot", "Bodoni 72", "Bodoni MT", "Times New Roman", serif;
+  --font-heading: Optima, Candara, "Segoe UI", sans-serif;
 }
 
 * {
