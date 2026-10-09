@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300&family=Crimson+Text:wght@300;400&display=swap');
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap");
 
 :root {
@@ -9,7 +10,7 @@
   --border: #e5e0d8;
   --logo: #A2C5D8;
   --font-body: "Montserrat", system-ui, sans-serif;
-  --font-heading: Optima, Candara, "Segoe UI", sans-serif;
+  --font-heading: "Crimson Text", Georgia, serif;
 }
 
 * {
@@ -139,10 +140,10 @@ nav a {
 
 .hero h1 {
   font-family: var(--font-heading);
-  font-weight: 400;
-  letter-spacing: 0;
-  font-size: clamp(52px, 7vw, 90px);
-  line-height: .95;
+  font-weight: 300;
+  font-size: clamp(52px, 6vw, 82px);
+  line-height: 1.05;
+  letter-spacing: -0.01em;
   margin: 20px 0;
 }
 
