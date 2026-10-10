@@ -1,8 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300&family=Crimson+Text:wght@300;400&display=swap');
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600&display=swap");
 
 :root {
-  --bg: #faf8f4;
+  --bg: #F7F7F3;
   --white: #ffffff;
   --text: #082845;
   --muted: #6e6e6e;
@@ -53,39 +53,47 @@ header {
 }
 
 .logo {
+  --logo-size: 78px;
   display: inline-flex;
   align-items: center;
-  gap: 4px;
+  gap: calc(var(--logo-size) * .12);
   letter-spacing: 0;
   color: var(--text);
   text-decoration: none;
 }
 
 .logo img {
-  width: 78px;
-  height: 78px;
+  width: auto;
+  height: var(--logo-size);
   display: block;
   object-fit: contain;
 }
 
 .logo-text {
-  display: grid;
-  gap: 2px;
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--logo-size) * .06);
   line-height: 1;
 }
 
 .logo-kicker {
+  order: 1;
+  color: #6498be;
   font-family: var(--font-body);
-  font-size: 14px;
-  font-weight: 300;
-  letter-spacing: 0;
+  font-size: calc(var(--logo-size) * .28);
+  font-weight: 600;
+  letter-spacing: .12em;
+  white-space: nowrap;
 }
 
 .logo-name {
-  font-family: var(--font-heading);
-  font-size: 44px;
+  color: #082845;
+  font-family: "Times New Roman", Times, serif;
+  font-size: var(--logo-size);
   font-weight: 400;
   letter-spacing: 0;
+  line-height: .66;
+  white-space: nowrap;
 }
 
 nav {
@@ -842,16 +850,7 @@ footer {
 
 @media (max-width: 640px) {
   .logo {
-    gap: 12px;
-  }
-
-  .logo img {
-    width: 64px;
-    height: 64px;
-  }
-
-  .logo-name {
-    font-size: 29px;
+    --logo-size: 64px;
   }
 
   .grid {
