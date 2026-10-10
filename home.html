@@ -3,170 +3,81 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Poliambulatorio De Vitis</title>
+  <title>De Vitis Poliambulatorio</title>
+  <link rel="icon" href="assets/favicon-google.png" type="image/png">
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="home.css">
+  <script src="home.js" defer></script>
 </head>
-<body>
-
-<header>
-  <div class="container nav">
-    <a href="#" class="logo" aria-label="Poliambulatorio De Vitis">
-      <img src="assets/favicon.png" alt="" aria-hidden="true">
-      <span class="logo-text">
-        <span class="logo-kicker">POLIAMBULATORIO</span>
-        <span class="logo-name">De Vitis</span>
-      </span>
-    </a>
-
-    <nav>
-      <a href="#specialisti">Specialisti</a>
-      <a href="#approccio">Approccio</a>
-      <a href="#contatti">Contatti</a>
-      <a href="prenota.html" class="btn">Prenota</a>
-    </nav>
-  </div>
+<body class="devitis-home">
+<header class="home-header">
+  <a class="home-logo" href="#home" aria-label="De Vitis Poliambulatorio — Home"><img src="assets/logo_poliambulatorio_vettoriale.svg" alt="De Vitis Poliambulatorio"></a>
+  <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="home-menu">Menu <span aria-hidden="true">☰</span></button>
+  <nav id="home-menu" class="home-menu" aria-label="Menu principale">
+    <a href="#home">Home</a><a href="#chi-siamo">Chi siamo</a><a href="#specialisti">Specializzazioni</a><a href="#contatti">Contatti</a><a href="#collabora">Collabora con noi</a><a class="home-book" href="prenota.html">Prenota</a>
+  </nav>
 </header>
-
-<section class="hero">
-  <div class="container hero-grid">
-
-    <div class="hero-content">
-      <span class="eyebrow">Poliambulatorio Specialistico</span>
-
-      <h1>
-        Medicina,<br>
-        prevenzione e cura.
-      </h1>
-
-      <p>
-        Un ambiente accogliente dove trovare specialisti qualificati,
-        percorsi personalizzati e tempi rapidi.
-      </p>
-
-      <div class="hero-buttons">
-        <a href="prenota.html" class="btn">Prenota una visita</a>
-        <a href="#specialisti" class="btn btn-outline">Scopri gli specialisti</a>
+<main>
+  <section id="home" class="home-hero">
+    <div class="home-hero-copy"><h1>Medicina,<br>competenza e<br>cura.</h1><p>Un ambiente accogliente dove trovare specialisti<br class="desktop-break"> qualificati, percorsi personalizzati e tempi rapidi.</p></div>
+    <a class="hero-booking" href="prenota.html">Prenota una visita <span class="diagonal-arrow" aria-hidden="true"></span></a>
+  </section>
+  <section id="chi-siamo" class="home-about home-section">
+    <a href="#approccio" class="home-section-heading"><h2>Chi siamo</h2><span class="diagonal-arrow" aria-hidden="true"></span></a>
+    <div id="approccio" class="about-cards">
+      <article class="about-card"><img src="assets/card1.png" alt="Medico che consulta una cartella clinica"><div><h3>Perché nasce il poliambulatorio</h3><p>*Sundays are for rest, recipe testing, and probably more cookies.</p></div></article>
+      <article class="about-card"><img src="assets/card2.png" alt="Gli ambienti del poliambulatorio"><div><h3>Struttura</h3><p>Orders placed after 4 PM roll over to the next morning’s bake. Still oven-fresh, never frozen.</p></div></article>
+      <article class="about-card"><img src="assets/card3.png" alt="Un medico dell’équipe nel suo studio"><div><h3>Equipè</h3><p>Orders placed after 4 PM roll over to the next morning’s bake. Still oven-fresh, never frozen.</p></div></article>
+    </div>
+  </section>
+  <section id="specialisti" class="home-specialties home-section" aria-roledescription="carosello" aria-label="Specializzazioni">
+    <a class="home-section-heading" href="prenota.html"><h2>Specializzazioni</h2><span class="diagonal-arrow" aria-hidden="true"></span></a>
+    <div class="specialty-window"><div class="specialty-track" id="specialty-track">
+      <a class="specialty-card" href="prenota.html"><span class="specialty-photo allergy-photo"><img src="assets/allergologia.png" alt="Allergologia ed Immunologia"></span><h3>Allergologia ed<br> Immunologia</h3></a>
+      <a class="specialty-card" href="prenota.html"><img src="assets/ginecologia.png" alt="Ginecologia"><h3>Ginecologia</h3></a>
+      <a class="specialty-card" href="prenota.html"><img src="assets/cardiologia.png" alt="Cardiologia"><h3>Cardiologia</h3></a>
+      <a class="specialty-card" href="prenota.html"><img src="assets/dermatologia.png" alt="Dermatologia"><h3>Dermatologia</h3></a>
+      <a class="specialty-card specialty-text" href="prenota.html"><div>Trattamento del dolore acuto e cronico.</div><h3>Terapia del Dolore</h3></a>
+      <a class="specialty-card specialty-text" href="prenota.html"><div>Percorsi riabilitativi e recupero funzionale.</div><h3>Fisioterapia</h3></a>
+      <a class="specialty-card specialty-text" href="prenota.html"><div>Trattamenti manuali per postura e benessere muscolare.</div><h3>Osteopatia</h3></a>
+      <a class="specialty-card specialty-text" href="prenota.html"><div>Visite specialistiche per orecchio, naso e gola.</div><h3>Otorinolaringoiatria</h3></a>
+    </div></div>
+    <div class="carousel-controls"><button type="button" class="carousel-prev" aria-label="Specializzazioni precedenti">‹</button><div class="carousel-dots" aria-label="Pagine delle specializzazioni"></div><button type="button" class="carousel-next" aria-label="Specializzazioni successive">›</button></div>
+    <p class="sr-only" id="carousel-status" role="status" aria-live="polite"></p>
+  </section>
+  <section id="contatti" class="home-info home-section">
+    <div class="home-section-heading"><h2>Informazioni</h2></div>
+    <div class="info-grid">
+      <a class="home-map" href="https://www.google.com/maps/search/?api=1&amp;query=Poliambulatorio+De+Vitis+Via+Cicolella+3+Lecce" target="_blank" rel="noopener" aria-label="Apri la mappa: Poliambulatorio De Vitis, Via Cicolella 3, Lecce"><img src="assets/mappa-home.png" alt="Mappa del Poliambulatorio De Vitis in Via Cicolella, vicino a Viale Gioacchino Rossini e Via Puglia"></a>
+      <div class="info-panels">
+        <article><h3>Orari</h3><p>Lun-Sab: 9.00 - 19.00<br>(si riceve solo su appuntamento)</p></article>
+        <article><h3>Indirizzo</h3><p>Via Cicolella, 3<br>Lecce (LE) 73100</p></article>
+        <article><h3>Contatti</h3><p><a href="mailto:info@poliambulatoriodevitis.it">info@poliambulatoriodevitis.it</a><br><a href="tel:+390832453967">0832 453967</a></p></article>
       </div>
     </div>
-
-    <div class="hero-image">
-      <div class="glass-card">
-        <h3>Approccio integrato</h3>
-        <p>Specialisti diversi, un unico percorso di cura.</p>
-      </div>
-    </div>
-
+  </section>
+  <section id="collabora" class="home-collaborate">
+    <div class="collaborate-copy"><h2>Collabora con noi</h2><p>Just fill in your cravings! Tell us what you<br class="desktop-break"> want, how much you need, and when you’d<br class="desktop-break"> like it.</p></div>
+    <form class="collaborate-form" id="collaborate-form">
+      <h3>Modulo contatti</h3>
+      <label for="contact-name">Nome e cognome</label><input id="contact-name" name="name" autocomplete="name" required maxlength="120">
+      <label for="contact-email">Indirizzo email</label><input id="contact-email" name="email" type="email" autocomplete="email" required maxlength="254">
+      <label for="contact-phone">Numero di telefono</label><input id="contact-phone" name="phone" type="tel" autocomplete="tel" required pattern="[+0-9 ()/.-]{6,25}">
+      <fieldset><legend>Chi sono</legend><label class="contact-role"><input type="radio" name="role" value="Specialista" required><span>Specialista</span></label><label class="contact-role"><input type="radio" name="role" value="Azienda" required><span>Azienda</span></label></fieldset>
+      <button type="submit">Invia</button>
+      <p class="form-note">Il tuo nome del profilo Canva non verrà condiviso. Non inviare mai password.</p>
+      <p id="contact-status" role="status" aria-live="polite" hidden></p><a id="contact-email-link" hidden>Apri il programma email</a>
+    </form>
+  </section>
+</main>
+<footer class="home-footer">
+  <div class="home-footer-grid">
+    <a class="footer-logo" href="#home" aria-label="De Vitis Poliambulatorio — torna all’inizio"><img src="assets/logo_poliambulatorio_vettoriale.svg" alt="De Vitis Poliambulatorio"></a>
+    <div class="footer-menu"><h3>MENU</h3><a href="#home">Home</a><a href="#chi-siamo">Chi siamo</a><a href="#specialisti">Specializzazioni</a><a href="#contatti">Contatti</a><a href="#collabora">Collabora con noi</a></div>
+    <div><h3>CONTATTI</h3><a href="mailto:info@poliambulatoriodevitis.it">info@poliambulatoriodevitis.it</a><br><a href="tel:+390832453967">0832 453967</a><br><a href="https://www.google.com/maps/search/?api=1&amp;query=Poliambulatorio+De+Vitis+Via+Cicolella+3+Lecce" target="_blank" rel="noopener">Via Cicolella, 3 - Lecce (LE) 73100</a></div>
+    <div><h3>ORARI</h3><p>Lun-Sab: 9.00 - 19.00<br>(si riceve solo su appuntamento)</p></div>
   </div>
-</section>
-
-<section id="specialisti" class="container">
-  <div class="section-header">
-    <h2>Le nostre specializzazioni</h2>
-    <p>
-      Professionisti selezionati per accompagnarti
-      in ogni fase del percorso clinico.
-    </p>
-  </div>
-
-  <div class="grid">
-
-    <div class="card">
-      <span>01</span>
-      <h3>Allergologia e Immunologia</h3>
-      <p>Diagnosi e trattamento di allergie e patologie immunologiche.</p>
-    </div>
-
-    <div class="card">
-      <span>02</span>
-      <h3>Cardiologia</h3>
-      <p>Prevenzione, diagnosi e monitoraggio cardiovascolare.</p>
-    </div>
-
-    <div class="card">
-      <span>03</span>
-      <h3>Terapia del Dolore</h3>
-      <p>Trattamento del dolore acuto e cronico.</p>
-    </div>
-
-    <div class="card">
-      <span>04</span>
-      <h3>Dermatologia</h3>
-      <p>Visite dermatologiche e prevenzione delle patologie cutanee.</p>
-    </div>
-
-    <div class="card">
-      <span>05</span>
-      <h3>Ginecologia</h3>
-      <p>Salute femminile, prevenzione e controlli specialistici.</p>
-    </div>
-
-    <div class="card">
-      <span>06</span>
-      <h3>Fisioterapia</h3>
-      <p>Percorsi riabilitativi e recupero funzionale.</p>
-    </div>
-
-    <div class="card">
-      <span>07</span>
-      <h3>Osteopatia</h3>
-      <p>Trattamenti manuali per postura e benessere muscolare.</p>
-    </div>
-
-    <div class="card">
-      <span>08</span>
-      <h3>Otorinolaringoiatria</h3>
-      <p>Visite specialistiche per orecchio, naso e gola.</p>
-    </div>
-
-  </div>
-</section>
-
-<section id="approccio" class="approach">
-  <div class="container approach-grid">
-
-    <div>
-      <span class="eyebrow">Metodo De Vitis</span>
-      <h2>Un percorso semplice e coordinato.</h2>
-      <p>
-        Accompagniamo ogni paziente con un approccio umano,
-        professionale e multidisciplinare.
-      </p>
-    </div>
-
-    <div class="approach-list">
-      <div>✓ Prenotazione rapida</div>
-      <div>✓ Specialisti qualificati</div>
-      <div>✓ Ambiente riservato</div>
-      <div>✓ Percorsi multidisciplinari</div>
-    </div>
-
-  </div>
-</section>
-
-<section id="prenota" class="cta">
-  <div class="container">
-
-    <span class="eyebrow">Prenotazioni</span>
-
-    <h2>Prenota la tua visita specialistica.</h2>
-
-    <p>
-      Contattaci per conoscere disponibilità e appuntamenti.
-    </p>
-
-    <a href="tel:+390000000000" class="btn">
-      Chiama ora
-    </a>
-
-  </div>
-</section>
-
-<footer id="contatti">
-  <div class="container footer">
-    <div>© Poliambulatorio De Vitis</div>
-    <div>info@devitis.it · +39 000 000000</div>
-  </div>
+  <div class="home-copyright">© 2026 TUMARE S.R.L. · P. IVA 05465060753 · <a href="privacy-policy.html">Privacy Policy</a> · <a href="cookie-policy.html">Cookie Policy</a></div>
 </footer>
-
 </body>
 </html>
