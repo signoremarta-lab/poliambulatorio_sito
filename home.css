@@ -1,4 +1,4 @@
-/* Styles restricted to the existing home.html; other pages keep style.css. */
+/* Shared site styles for home.html and chisiamo.html; other pages keep style.css. */
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
 .devitis-home { --home-blue:#082845; --home-light:#6498be; --home-green:#3d5919; --home-bg:#f7f7f3; background:var(--home-bg); font-family:Montserrat,system-ui,sans-serif; font-weight:400; line-height:1.4; }
 .devitis-home a { color:inherit; }
@@ -6,7 +6,7 @@
 .devitis-home button,.devitis-home a { -webkit-tap-highlight-color:transparent; }
 .devitis-home :focus-visible { outline:3px solid var(--home-light); outline-offset:5px; }
 .devitis-home [hidden] { display:none !important; }
-.home-header { position:absolute; top:0; left:0; width:100%; height:132px; padding:0 48px; display:flex; align-items:center; justify-content:space-between; background:rgba(247,247,243,.87); border:0; border-radius:0 0 24px 24px; backdrop-filter:none; z-index:10; }
+.home-header { position:absolute; top:0; left:0; width:100%; height:132px; padding:0 48px; display:flex; align-items:center; justify-content:space-between; background:rgba(247,247,243,.87); border:0; border-radius:0 0 24px 24px; backdrop-filter:blur(8px); box-shadow:0 10px 24px rgba(8,40,69,.06); z-index:10; }
 .home-logo { display:block; width:220px; flex-shrink:0; }
 .home-logo img { display:block; width:100%; }
 .home-menu { display:flex; gap:32px; align-items:center; padding-top:44px; }
@@ -77,7 +77,7 @@
 .form-note { text-align:center; font-size:10px; margin-top:8px; color:#9fae8d; }
 #contact-status { font-size:15px; margin-top:12px; }
 #contact-email-link { display:block; margin-top:8px; font-size:16px; }
-.home-footer { padding:0; border:0; }
+.home-footer { padding:0; border:0; box-shadow:0 -12px 28px rgba(8,40,69,.05); }
 .home-footer-grid { height:298px; padding:42px 48px 30px; display:grid; grid-template-columns:108px 220px 354px 354px; justify-content:space-between; gap:32px; font-size:21px; line-height:1.5; }
 .footer-logo { display:block; width:108px; height:210px; overflow:hidden; }
 .footer-logo img { display:block; width:auto; height:210px; max-width:none; }
@@ -144,4 +144,150 @@
  .home-menu.is-open { display:flex; align-items:stretch; flex-direction:column; gap:18px; }
  .home-menu a { font-size:18px; }
  .home-menu .home-book { text-align:center; }
+}
+
+/* Chi siamo — rules scoped to this page; shared components stay unchanged. */
+.about-page main { padding-top:132px; }
+.about-hero { position:relative; display:flex; align-items:center; height:260px; margin:24px 48px 0; padding:0; overflow:hidden; border-radius:20px; color:var(--home-bg); }
+.about-hero>img { position:absolute; inset:0; display:block; width:100%; height:100%; object-fit:cover; object-position:center 58%; }
+.about-hero::after { content:''; position:absolute; inset:0; background:linear-gradient(180deg,rgba(8,40,69,.08),rgba(8,40,69,.46)); }
+.about-page .about-hero h1 { position:relative; z-index:1; margin:0 40px; font:400 88px/1.1 var(--font-body); letter-spacing:-4px; color:inherit; }
+.about-page .about-section { height:auto; padding-top:58px; padding-bottom:64px; }
+.about-page .home-section-heading { border-bottom-width:1px; padding-bottom:12px; }
+.about-page .home-section-heading h2 { font-size:clamp(36px,4.3vw,60px); line-height:1.2 !important; letter-spacing:-2.5px !important; }
+.about-intro-grid { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:56px; align-items:center; margin-top:36px; }
+.about-copy { font-size:21px; line-height:1.65; }
+.about-copy p+p { margin-top:24px; }
+.about-intro .about-copy { color:color-mix(in srgb,var(--home-blue) 82%,var(--home-light)); }
+.about-intro-photo { display:block; width:100%; height:440px; object-fit:cover; object-position:55% center; border-radius:20px; }
+.about-rooms { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:32px; margin-top:40px; }
+.about-room { position:relative; display:grid; margin:0; overflow:hidden; border-radius:20px; }
+.about-room-photo { grid-area:1/1; display:block; width:100%; aspect-ratio:4/5; object-fit:cover; }
+.about-room::after { content:''; position:absolute; inset:0; background:linear-gradient(transparent 55%,rgba(8,40,69,.6)); pointer-events:none; }
+.about-room figcaption { grid-area:1/1; align-self:center; padding:0 16px; z-index:1; text-align:center; font-size:26px; font-weight:600; color:var(--home-bg); }
+.about-photo-placeholder { display:grid; place-items:center; background:color-mix(in srgb,var(--home-light) 20%,var(--home-bg)); color:var(--home-blue); font-size:14px; text-align:center; }
+.about-room .about-photo-placeholder { align-items:end; padding-bottom:24px; background:color-mix(in srgb,var(--home-light) 32%,var(--home-blue)); color:var(--home-bg); }
+.about-structure-copy { margin-top:40px; }
+.about-team-grid { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:44px 28px; margin-top:40px; }
+.about-person { min-width:0; }
+.about-portrait { display:block; width:100%; aspect-ratio:3/4; border-radius:18px; object-fit:cover; }
+.about-portrait.about-photo-placeholder { display:grid; }
+.about-person h3 { margin:16px 0 6px; color:var(--home-blue); font-size:20px; font-weight:700; line-height:1.4; }
+.about-person p { color:var(--home-light); font-size:17px; line-height:1.5; }
+@media(max-width:1100px) {
+ .about-page main { padding-top:94px; }
+ .about-hero { margin:20px 24px 0; height:220px; }
+ .about-intro-grid { gap:28px; }
+ .about-copy { font-size:18px; }
+ .about-intro-photo { height:380px; }
+ .about-room figcaption { font-size:20px; }
+ .about-team-grid { grid-template-columns:repeat(2,minmax(0,1fr)); gap:36px 24px; }
+}
+@media(max-width:1000px) {
+ .about-page .about-section { padding:40px 24px; }
+ .about-page .home-section-heading h2 { font-size:clamp(31px,5.4vw,42px); letter-spacing:-1.8px !important; }
+ .about-page .about-hero h1 { font-size:64px; margin-left:28px; letter-spacing:-2px; }
+ .about-rooms { gap:20px; }
+}
+@media(max-width:640px) {
+ .about-hero { height:180px; margin:18px 20px 0; border-radius:14px; }
+ .about-page .about-hero h1 { font-size:48px; margin-left:22px; }
+ .about-page .about-section { padding:36px 20px; }
+ .about-intro-grid { grid-template-columns:1fr; gap:28px; margin-top:28px; }
+ .about-copy { font-size:16px; line-height:1.65; }
+ .about-copy p+p { margin-top:20px; }
+ .about-intro-photo { height:auto; aspect-ratio:4/3; border-radius:14px; }
+ .about-rooms { grid-template-columns:1fr; gap:24px; margin-top:28px; }
+ .about-room-photo { aspect-ratio:4/3; }
+ .about-room figcaption { font-size:23px; }
+ .about-structure-copy { margin-top:28px; }
+ .about-team-grid { gap:28px 16px; margin-top:28px; }
+ .about-person h3 { font-size:16px; margin-top:12px; }
+ .about-person p { font-size:14px; }
+ .about-photo-placeholder { font-size:12px; }
+}
+@media(max-width:380px) {
+ .about-team-grid { grid-template-columns:1fr; }
+}
+
+/* Specializzazioni — existing hero, navigation and footer are shared. */
+.specialties-page .about-hero h1 { font-size:clamp(28px,6.4vw,88px); }
+.specialties-page .about-section { padding-top:76px; padding-bottom:48px; }
+.specialties-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:48px 24px; }
+.specialty-flip { position:relative; display:block; width:100%; min-width:0; min-height:400px; aspect-ratio:8/9; padding:0; border:0; border-radius:20px; background:none; color:var(--home-blue); text-align:left; line-height:inherit; cursor:pointer; perspective:1200px; }
+.specialty-flip-inner { position:absolute; inset:0; display:block; border-radius:inherit; transform-style:preserve-3d; transition:transform 650ms ease-in-out; }
+.specialty-flip.is-flipped .specialty-flip-inner { transform:rotateY(180deg); }
+.specialty-flip-front,.specialty-flip-back { position:absolute; inset:0; border-radius:inherit; overflow:hidden; backface-visibility:hidden; -webkit-backface-visibility:hidden; }
+.specialty-flip-front { display:grid; place-items:center; padding:28px; background:var(--home-blue); color:var(--home-bg); }
+.specialty-flip-front img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+.specialty-flip-front::after { content:''; position:absolute; inset:0; background:rgba(0,0,0,.3); }
+.specialty-flip-title { position:relative; z-index:1; font-size:25px; font-weight:700; text-align:center; text-transform:uppercase; overflow-wrap:anywhere; }
+.specialty-flip-front .diagonal-arrow { position:absolute; bottom:28px; right:28px; z-index:1; }
+.specialty-photo-note { position:absolute; bottom:28px; left:28px; z-index:1; font-size:13px; }
+.specialty-flip-back { display:flex; flex-direction:column; gap:20px; padding:32px; border:1px solid var(--border); background:var(--home-bg); transform:rotateY(180deg); }
+.specialty-flip-back strong { display:block; padding-bottom:14px; border-bottom:1px solid var(--home-light); font-size:24px; line-height:1.3; overflow-wrap:anywhere; }
+.specialty-flip-description { min-height:0; overflow:auto; font-size:18px; line-height:1.6; }
+.specialty-flip-return { margin-top:auto; font-size:15px; color:var(--home-green); }
+.specialties-booking { grid-column:span 2; display:flex; justify-content:flex-end; align-items:flex-end; min-width:0; padding:28px 52px; border-radius:20px; background:url('assets/home_hero.png') center/cover no-repeat; text-decoration:none; }
+.specialties-booking>span { color:var(--home-bg); display:flex; align-items:center; gap:28px; padding-bottom:5px; border-bottom:2px solid; font-size:28px; }
+.specialties-booking .diagonal-arrow { width:28px; height:28px; }
+@media(max-width:1000px) {
+ .specialties-page .about-section { padding-top:40px; padding-bottom:40px; }
+ .specialties-grid { grid-template-columns:repeat(2,minmax(0,1fr)); gap:28px 20px; }
+ .specialty-flip-title { font-size:22px; }
+ .specialty-flip-back { padding:24px; }
+ .specialties-booking { min-height:300px; padding:28px; }
+ .specialties-booking>span { font-size:22px; }
+}
+@media(max-width:640px) {
+ .specialties-grid { grid-template-columns:1fr; }
+ .specialties-booking { grid-column:span 1; }
+}
+@media(prefers-reduced-motion:reduce) {
+ .specialty-flip-inner { transition:none; }
+}
+
+/* Prenota — the team source and internal hero are shared with Chi siamo. */
+.booking-page { background:var(--home-blue); }
+.booking-page main { background:var(--home-bg); }
+.booking-page .about-hero { background:var(--home-blue); }
+.booking-page .booking-search-panel { padding-top:80px; padding-bottom:72px; }
+.booking-search-panel .home-section-heading { border:0; padding-bottom:0; }
+.booking-search-form { display:flex; width:100%; max-width:1000px; height:54px; margin-top:28px; padding:3px; border:2px solid var(--home-blue); border-radius:999px; background:var(--white); }
+.booking-search-form input { flex:1; min-width:0; padding:0 18px; border:0; border-radius:inherit; background:transparent; color:var(--home-blue); font-size:20px; }
+.booking-search-form button { padding:0 20px; border:0; border-radius:999px; background:var(--home-blue); color:var(--home-bg); font-size:24px; cursor:pointer; }
+.booking-subtitle { margin-top:40px; font-size:24px; line-height:1.5; }
+.booking-list { display:grid; gap:46px; margin-top:46px; }
+.booking-card { display:grid; grid-template-columns:144px minmax(0,1fr); grid-template-rows:1fr auto; gap:0 36px; min-height:200px; padding:14px 20px 14px 16px; border-radius:20px; background:var(--home-bg); color:var(--home-blue); }
+.booking-card-image { grid-row:1/span 2; width:144px; height:172px; border-radius:18px; object-fit:cover; }
+.booking-card-content { min-width:0; padding-top:16px; }
+.booking-card-content h3 { font-size:42px; font-weight:700; line-height:1.2; overflow-wrap:anywhere; }
+.booking-card-content p { font-size:28px; color:var(--home-light); line-height:1.4; }
+.booking-card .booking-profile { grid-column:2; justify-self:end; display:flex; align-items:center; gap:50px; color:var(--home-green); font-size:21px; }
+.booking-profile[href] { padding-bottom:5px; border-bottom:2px solid; text-decoration:none; }
+.booking-profile .diagonal-arrow { width:24px; height:24px; }
+.booking-empty { margin-top:40px; font-size:20px; }
+.booking-page .booking-doctors { padding-bottom:160px; }
+.booking-page .home-footer { border-radius:24px 24px 0 0; background:color-mix(in srgb,var(--home-blue) 15%,var(--home-bg)); }
+@media(max-width:1000px) {
+ .booking-page .booking-search-panel { padding-top:40px; padding-bottom:40px; }
+ .booking-subtitle { margin-top:28px; font-size:19px; }
+ .booking-list { gap:28px; margin-top:32px; }
+ .booking-card { grid-template-columns:110px minmax(0,1fr); gap:0 24px; min-height:170px; }
+ .booking-card-image { width:110px; height:142px; }
+ .booking-card-content { padding-top:8px; }
+ .booking-card-content h3 { font-size:30px; }
+ .booking-card-content p { font-size:21px; }
+ .booking-card .booking-profile { font-size:17px; gap:24px; }
+ .booking-page .booking-doctors { padding-bottom:64px; }
+}
+@media(max-width:640px) {
+ .booking-search-form input { padding:0 12px; font-size:16px; }
+ .booking-search-form button { padding:0 14px; font-size:18px; }
+ .booking-card { grid-template-columns:80px minmax(0,1fr); gap:16px; padding:16px; }
+ .booking-card-image { grid-row:1; width:80px; height:108px; font-size:11px; }
+ .booking-card-content { padding-top:0; }
+ .booking-card-content h3 { font-size:22px; }
+ .booking-card-content p { margin-top:6px; font-size:16px; }
+ .booking-card .booking-profile { grid-column:1/-1; }
 }

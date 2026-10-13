@@ -3,86 +3,52 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Prenota | Poliambulatorio De Vitis</title>
+  <title>Prenota | De Vitis Poliambulatorio</title>
+  <meta name="description" content="Cerca i medici del Poliambulatorio De Vitis a Lecce per nome e specializzazione.">
+  <link rel="icon" href="assets/favicon-google.png" type="image/png">
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="home.css">
+  <script src="medici.js" defer></script>
+  <script src="home.js" defer></script>
 </head>
-<body>
-
-<header>
-  <div class="container nav">
-    <a href="#" class="logo" aria-label="Poliambulatorio De Vitis">
-      <img src="assets/favicon.png" alt="" aria-hidden="true">
-      <span class="logo-text">
-        <span class="logo-kicker">POLIAMBULATORIO</span>
-        <span class="logo-name">De Vitis</span>
-      </span>
-    </a>
-
-    <nav>
-      <a href="home.html">Specialisti</a>
-      <a href="home.html">Approccio</a>
-      <a href="home.html">Contatti</a>
-      <a href="prenota.html" class="btn">Prenota</a>
-    </nav>
-  </div>
+<body class="devitis-home about-page booking-page">
+<header class="home-header">
+  <a class="home-logo" href="home.html#home" aria-label="De Vitis Poliambulatorio — Home"><img src="assets/logo_poliambulatorio_vettoriale.svg" alt="De Vitis Poliambulatorio"></a>
+  <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="home-menu">Menu <span aria-hidden="true">☰</span></button>
+  <nav id="home-menu" class="home-menu" aria-label="Menu principale">
+    <a href="home.html#home">Home</a><a href="chisiamo.html">Chi siamo</a><a href="specializzazioni.html">Specializzazioni</a><a href="home.html#contatti">Contatti</a><a href="home.html#collabora">Collabora con noi</a><a class="home-book" href="prenota.html" aria-current="page">Prenota</a>
+  </nav>
 </header>
-
-<section class="booking-search">
-  <div class="container">
-    <span class="eyebrow">Prenotazioni</span>
-    <h1>Cerca una prestazione o un medico.</h1>
-
-    <form class="search-bar">
-      <input type="text" placeholder="Es. cardiologia, dermatologia, Dott. Rossi">
-      <button type="submit" class="btn">Cerca</button>
+<main>
+  <section class="about-hero" aria-labelledby="booking-title">
+    <!-- Manca la fotografia originale dell’incontro con tablet: nessun asset sostitutivo. -->
+    <h1 id="booking-title">Prenota</h1>
+  </section>
+  <section class="home-section about-section booking-search-panel" aria-labelledby="booking-search-title">
+    <div class="home-section-heading"><h2 id="booking-search-title">Cerca una prestazione o un medico</h2></div>
+    <form class="booking-search-form" id="doctor-search" role="search">
+      <label class="sr-only" for="doctor-query">Cerca per nome o specializzazione</label>
+      <input id="doctor-query" name="q" type="search" autocomplete="off" aria-controls="booking-list">
+      <button type="submit">Cerca</button>
     </form>
+  </section>
+  <section class="home-section home-specialties about-section booking-doctors" aria-labelledby="booking-doctors-title">
+    <div class="home-section-heading"><h2 id="booking-doctors-title">I nostri medici</h2></div>
+    <p class="booking-subtitle">Seleziona uno specialista per visualizzare il profilo e prenotare una visita.</p>
+    <noscript><p>Attiva JavaScript per visualizzare e cercare i medici.</p></noscript>
+    <p class="sr-only" id="booking-results-status" role="status" aria-live="polite" aria-atomic="true"></p>
+    <p class="booking-empty" id="booking-empty" hidden>Nessun medico trovato. Prova con un altro nome o una specializzazione.</p>
+    <div class="booking-list" id="booking-list"></div>
+  </section>
+</main>
+<footer class="home-footer">
+  <div class="home-footer-grid">
+    <a class="footer-logo" href="home.html#home" aria-label="De Vitis Poliambulatorio — torna all’inizio"><img src="assets/logo_poliambulatorio_vettoriale.svg" alt="De Vitis Poliambulatorio"></a>
+    <div class="footer-menu"><h3>MENU</h3><a href="home.html#home">Home</a><a href="chisiamo.html">Chi siamo</a><a href="specializzazioni.html">Specializzazioni</a><a href="home.html#contatti">Contatti</a><a href="home.html#collabora">Collabora con noi</a></div>
+    <div><h3>CONTATTI</h3><a href="mailto:info@poliambulatoriodevitis.it">info@poliambulatoriodevitis.it</a><br><a href="tel:+390832453967">0832 453967</a><br><a href="https://www.google.com/maps/search/?api=1&amp;query=Poliambulatorio+De+Vitis+Via+Cicolella+3+Lecce" target="_blank" rel="noopener">Via Cicolella, 3 - Lecce (LE) 73100</a></div>
+    <div><h3>ORARI</h3><p>Lun-Sab: 9.00 - 19.00<br>(si riceve solo su appuntamento)</p></div>
   </div>
-</section>
-
-<section class="container doctors-section">
-  <div class="section-header">
-    <h2>I nostri medici</h2>
-    <p>Seleziona uno specialista per visualizzare il profilo e prenotare una visita.</p>
-  </div>
-
-  <div class="doctors-grid">
-
-    <a href="medico-leonardo-anselmi.html" class="doctor-card">
-      <img src="assets/medico-1.jpg" alt="Dott. Leonardo Anselmi">
-      <div>
-        <h3>Dott. Leonardo Anselmi</h3>
-        <p>Neurochirurgo</p>
-        <span>Visita il profilo →</span>
-      </div>
-    </a>
-
-    <a href="medico-maria-rossi.html" class="doctor-card">
-      <img src="assets/medico-2.jpg" alt="Dott.ssa Maria Rossi">
-      <div>
-        <h3>Dott.ssa Maria Rossi</h3>
-        <p>Cardiologa</p>
-        <span>Visita il profilo →</span>
-      </div>
-    </a>
-
-    <a href="medico-luca-bianchi.html" class="doctor-card">
-      <img src="assets/medico-3.jpg" alt="Dott. Luca Bianchi">
-      <div>
-        <h3>Dott. Luca Bianchi</h3>
-        <p>Dermatologo</p>
-        <span>Visita il profilo →</span>
-      </div>
-    </a>
-
-  </div>
-</section>
-
-<footer id="contatti">
-  <div class="container footer">
-    <div>© Poliambulatorio De Vitis</div>
-    <div>info@devitis.it · +39 000 000000</div>
-  </div>
+  <div class="home-copyright">© 2026 TUMARE S.R.L. · P. IVA 05465060753 · <a href="privacy-policy.html">Privacy Policy</a> · <a href="cookie-policy.html">Cookie Policy</a></div>
 </footer>
-
 </body>
 </html>
