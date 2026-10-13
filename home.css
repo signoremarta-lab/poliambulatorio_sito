@@ -6,7 +6,10 @@
 .devitis-home button,.devitis-home a { -webkit-tap-highlight-color:transparent; }
 .devitis-home :focus-visible { outline:3px solid var(--home-light); outline-offset:5px; }
 .devitis-home [hidden] { display:none !important; }
-.home-header { position:absolute; top:0; left:0; width:100%; height:132px; padding:0 48px; display:flex; align-items:center; justify-content:space-between; background:rgba(247,247,243,.87); border:0; border-radius:0 0 24px 24px; backdrop-filter:blur(8px); box-shadow:0 10px 24px rgba(8,40,69,.06); z-index:10; }
+.home-header { position:fixed; top:0; left:0; width:100%; height:132px; padding:0 48px; display:flex; align-items:center; justify-content:space-between; border:0; border-radius:0 0 24px 24px; box-shadow:0 10px 24px rgba(8,40,69,.06); z-index:10; }
+/* The fixed header keeps the original hero overlay; internal pages already reserve its height. */
+.home-header,.home-footer { background:rgba(247,247,243,.87); backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px); }
+html:has(.devitis-home) { scroll-padding-top:148px; }
 .home-logo { display:block; width:220px; flex-shrink:0; }
 .home-logo img { display:block; width:100%; }
 .home-menu { display:flex; gap:32px; align-items:center; padding-top:44px; }
@@ -77,18 +80,20 @@
 .form-note { text-align:center; font-size:10px; margin-top:8px; color:#9fae8d; }
 #contact-status { font-size:15px; margin-top:12px; }
 #contact-email-link { display:block; margin-top:8px; font-size:16px; }
-.home-footer { padding:0; border:0; box-shadow:0 -12px 28px rgba(8,40,69,.05); }
-.home-footer-grid { height:298px; padding:42px 48px 30px; display:grid; grid-template-columns:108px 220px 354px 354px; justify-content:space-between; gap:32px; font-size:21px; line-height:1.5; }
-.footer-logo { display:block; width:108px; height:210px; overflow:hidden; }
-.footer-logo img { display:block; width:auto; height:210px; max-width:none; }
-.home-footer-grid h3 { font-size:27px; font-weight:600; padding:0 8px 12px; border-bottom:2px solid var(--home-light); margin-bottom:10px; }
-.footer-menu { text-align:center; }
-.footer-menu a { display:block; text-decoration:none; }
-.home-copyright { min-height:43px; padding:7px 16px; font-size:20px; text-align:center; background:var(--home-light); }
+.home-footer { padding:40px 48px 14px; border:0; border-radius:24px 24px 0 0; box-shadow:0 -12px 35px rgba(8,40,69,.08); }
+.home-footer-grid { padding:0 0 28px; display:grid; grid-template-columns:80px minmax(0,300px) minmax(0,320px) minmax(0,302px); justify-content:space-between; gap:32px; font-size:18px; line-height:1.5; }
+.home-footer-grid>div { min-width:0; }
+.home-footer-grid a { text-decoration:none; overflow-wrap:anywhere; }
+.footer-logo { display:block; width:80px; height:154px; margin-top:-16px; overflow:hidden; }
+.footer-logo img { display:block; width:auto; height:154px; max-width:none; }
+.home-footer-grid h3 { font-size:24px; font-weight:600; margin-bottom:8px; }
+.footer-menu { text-align:left; }
+.footer-menu a { display:block; font-size:20px; font-weight:500; text-transform:uppercase; }
+.home-copyright { display:flex; justify-content:space-between; gap:20px; padding-top:8px; border-top:1px solid var(--home-light); color:var(--home-light); font-size:18px; line-height:1.4; }
 @media(min-width:769px) and (max-width:1200px) {
  .home-header { padding:0 28px; }.home-logo { width:190px; }.home-menu { gap:18px; }.home-menu a { font-size:16px; }
  .home-collaborate { grid-template-columns:1fr 43%; gap:55px; }.devitis-home .collaborate-copy h2 { font-size:48px; }.collaborate-copy p { font-size:21px; }
- .home-footer-grid { grid-template-columns:90px 180px 1fr 1fr; gap:24px; font-size:17px; }.home-footer-grid h3 { font-size:23px; }
+ .home-footer-grid { grid-template-columns:80px 220px minmax(0,1fr) minmax(0,1fr); gap:24px; font-size:16px; }.home-footer-grid h3 { font-size:22px; }
  .about-card>div { padding:25px; }.about-card h3 { font-size:24px; }.about-card p { font-size:18px; }.specialty-card h3 { font-size:20px; }.info-panels p { font-size:17px; }
 }
 @media(max-width:1000px) {
@@ -101,10 +106,10 @@
  .specialty-window { margin-top:40px; }.specialty-track { gap:20px; }.specialty-card { flex-basis:calc((100% - 20px)/2); }.specialty-card img,.specialty-text>div { height:auto; aspect-ratio:4/5; border-radius:14px; }.specialty-card h3 { font-size:17px; }.specialty-text>div { font-size:18px; }.carousel-controls { margin-top:24px; }
  .info-grid { grid-template-columns:1fr; gap:24px; margin-top:32px; }.home-map { height:auto; aspect-ratio:826/480; }.info-panels { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px; }.info-panels article { min-height:0; padding:14px; border-radius:14px; }.info-panels h3 { width:100%; font-size:21px; }.info-panels p { font-size:14px; }
  .home-collaborate { height:auto; padding:40px 24px; grid-template-columns:1fr; gap:32px; }.collaborate-copy { padding-top:0; }.devitis-home .collaborate-copy h2 { white-space:normal; }.collaborate-copy p { font-size:18px; max-width:520px; }.collaborate-form { width:100%; max-width:514px; justify-self:center; min-height:0; }.collaborate-form h3 { font-size:27px; }.form-note { font-size:10px; }
- .home-footer-grid { height:auto; padding:36px 24px; grid-template-columns:90px 1fr; gap:30px; font-size:16px; }.home-footer-grid h3 { font-size:22px; }.footer-logo { width:90px; height:175px; }.footer-logo img { height:175px; }.footer-menu { text-align:left; }.home-copyright { font-size:13px; padding:12px 18px; }
+ .home-footer { padding:36px 24px 16px; }.home-footer-grid { padding-bottom:24px; grid-template-columns:80px minmax(0,1fr); gap:30px; font-size:16px; }.home-footer-grid h3 { font-size:22px; }.footer-logo { margin-top:0; }.home-copyright { flex-direction:column; gap:8px; font-size:14px; }
 }
 @media(max-width:440px) {
- .home-header { padding:0 18px; }.home-logo { width:160px; }.home-section { padding:36px 20px; }.about-card { display:block; height:auto; border-radius:12px; }.about-card img { height:145px; }.about-card>div { padding:20px; }.about-card h3 { font-size:20px; }.about-card p { font-size:15px; }.specialty-card { flex-basis:100%; }.specialty-card h3 { font-size:20px; }.info-panels { grid-template-columns:1fr; }.info-panels article { padding:16px; }.info-panels h3 { width:176px; }.info-panels p { font-size:17px; }.home-footer-grid { grid-template-columns:1fr; }.footer-logo { justify-self:center; }.home-footer-grid>div { min-width:0; }.home-footer-grid a { overflow-wrap:anywhere; }
+ .home-header { padding:0 18px; }.home-logo { width:160px; }.home-section { padding:36px 20px; }.about-card { display:block; height:auto; border-radius:12px; }.about-card img { height:145px; }.about-card>div { padding:20px; }.about-card h3 { font-size:20px; }.about-card p { font-size:15px; }.specialty-card { flex-basis:100%; }.specialty-card h3 { font-size:20px; }.info-panels { grid-template-columns:1fr; }.info-panels article { padding:16px; }.info-panels h3 { width:176px; }.info-panels p { font-size:17px; }.home-footer-grid { grid-template-columns:1fr; }.footer-logo { justify-self:center; }
 }
 @media(prefers-reduced-motion:reduce) { .devitis-home { scroll-behavior:auto; }.specialty-track { transition:none; } html:has(.devitis-home) { scroll-behavior:auto; } }
 
@@ -175,6 +180,7 @@
 .about-person h3 { margin:16px 0 6px; color:var(--home-blue); font-size:20px; font-weight:700; line-height:1.4; }
 .about-person p { color:var(--home-light); font-size:17px; line-height:1.5; }
 @media(max-width:1100px) {
+ html:has(.devitis-home) { scroll-padding-top:110px; }
  .about-page main { padding-top:94px; }
  .about-hero { margin:20px 24px 0; height:220px; }
  .about-intro-grid { gap:28px; }
@@ -268,7 +274,6 @@
 .booking-profile .diagonal-arrow { width:24px; height:24px; }
 .booking-empty { margin-top:40px; font-size:20px; }
 .booking-page .booking-doctors { padding-bottom:160px; }
-.booking-page .home-footer { border-radius:24px 24px 0 0; background:color-mix(in srgb,var(--home-blue) 15%,var(--home-bg)); }
 @media(max-width:1000px) {
  .booking-page .booking-search-panel { padding-top:40px; padding-bottom:40px; }
  .booking-subtitle { margin-top:28px; font-size:19px; }
