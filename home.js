@@ -1,4 +1,20 @@
 'use strict';
+const landingPage = document.querySelector('.index2-page');
+if (landingPage && typeof IntersectionObserver === 'function' &&
+    typeof window.matchMedia === 'function' && window.matchMedia('(prefers-reduced-motion: no-preference)').matches) {
+  const revealObserver = new IntersectionObserver(entries => {
+    entries.forEach(({ target, isIntersecting }) => {
+      if (!isIntersecting) return;
+      target.classList.add('is-visible');
+      revealObserver.unobserve(target);
+    });
+  }, { threshold: 0.08 });
+  landingPage.querySelectorAll('.landing-newsletter, .home-section-heading, .landing-story .about-copy, .landing-mosaic .about-room, .info-grid > div:first-child, .info-panels article, .collaborate-copy').forEach(element => {
+    revealObserver.observe(element);
+    element.classList.add('reveal');
+  });
+}
+
 const menuToggle = document.querySelector('.menu-toggle');
 const menu = document.querySelector('.home-menu');
 if (menuToggle && menu) {

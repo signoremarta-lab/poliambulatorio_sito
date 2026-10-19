@@ -359,6 +359,27 @@ html:has(.devitis-home) { scroll-padding-top:148px; }
 .index2-page .home-footer-grid { grid-template-columns:80px minmax(0,430px) minmax(0,350px) minmax(0,290px); gap:20px; padding-bottom:32px; }
 .index2-page .footer-logo { margin-top:-6px; }
 .index2-page .home-copyright { font-size:18px; }
+/* Motion is opt-in; content stays visible without JavaScript or observer support. */
+@media(prefers-reduced-motion:no-preference) {
+ .index2-page .home-hero-copy h1,.index2-page .home-hero-copy p { animation:index2-fade-up 700ms ease-out backwards; }
+ .index2-page .home-hero-copy p { animation-delay:120ms; }
+ .index2-page .reveal { opacity:0; transform:translateY(12px); transition:opacity 650ms ease-out,transform 650ms ease-out; }
+ .index2-page .reveal.is-visible,.index2-page .reveal:focus-within { opacity:1; transform:none; }
+ .index2-page .landing-mosaic .about-room:nth-child(3n+2) { transition-delay:70ms; }
+ .index2-page .landing-mosaic .about-room:nth-child(3n) { transition-delay:140ms; }
+ .index2-page .about-room-photo { transition:transform 600ms ease-out; }
+ .index2-page .home-menu a { position:relative; }
+ .index2-page .home-menu a::after { content:''; position:absolute; left:0; right:0; bottom:-4px; height:1px; background:currentColor; transform:scaleX(0); transform-origin:left; transition:transform 500ms ease-out; }
+ .index2-page .home-menu a:focus-visible::after { transform:scaleX(1); }
+ @media(hover:hover) and (pointer:fine) {
+  .index2-page .landing-mosaic .about-room:hover .about-room-photo { transform:scale(1.025); }
+  .index2-page .home-menu a:hover::after { transform:scaleX(1); }
+ }
+}
+@keyframes index2-fade-up {
+ from { opacity:0; transform:translateY(12px); }
+ to { opacity:1; transform:none; }
+}
 @media(max-width:1100px) {
  .index2-page main { padding-top:94px; }
 }
