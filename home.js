@@ -210,3 +210,92 @@ if ((equipeGrid || bookingList) && typeof equipe !== 'undefined') {
     filterDoctors();
   }
 }
+
+
+/* NEWSLETTER POLIAMBULATORIO DE VITIS */
+
+(() => {
+  const form = document.getElementById("newsletterForm");
+  if (!form) return;
+
+  const emailInput = document.getElementById("newsletter-email");
+  const consentInput = document.getElementById("newsletterConsent");
+  const message = document.getElementById("newsletterMessage");
+  const button = form.querySelector('button[type="submit"]');
+
+  const APPS_SCRIPT_URL =
+    "https://script.google.com/macros/s/AKfycbxqGK99Ns9e2EjOwh5d7qVnQplO9iL9NSz9K1AFBmY2zsu3UF-p9ajbPROoWFRXvx4l-Q/exec";
+
+  function showMessage(text, type = "") {
+    message.textContent = text;
+    message.style.color =
+      type === "success" ? "#496b22" :
+      type === "error" ? "#9b2c2c" : "";
+  }
+
+  form.addEventListener("submit", async (event) => {
+    event.preventDefault();
+
+    const email = emailInput.value.trim().toLowerCase();
+
+    if (!emailInput.checkValidity()) {
+      showMessage("Inserisci un indirizzo email valido.", "error");
+      emailInput.reportValidity();
+      return;
+    }
+
+    if (!consentInput.checked) {
+      showMessage(
+        "Per iscriverti è necessario prestare il consenso.",
+        "error"
+      );
+      consentInput.focus();
+      return;
+    }
+
+    const originalText = button.textContent;
+
+    button.disabled = true;
+    emailInput.disabled = true;
+    consentInput.disabled = true;
+    button.textContent = "INVIO IN CORSO...";
+    showMessage("");
+
+    try {
+      await fetch(APPS_SCRIPT_URL, {
+        method: "POST",
+        mode: "no-cors",
+        headers: {
+          "Content-Type": "text/plain;charset=utf-8"
+        },
+        body: JSON.stringify({
+          email: email,
+          consent: true
+        })
+      });
+
+      showMessage(
+        "Richiesta inviata. Se ricevi l'email di conferma, " +
+        "aprila e clicca su “Conferma iscrizione” " +
+        "per completare la procedura.",
+        "success"
+      );
+
+      form.reset();
+
+    } catch (error) {
+      console.error("Errore newsletter:", error);
+
+      showMessage(
+        "Non è stato possibile inviare la richiesta. Riprova.",
+        "error"
+      );
+
+    } finally {
+      button.disabled = false;
+      emailInput.disabled = false;
+      consentInput.disabled = false;
+      button.textContent = originalText;
+    }
+  });
+})();

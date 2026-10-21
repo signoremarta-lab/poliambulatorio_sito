@@ -458,3 +458,90 @@ html:has(.devitis-home) { scroll-padding-top:148px; }
  .index2-page .home-footer-grid h3 { font-size:20px; }
  .index2-page .home-copyright { font-size:12px; }
 }
+
+
+/* Messaggio newsletter */
+#newsletterMessage {
+  margin-top: 12px;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+/* Pulsante durante l'invio */
+.landing-signup button:disabled {
+  opacity: 0.65;
+  cursor: wait;
+}
+
+/* Controlli newsletter */
+.landing-signup input:focus-visible,
+.landing-consent input:focus-visible {
+  outline: 2px solid #496b22;
+  outline-offset: 3px;
+}
+
+
+/* NEWSLETTER - RESPONSIVE CELLULARE */
+
+@media (max-width: 768px) {
+
+  .landing-newsletter {
+    width: 100%;
+    max-width: 100%;
+    padding-left: 16px;
+    padding-right: 16px;
+    box-sizing: border-box;
+  }
+
+  .landing-signup {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: auto;
+    overflow: visible;
+    gap: 10px;
+  }
+
+  .landing-signup label {
+    width: 100%;
+    min-height: 48px;
+    box-sizing: border-box;
+  }
+
+  .landing-signup input {
+    min-width: 0;
+    width: 100%;
+    font-size: 16px;
+  }
+
+  .landing-signup button {
+    display: block;
+    width: 100%;
+    min-height: 52px;
+    padding: 12px 14px;
+    font-size: 13px;
+    line-height: 1.4;
+    white-space: normal;
+    cursor: pointer;
+    touch-action: manipulation;
+  }
+
+  .landing-consent {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-top: 12px;
+  }
+
+  .landing-consent input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+  }
+
+  #newsletterMessage {
+    margin-top: 12px;
+    font-size: 13px;
+    line-height: 1.5;
+  }
+}

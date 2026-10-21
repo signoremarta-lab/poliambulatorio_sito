@@ -30,18 +30,67 @@
     <li>PRENOTAZIONE RAPIDA</li><li>SPECIALISTI QUALIFICATI</li><li>APPROCCIO INTEGRATO</li>
   </ul>
 
-  <section class="landing-newsletter" aria-labelledby="newsletter-title">
-    <h2 id="newsletter-title">Vuoi rimanere aggiornato?</h2>
-    <!-- Anteprima grafica: il pulsante non invia dati. Da collegare al futuro servizio newsletter. -->
-    <form aria-labelledby="newsletter-title">
+  
+  <section class="landing-newsletter"
+          aria-labelledby="newsletter-title">
+
+    <h2 id="newsletter-title">
+      Vuoi rimanere aggiornato?
+    </h2>
+
+    <form id="newsletterForm"
+          aria-labelledby="newsletter-title">
+
       <div class="landing-signup">
-        <label for="newsletter-email"><svg viewBox="0 0 24 20" aria-hidden="true"><rect x="1" y="1" width="22" height="18" rx="1"/><path d="m1 2 11 9L23 2M1 19l8-9m14 9-8-9"/></svg><span class="sr-only">Indirizzo email</span></label>
-        <input id="newsletter-email" name="email" type="email" autocomplete="email" placeholder="Inserisci la tua e-mail">
-        <button type="submit" disabled>AVVISAMI QUANDO CI SONO NOVITÀ</button>
+
+        <label for="newsletter-email">
+          <svg viewBox="0 0 24 20" aria-hidden="true">
+            <rect x="1" y="1"
+                  width="22" height="18" rx="1"/>
+            <path d="m1 2 11 9L23 2M1 19l8-9m14 9-8-9"/>
+          </svg>
+          <span class="sr-only">Indirizzo email</span>
+        </label>
+
+        <input
+          id="newsletter-email"
+          name="email"
+          type="email"
+          autocomplete="email"
+          placeholder="Inserisci la tua e-mail"
+          required
+        >
+
+        <button type="submit">
+          AVVISAMI QUANDO CI SONO NOVITÀ
+        </button>
+
       </div>
-      <label class="landing-consent"><input type="checkbox" name="consent"><span>Acconsento a ricevere via email aggiornamenti e novità sul Poliambulatorio De Vitis. Ho letto l’<a href="privacy-policy.html">Informativa Privacy</a>.</span></label>
+
+      <label class="landing-consent">
+        <input
+          type="checkbox"
+          id="newsletterConsent"
+          name="consent"
+          required
+        >
+        <span>
+          Acconsento a ricevere via email aggiornamenti
+          e novità sul Poliambulatorio De Vitis.
+          Ho letto l'
+          <a href="privacy-policy.html">
+            Informativa Privacy
+          </a>.
+        </span>
+      </label>
+
+      <p id="newsletterMessage"
+        role="status"
+        aria-live="polite"></p>
+
     </form>
   </section>
+
 
   <section id="specializzazioni" class="landing-specialties" aria-labelledby="specialties-title">
     <div class="home-section-heading"><h2 id="specialties-title">Specializzazioni</h2></div>
@@ -70,13 +119,45 @@
   <section id="contatti" class="landing-info" aria-labelledby="info-title">
     <div class="home-section-heading"><h2 id="info-title">Informazioni</h2></div>
     <div class="info-grid">
-      <div><p>Il nostro poliambulatorio si prepara ad accoglierti nella sua nuova sede.<br>Puoi scoprire dove ci troverai e i nostri contatti per informazioni o chiarimenti.</p>
-        <!-- Collegamenti social assenti nel progetto: icone in attesa degli URL ufficiali. -->
-        <div class="landing-socials" role="group" aria-label="Social — collegamenti in arrivo">
-          <span role="img" aria-label="Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" stroke="none" d="M24 12a12 12 0 1 0-13.9 11.85v-8.38H7.05V12h3.05V9.36c0-3 1.8-4.67 4.54-4.67 1.32 0 2.7.24 2.7.24v2.97h-1.52c-1.5 0-1.96.93-1.96 1.88V12h3.33l-.53 3.47h-2.8v8.38A12 12 0 0 0 24 12Z"/></svg></span>
-          <span role="img" aria-label="Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="1.5" y="1.5" width="21" height="21" rx="6"/><circle cx="12" cy="12" r="5"/><circle class="social-dot" cx="18.2" cy="5.8" r="1.2"/></svg></span>
-        </div>
+    <div>
+      <p>
+        Il nostro poliambulatorio si prepara ad accoglierti
+        nella sua nuova sede.<br>
+        Puoi scoprire dove ci troverai e i nostri contatti
+        per informazioni o chiarimenti.
+      </p>
+
+      <div class="landing-socials"
+          role="group"
+          aria-label="Seguici sui social">
+
+        <!-- Facebook -->
+        <a href="https://www.facebook.com/profile.php?id=61595564256131"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Visita la nostra pagina Facebook">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path fill="currentColor" stroke="none"
+              d="M24 12a12 12 0 1 0-13.9 11.85v-8.38H7.05V12h3.05V9.36c0-3 1.8-4.67 4.54-4.67 1.32 0 2.7.24 2.7.24v2.97h-1.52c-1.5 0-1.96.93-1.96 1.88V12h3.33l-.53 3.47h-2.8v8.38A12 12 0 0 0 24 12Z"/>
+          </svg>
+        </a>
+
+        <!-- Instagram -->
+        <a href="https://www.instagram.com/poliambulatoriodevitis/"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Visita il nostro profilo Instagram">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <rect x="1.5" y="1.5"
+                  width="21" height="21" rx="6"/>
+            <circle cx="12" cy="12" r="5"/>
+            <circle class="social-dot"
+                    cx="18.2" cy="5.8" r="1.2"/>
+          </svg>
+        </a>
+
       </div>
+    </div>
       <div class="info-panels">
         <article><h3>Indirizzo</h3><p>Via Cicolella, 3 - Lecce (LE) 73100</p></article>
         <article><h3>Contatti</h3><p><a href="mailto:info@poliambulatoriodevitis.it">info@poliambulatoriodevitis.it</a></p></article>
@@ -103,3 +184,4 @@
 </footer>
 </body>
 </html>
+
