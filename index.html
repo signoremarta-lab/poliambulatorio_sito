@@ -1,632 +1,187 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-  <link rel="icon" href="/assets/favicon-google.png" type="image/png" sizes="192x192">
-
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>De Vitis Poliambulatorio | Prossima apertura</title>
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
-
-  <style>
-    :root { 
-        --blue: #082845; 
-        --light-blue: #6498be; 
-        --green: #496b22; 
-    }
-
-    * {
-        box-sizing: border-box; 
-        margin: 0;
-         padding: 0; 
-    }
-
-    body, .landing {
-        min-height: 100vh; 
-        background: #f7f7f3; 
-        font-family: "Montserrat", sans-serif; 
-    }
-
-    .hero { 
-        width: 100%; 
-        background:
-          linear-gradient(to bottom, rgba(247, 247, 243, 0) 55%, #f7f7f3 100%) center top / 100% 100% no-repeat,
-          url("assets/sfondo.png") center top / cover no-repeat;
-    }
-
-    .content { 
-        max-width: 1900px; 
-        margin: auto;
-        padding: clamp(306px, calc(32vw - 24px), 631px) 24px 42px;
-        text-align: center; 
-    }
-
-    .brand { 
-        --brand-size: clamp(54px, 5.4vw, 110px);
-        display: flex; 
-        align-items: center; 
-        gap: 18px; 
-        width: fit-content; 
-        margin: 0 auto 28px;
-    }
-
-    .brand img { 
-        display: block; 
-        width: calc(var(--brand-size) * .724 + 5.6px);
-        height: auto; 
-    }
-
-    .brand-text { 
-        display: flex; 
-        flex-direction: column; 
-        align-items: center; 
-    }
-
-    .brand-name { color: var(--blue); font: 400 var(--brand-size)/.9 "Bodoni Moda", Georgia, serif; white-space: nowrap; }
-    .brand-subtitle { margin-top: 10px; color: var(--light-blue); font-size: calc(var(--brand-size) * .3215); line-height: 1.2; letter-spacing: .08em; white-space: nowrap; }
-
-    h1 { width: min(100%, 1114px); margin: 0 auto 26px; color: var(--blue); font-size: clamp(38px, 3.8vw, 75px); font-weight: 600; line-height: 1.15; white-space: nowrap; }
-    .intro { max-width: 1500px; margin: auto; color: var(--blue); font-size: clamp(18px, 1.55vw, 30px); line-height: 1.4; letter-spacing: .08em; }
-    .opening { display: inline-block; margin-top: 30px; padding: 8px 30px 10px; border: 1.5px solid var(--green); border-radius: 999px; color: var(--green); font-size: clamp(20px, 1.5vw, 29px); line-height: 1.1; }
-    .opening strong { font-weight: 600; }
-
-    .details { max-width: 1162px; margin: auto; padding: 56px 24px 76px; color: var(--blue); }
-    .newsletter { max-width: 816px; margin: 60px auto 0; text-align: left; }
-    .signup { display: grid; grid-template-columns: 1fr 366px; height: 54px; overflow: hidden; border: 1px solid #111; border-radius: 10px; background: #fff; }
-    .signup label { display: flex; align-items: center; gap: 8px; padding: 0 16px; color: #777; }
-    .signup input { width: 100%; border: 0; outline: 0; font: inherit; color: var(--blue); }
-    .signup button { margin: 2px; border: 0; border-radius: 7px; background: #426718; color: #fff; font: inherit; cursor: pointer; }
-    .privacy { margin: 6px 8px 0; color: #777; font-size: 12px; }
-
-    .card { border: 1px solid #deded8; border-radius: 8px; background: rgba(255,255,255,.92); box-shadow: 0 10px 30px rgba(24,40,20,.09); }
-    .story { display: grid; grid-template-columns: 54px 1.4fr 1px 1fr; gap: 22px; min-height: 344px; padding: 26px; }
-    .icon-circle { display: grid; place-items: center; width: 50px; height: 50px; flex: 0 0 50px; border-radius: 50%; background: #cbd3c3; color: var(--green); }
-    .icon { width: 28px; height: 28px; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
-    .story h2, .location h2 { font: 400 32px/1.2 "Bodoni Moda", Georgia, serif; letter-spacing: .12em; }
-    .story h2 { white-space: nowrap; }
-    .story-copy p { margin-top: 18px; font-size: 14px; line-height: 1.38; letter-spacing: .03em; }
-    .divider { background: #cbd3c3; }
-    .quote { position: relative; display: grid; place-items: center; padding: 42px 24px 22px; font: italic 400 30px/1.35 "Bodoni Moda", Georgia, serif; letter-spacing: .1em; text-align: center; }
-    .quote::before { content: "“"; position: absolute; top: -20px; left: 16px; color: #cbd3c3; font: 120px/1 Georgia, serif; }
-    .location { margin-top: 48px; padding: 28px 27px 52px; text-align: center; }
-    .location-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 13px; margin-top: 20px; }
-    .place { display: flex; align-items: center; min-height: 99px; padding: 10px 14px; border: 1px solid #cbd3c3; border-radius: 8px; text-align: left; }
-    .place div:last-child { margin-left: 14px; }
-    .place h3 { font-size: 19px; font-weight: 400; letter-spacing: .08em; }
-    .place p { margin-top: 3px; font-size: 12px; line-height: 1.35; }
-
-    .signup-wrapper {
-        width: 100%;
-    }
-
-    .newsletter-consent {
-        display: flex;
-        align-items: flex-start;
-        gap: 8px;
-        margin: 10px 8px 0;
-        color: #777;
-        font-size: 12px;
-        line-height: 1.45;
-    }
-
-    .newsletter-consent input {
-        width: auto;
-        margin-top: 3px;
-        flex: 0 0 auto;
-    }
-
-    .newsletter-consent a {
-        color: var(--blue);
-        text-decoration: underline;
-    }
-
-    .newsletter-consent a:hover {
-        color: var(--green);
-    }
-
-    /* Footer legale */
-    .legal-footer {
-        background: #e5e0d8;
-        color: var(--blue);
-        padding: 20px 24px;
-        font-size: 11px;
-        line-height: 1.6;
-        letter-spacing: .03em;
-    }
-
-    .legal-footer-inner {
-        max-width: 1162px;
-        margin: 0 auto;
-        text-align: center;
-    }
-
-    .legal-footer-company {
-        margin-bottom: 5px;
-    }
-
-    .legal-footer-links {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 9px;
-        flex-wrap: wrap;
-    }
-
-    .legal-footer a {
-        color: var(--blue);
-        text-decoration: none;
-    }
-
-    .legal-footer a:hover {
-        text-decoration: underline;
-    }
-
-    .legal-footer-separator {
-        opacity: .45;
-    }
-
-    @media (max-width: 960px) {
-      .content { padding-top: clamp(270px, 48vw, 440px); }
-      h1 { max-width: 720px; white-space: normal; }
-      .intro { max-width: 720px; letter-spacing: .05em; }
-      .intro br { display: none; }
-      .newsletter { margin-top: 44px; }
-      .signup { grid-template-columns: minmax(0, 1fr) minmax(240px, 38%); }
-      .details { padding-top: 44px; padding-bottom: 60px; }
-      .story { grid-template-columns: 50px 1fr; min-height: 0; }
-      .story h2 { white-space: normal; }
-      .divider {
-        display: block;
-        grid-column: 1 / -1;
-        width: 100%;
-        height: 1px;
-        margin-top: 8px;
-      }
-      .quote { grid-column: 1 / -1; min-height: 180px; margin-top: 0; }
-      .quote::after { display: none; }
-      .location { margin-top: 32px; }
-      .location-grid { grid-template-columns: 1fr; }
-      .place { min-height: 88px; }
-    }
-
-    @media (max-width: 640px) {
-      .hero { background-size: 100% 70.69vw, 100% auto; }
-      .content { padding: clamp(205px, 58vw, 260px) 18px 32px; }
-      .brand {
-        --brand-size: clamp(46px, 14vw, 58px);
-        gap: 9px;
-        margin-bottom: 24px;
-      }
-      .brand-subtitle { margin-top: 7px; }
-      h1 { margin-bottom: 18px; font-size: clamp(31px, 9.2vw, 40px); line-height: 1.08; }
-      .intro { font-size: clamp(15px, 4.25vw, 18px); line-height: 1.55; letter-spacing: .025em; }
-      .opening { margin-top: 22px; padding: 8px 20px 9px; font-size: 17px; }
-      .newsletter { margin-top: 34px; }
-      .signup { grid-template-columns: 1fr; height: auto; border-radius: 9px; }
-      .signup label { min-height: 50px; padding: 0 14px; }
-      .signup button { min-height: 48px; margin: 0 3px 3px; padding: 0 12px; }
-      .newsletter-consent { margin: 10px 2px 0; font-size: 11px; }
-      .privacy { margin-right: 2px; margin-left: 2px; }
-      .details { padding: 32px 16px 44px; }
-      .card { box-shadow: 0 6px 20px rgba(24,40,20,.07); }
-      .story { grid-template-columns: 40px 1fr; gap: 14px; padding: 20px 18px; }
-      .icon-circle { width: 40px; height: 40px; flex-basis: 40px; }
-      .icon { width: 23px; height: 23px; }
-      .story h2, .location h2 { font-size: 25px; line-height: 1.15; letter-spacing: .07em; }
-      .story-copy p { margin-top: 14px; font-size: 13px; line-height: 1.55; letter-spacing: .015em; }
-      .quote { min-height: 150px; padding: 34px 14px 20px; font-size: 23px; line-height: 1.35; letter-spacing: .06em; }
-      .quote::before { top: -10px; left: 6px; font-size: 88px; }
-      .quote::after { right: 6px; bottom: 18px; left: 6px; }
-      .location { margin-top: 24px; padding: 22px 18px 24px; }
-      .location-grid { gap: 10px; margin-top: 16px; }
-      .place { min-height: 76px; padding: 10px 12px; }
-      .place div:last-child { margin-left: 11px; }
-      .place h3 { font-size: 16px; letter-spacing: .05em; }
-      .place p { font-size: 11px; }
-      .legal-footer { padding: 18px 16px; font-size: 10px; }
-      .legal-footer-company { line-height: 1.7; }
-    }
-
-    @media (max-width: 360px) {
-      .content { padding-right: 14px; padding-left: 14px; }
-      .brand { --brand-size: 43px; }
-      h1 { font-size: 29px; }
-      .details { padding-right: 12px; padding-left: 12px; }
-      .story { grid-template-columns: 1fr; }
-      .story .icon-circle { margin-bottom: 2px; }
-    }
-  </style>
+  <meta name="description" content="Dall’esperienza del Laboratorio De Vitis, un nuovo punto di riferimento per visite specialistiche e servizi sanitari a Lecce.">
+  <title>Poliambulatorio De Vitis | Un nuovo punto di riferimento a Lecce</title>
+  <link rel="icon" href="assets/favicon-google.png" type="image/png">
+  <link rel="stylesheet" href="home.css">
+  <script src="home.js" defer></script>
 </head>
-<body>
-  <main class="landing">
-    <section class="hero">
-      <div class="content">
-        <div class="brand">
-          <img src="assets/favicon.png" alt="Logo De Vitis">
-          <div class="brand-text">
-            <div class="brand-name">De Vitis</div>
-            <div class="brand-subtitle">POLIAMBULATORIO</div>
-          </div>
-        </div>
+<body class="devitis-home index-page">
+<header class="home-header">
+  <a class="home-logo" href="#home" aria-label="De Vitis Poliambulatorio — Home"><img src="assets/logo_poliambulatorio_vettoriale.svg" alt="De Vitis Poliambulatorio"></a>
+  <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="home-menu">Menu <span aria-hidden="true">☰</span></button>
+  <nav id="home-menu" class="home-menu" aria-label="Menu principale">
+    <a href="#home">Home</a><a href="#specializzazioni">Specializzazioni</a><a href="#perche-nasce">Chi siamo</a><a href="#contatti">Contatti</a><a href="#collabora">Collabora con noi</a>
+  </nav>
+</header>
 
-        <h1>La salute ha un nuovo punto di riferimento.</h1>
-        <p class="intro">Dall’esperienza del Laboratorio De Vitis, un nuovo punto di riferimento per<br>
-          visite specialistiche e servizi sanitari a Lecce.</p>
-        <p class="opening">Apertura prevista: <strong>Novembre</strong></p>
+<main>
+  <section id="home" class="home-hero" aria-labelledby="hero-title">
+    <img class="landing-photo" src="assets/home_hero.png" alt="Un medico accoglie una paziente nel suo studio" width="1920" height="1080" fetchpriority="high">
+    <div class="home-hero-copy">
+      <h1 id="hero-title">La salute ha un<br>nuovo punto di<br>riferimento</h1>
+      <p>Dall’esperienza del Laboratorio De Vitis, un nuovo punto di riferimento per<br class="desktop-break"> visite specialistiche e servizi sanitari a Lecce.</p>
+    </div>
+  </section>
+  <ul class="landing-benefits" aria-label="Il nostro approccio">
+    <li>PRENOTAZIONE RAPIDA</li><li>SPECIALISTI QUALIFICATI</li><li>APPROCCIO INTEGRATO</li>
+  </ul>
 
-        <div class="newsletter">
+  
+  <section class="landing-newsletter"
+          aria-labelledby="newsletter-title">
 
-          <form
-            class="signup-wrapper"
-            id="newsletterForm"
-          >
+    <h2 id="newsletter-title">
+      Vuoi rimanere aggiornato?
+    </h2>
 
-            <div class="signup">
+    <form id="newsletterForm"
+          aria-labelledby="newsletter-title">
 
-              <label>
+      <div class="landing-signup">
 
-                ✉
+        <label for="newsletter-email">
+          <svg viewBox="0 0 24 20" aria-hidden="true">
+            <rect x="1" y="1"
+                  width="22" height="18" rx="1"/>
+            <path d="m1 2 11 9L23 2M1 19l8-9m14 9-8-9"/>
+          </svg>
+          <span class="sr-only">Indirizzo email</span>
+        </label>
 
-                <input
-                  type="email"
-                  id="email"
-                  placeholder="Inserisci la tua mail"
-                  aria-label="Indirizzo email"
-                  autocomplete="email"
-                  required
-                >
+        <input
+          id="newsletter-email"
+          name="email"
+          type="email"
+          autocomplete="email"
+          placeholder="Inserisci la tua e-mail"
+          required
+        >
 
-              </label>
+        <button type="submit">
+          AVVISAMI QUANDO CI SONO NOVITÀ
+        </button>
 
-
-              <button type="submit">
-                Avvisami quando ci sono novità
-              </button>
-
-            </div>
-
-
-            <label class="newsletter-consent">
-
-              <input
-                type="checkbox"
-                id="newsletterConsent"
-                required
-              >
-
-              <span>
-                Acconsento a ricevere via email aggiornamenti
-                e novità sul Poliambulatorio De Vitis.
-                Ho letto
-                <a
-                  href="/privacy-policy.html"
-                  target="_blank"
-                  rel="noopener"
-                >
-                  l'Informativa Privacy
-                </a>.
-              </span>
-
-            </label>
-
-
-            <p
-              id="newsletterMessage"
-              class="privacy"
-              role="status"
-              aria-live="polite"
-            ></p>
-
-          </form>
-
-        </div>
       </div>
-    </section>
 
-    <div class="details">
-      <section class="story card">
-        <span class="icon-circle" aria-hidden="true">
-          <svg class="icon" viewBox="0 0 24 24"><path d="M6 3v5a5 5 0 0 0 10 0V3M6 3H4m12 0h2M11 13v3a4 4 0 0 0 8 0v-1"/><circle cx="19" cy="12" r="2"/></svg>
+      <label class="landing-consent">
+        <input
+          type="checkbox"
+          id="newsletterConsent"
+          name="consent"
+          required
+        >
+        <span>
+          Acconsento a ricevere via email aggiornamenti
+          e novità sul Poliambulatorio De Vitis.
+          Ho letto l'
+          <a href="privacy-policy.html">
+            Informativa Privacy
+          </a>.
         </span>
-        <div class="story-copy">
-          <h2>Perché nasce il poliambulatorio</h2>
-          <p>Il nostro poliambulatorio nasce per offrire un’esperienza di cura completa, moderna e vicina alle persone.</p>
-          <p>Crediamo in una medicina capace di evolvere, senza perdere il valore dell’ascolto, della competenza e del rapporto umano. Per questo riuniamo professionalità diverse che collaborano con un obiettivo comune: prendersi cura di ogni persona in modo coordinato e consapevole.</p>
-          <p>Competenza, tecnologia e attenzione alla persona si incontrano per dare forma a un nuovo modo di vivere la salute.</p>
-        </div>
-        <span class="divider" aria-hidden="true"></span>
-        <blockquote class="quote">Più competenze, la stessa attenzione alla persona</blockquote>
-      </section>
+      </label>
 
-      <section class="location card">
-        <h2>Dove siamo</h2>
-        <div class="location-grid">
-          <article class="place">
-            <span class="icon-circle" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24"><path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg></span>
-            <div><h3>Posizione</h3><p>Via Cicolella, 3<br>Lecce (LE) - 73100</p></div>
-          </article>
-          <article class="place">
-            <span class="icon-circle" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24"><path d="m5 11 2-5h10l2 5M4 11h16v7H4zM7 18v2m10-2v2"/><circle cx="7" cy="14.5" r="1"/><circle cx="17" cy="14.5" r="1"/></svg></span>
-            <div><h3>Parcheggio</h3><p>Parcheggi gratuiti disponibili<br>nelle vicinanze.</p></div>
-          </article>
-          <article class="place">
-            <span class="icon-circle" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24"><path d="M12 22V3M5 5h14l2 3-2 3H5L3 8zM7 14h12l2 3-2 3H7l-2-3z"/></svg></span>
-            <div><h3>Indicazioni</h3><p>Facilmente raggiungibile dall'ingresso della Lecce-Maglie.</p></div>
-          </article>
-        </div>
-      </section>
+      <p id="newsletterMessage"
+        role="status"
+        aria-live="polite"></p>
+
+    </form>
+  </section>
+
+
+  <section id="specializzazioni" class="landing-specialties" aria-labelledby="specialties-title">
+    <div class="home-section-heading"><h2 id="specialties-title">Specializzazioni</h2></div>
+    <div class="landing-mosaic">
+      <figure class="about-room mosaic-dermatology"><img class="about-room-photo" src="assets/dermatologia.png" alt="" width="1414" height="2000" loading="lazy" decoding="async"><figcaption>Dermatologia</figcaption></figure>
+      <figure class="about-room mosaic-ultrasound"><img class="about-room-photo" src="assets/ecografia.png" alt="" width="1414" height="2000" loading="lazy" decoding="async"><figcaption>Ecografia</figcaption></figure>
+      <figure class="about-room mosaic-allergy"><img class="about-room-photo" src="assets/immunologia_allergologia.png" alt="" width="2000" height="1545" loading="lazy" decoding="async"><figcaption>Allergologia e<br> Immunologia</figcaption></figure>
+      <figure class="about-room mosaic-gynecology"><img class="about-room-photo" src="assets/ginecologia.png" alt="" width="1414" height="2000" loading="lazy" decoding="async"><figcaption>Ginecologia</figcaption></figure>
+      <figure class="about-room mosaic-cardiology"><img class="about-room-photo" src="assets/cardiologia.png" alt="" width="1414" height="2000" loading="lazy" decoding="async"><figcaption>Cardiologia</figcaption></figure>
+      <figure class="about-room mosaic-orthopedics"><img class="about-room-photo" src="assets/ortopedia.png" alt="" width="1414" height="2000" loading="lazy" decoding="async"><figcaption>Ortopedia</figcaption></figure>
+      <figure class="about-room mosaic-endocrinology"><img class="about-room-photo" src="assets/endocrinologia_diabetologia.png" alt="" width="2000" height="1545" loading="lazy" decoding="async"><figcaption>Endocrinologia e<br> Diabetologia</figcaption></figure>
+      <figure class="about-room mosaic-anesthesia"><img class="about-room-photo" src="assets/anestesia.png" alt="" width="2000" height="1545" loading="lazy" decoding="async"><figcaption>Anestesia e<br> Terapia del Dolore<br> (Longevità)</figcaption></figure>
+      <figure class="about-room mosaic-rheumatology"><img class="about-room-photo" src="assets/reumatologia.png" alt="" width="1414" height="2000" loading="lazy" decoding="async"><figcaption>Reumatologia</figcaption></figure>
     </div>
-  </main>
+  </section>
 
-  <footer class="legal-footer">
-    <div class="legal-footer-inner">
-
-        <div class="legal-footer-company">
-            © 2026 TUMARE S.R.L. ·
-            P. IVA 05465060753 ·
-            Sede legale: Piazza Ludovico Ariosto 23, 73100 Lecce(LE) ·
-            Registro Imprese di Lecce n. 05465060753 ·
-            Capitale sociale € 10.002,00 i.v.
-        </div>
-
-        <div class="legal-footer-links">
-            <a href="/privacy-policy.html">Privacy Policy</a>
-            <span class="legal-footer-separator">·</span>
-            <a href="/cookie-policy.html">Cookie Policy</a>
-        </div>
-
+  <section id="perche-nasce" class="landing-story" aria-labelledby="story-title">
+    <div class="home-section-heading"><h2 id="story-title">Perché nasce il poliambulatorio</h2></div>
+    <div class="about-copy">
+      <p>Il nostro poliambulatorio nasce per offrire un’esperienza di cura completa, moderna e vicina alle persone.</p>
+      <p>Crediamo in una medicina capace di evolvere, senza perdere il valore dell’ascolto, della competenza e del rapporto umano. Per questo riuniamo professionalità diverse che collaborano con un obiettivo comune: prendersi cura di ogni persona in modo coordinato e consapevole.</p>
+      <p>Competenza, tecnologia e attenzione alla persona si incontrano per dare forma a un nuovo modo di vivere la salute.</p>
     </div>
-  </footer>
-
-  <script>
-
-  const form =
-    document.getElementById(
-      "newsletterForm"
-    );
-
-  const message =
-    document.getElementById(
-      "newsletterMessage"
-    );
-
-  const emailInput =
-    document.getElementById(
-      "email"
-    );
-
-  const consentInput =
-    document.getElementById(
-      "newsletterConsent"
-    );
-
-  const APPS_SCRIPT_URL =
-    "https://script.google.com/macros/s/AKfycbxqGK99Ns9e2EjOwh5d7qVnQplO9iL9NSz9K1AFBmY2zsu3UF-p9ajbPROoWFRXvx4l-Q/exec";
-
-  form.addEventListener(
-    "submit",
-    async function(event) {
-
-      event.preventDefault();
-
-      const email =
-        emailInput
-          .value
-          .trim()
-          .toLowerCase();
-
-      const button =
-        form.querySelector(
-          'button[type="submit"]'
-        );
-
-      /* controllo email */
-
-      if (
-        !email
-      ) {
-
-        showMessage(
-          "Inserisci un indirizzo email.",
-          "error"
-        );
-
-        emailInput.focus();
-
-        return;
-
-      }
-
-      if (
-        !isValidEmail(email)
-      ) {
-
-        showMessage(
-          "Inserisci un indirizzo email valido.",
-          "error"
-        );
-
-
-        emailInput.focus();
-
-        return;
-
-      }
-
-      /* controllo consenso */
-
-      if (
-        !consentInput.checked
-      ) {
-
-        showMessage(
-          "Per iscriverti è necessario prestare il consenso.",
-          "error"
-        );
-
-
-        consentInput.focus();
-
-        return;
-
-      }
-
-      /* blocco form */
-
-      button.disabled =
-        true;
-
-
-      emailInput.disabled =
-        true;
-
-
-      consentInput.disabled =
-        true;
-
-
-      button.textContent =
-        "Invio...";
-
-
-      showMessage(
-        "",
-        ""
-      );
-
-      try {
-
-        await fetch(
-
-          APPS_SCRIPT_URL,
-
-          {
-
-            method:
-              "POST",
-
-            mode:
-              "no-cors",
-
-            headers: {
-
-              "Content-Type":
-                "text/plain;charset=utf-8"
-
-            },
-
-            body:
-              JSON.stringify({
-
-                email:
-                  email,
-
-                consent:
-                  true
-
-              })
-
-          }
-
-        );
-
-        /* La richiesta iniziale è stata inviata. L'iscrizione NON è ancora ACTIVE: l'utente deve cliccare la mail. */
-
-        showMessage(
-
-          "✓ Ti abbiamo inviato un'email. Aprila e clicca su “Conferma iscrizione” per completare la procedura.",
-
-          "success"
-
-        );
-
-        emailInput.value =
-          "";
-
-
-        consentInput.checked =
-          false;
-
-      } catch (error) {
-
-        console.error(
-          "Errore newsletter:",
-          error
-        );
-
-        showMessage(
-
-          "Non è stato possibile inviare la richiesta. Riprova.",
-
-          "error"
-
-        );
-
-      } finally {
-
-        button.disabled =
-          false;
-
-        emailInput.disabled =
-          false;
-
-        consentInput.disabled =
-          false;
-
-        button.textContent =
-          "Avvisami quando ci sono novità";
-
-      }
-
-    }
-  );
-
-  function isValidEmail(
-    email
-  ) {
-
-    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-      .test(
-        email
-      );
-
-  }
-
-  function showMessage(
-    text,
-    type
-  ) {
-
-    message.textContent =
-      text;
-
-    message.style.color =
-      "";
-
-    if (
-      type === "success"
-    ) {
-
-      message.style.color =
-        "#496b22";
-
-    }
-
-    if (
-      type === "error"
-    ) {
-
-      message.style.color =
-        "#9b2c2c";
-
-    }
-
-  }
-
-  </script>
-
+  </section>
+
+  <section id="contatti" class="landing-info" aria-labelledby="info-title">
+    <div class="home-section-heading"><h2 id="info-title">Informazioni</h2></div>
+    <div class="info-grid">
+    <div>
+      <p>
+        Il nostro poliambulatorio si prepara ad accoglierti
+        nella sua nuova sede.<br>
+        Puoi scoprire dove ci troverai e i nostri contatti
+        per informazioni o chiarimenti.
+      </p>
+
+      <div class="landing-socials"
+          role="group"
+          aria-label="Seguici sui social">
+
+        <!-- Facebook -->
+        <a href="https://www.facebook.com/profile.php?id=61595564256131"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Visita la nostra pagina Facebook">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path fill="currentColor" stroke="none"
+              d="M24 12a12 12 0 1 0-13.9 11.85v-8.38H7.05V12h3.05V9.36c0-3 1.8-4.67 4.54-4.67 1.32 0 2.7.24 2.7.24v2.97h-1.52c-1.5 0-1.96.93-1.96 1.88V12h3.33l-.53 3.47h-2.8v8.38A12 12 0 0 0 24 12Z"/>
+          </svg>
+        </a>
+
+        <!-- Instagram -->
+        <a href="https://www.instagram.com/poliambulatoriodevitis/"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Visita il nostro profilo Instagram">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <rect x="1.5" y="1.5"
+                  width="21" height="21" rx="6"/>
+            <circle cx="12" cy="12" r="5"/>
+            <circle class="social-dot"
+                    cx="18.2" cy="5.8" r="1.2"/>
+          </svg>
+        </a>
+
+      </div>
+    </div>
+      <div class="info-panels">
+        <article><h3>Indirizzo</h3><p>Via Cicolella, 3 - Lecce (LE) 73100</p></article>
+        <article><h3>Contatti</h3><p><a href="mailto:info@poliambulatoriodevitis.it">info@poliambulatoriodevitis.it</a></p></article>
+      </div>
+    </div>
+  </section>
+
+  <section id="collabora" class="home-collaborate" aria-labelledby="collaborate-title">
+    <img class="landing-photo" src="assets/contattaci.png" alt="" width="1920" height="1080" loading="lazy" decoding="async">
+    <div class="collaborate-copy">
+      <h2 id="collaborate-title">Collabora con noi</h2>
+      <p>Sei un medico specialista interessato a collaborare con il nostro poliambulatorio o rappresenti un’azienda che desidera attivare una convenzione per i propri dipendenti?<br>Contattaci per ricevere maggiori informazioni e valutare insieme le possibilità di collaborazione.</p>
+    </div>
+  </section>
+</main>
+<footer class="home-footer">
+  <div class="home-footer-grid">
+    <a class="footer-logo" href="#home" aria-label="De Vitis Poliambulatorio — torna all’inizio"><img src="assets/logo_poliambulatorio_vettoriale.svg" alt="De Vitis Poliambulatorio" width="418" height="109" loading="lazy"></a>
+    <nav class="footer-menu" aria-label="Menu del footer"><a href="#home">Home</a><a href="#specializzazioni">Specializzazioni</a><a href="#perche-nasce">Perché nasce il poliambulatorio</a><a href="#contatti">Contatti</a><a href="#collabora">Collabora con noi</a></nav>
+    <div><h3>CONTATTI</h3><a href="mailto:info@poliambulatoriodevitis.it">info@poliambulatoriodevitis.it</a><p>Via Cicolella, 3 - Lecce (LE) 73100</p></div>
+    <div><h3>ORARI</h3><p>Lun-Sab: 9.00 - 19.00<br>(si riceverà solo su appuntamento)</p></div>
+  </div>
+  <div class="home-copyright"><span>© 2026 TUMARE S.R.L. - Tutti i diritti riservati.</span><span>P. IVA 05465060753 · <a href="privacy-policy.html">Privacy Policy</a> · <a href="cookie-policy.html">Cookie Policy</a></span></div>
+</footer>
 </body>
 </html>
+
