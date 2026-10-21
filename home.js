@@ -1,5 +1,5 @@
 'use strict';
-const landingPage = document.querySelector('.index-page');
+const landingPage = document.querySelector('.index2-page');
 if (landingPage && typeof IntersectionObserver === 'function' &&
     typeof window.matchMedia === 'function' && window.matchMedia('(prefers-reduced-motion: no-preference)').matches) {
   const revealObserver = new IntersectionObserver(entries => {
