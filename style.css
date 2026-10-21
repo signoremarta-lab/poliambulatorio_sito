@@ -3486,9 +3486,24 @@ html:where(.css-home):has(.devitis-home) {
 }
 
 :where(html.css-home) .index2-page .home-hero-copy {
-  top:23%;
+  top:50%;
   left:24px;
   right:24px;
+  transform:translateY(-50%);
+}
+
+:where(html.css-home) .index2-page .hero-opening {
+  display:block;
+  width:fit-content;
+  max-width:100%;
+  margin-bottom:14px;
+  padding:5px 32px;
+  border-radius:999px;
+  background:var(--home-bg);
+  color:var(--home-green);
+  font-size:30px;
+  font-weight:700;
+  line-height:1.2;
 }
 
 :where(html.css-home) .index2-page .home-hero h1 {
@@ -3928,7 +3943,11 @@ html:where(.css-home):has(.devitis-home) {
 :where(html.css-home) .index2-page .home-hero-copy {
   left:24px;
   right:24px;
-  top:17%;
+  top:50%;
+}
+
+:where(html.css-home) .index2-page .hero-opening {
+  font-size:clamp(18px,2.2vw,24px);
 }
 
 :where(html.css-home) .index2-page .home-hero h1 {
@@ -4075,9 +4094,15 @@ html:where(.css-home):has(.devitis-home) {
 }
 
 :where(html.css-home) .index2-page .home-hero-copy {
-  top:20%;
+  top:50%;
   left:20px;
   right:20px;
+}
+
+:where(html.css-home) .index2-page .hero-opening {
+  margin-bottom:12px;
+  padding-inline:20px;
+  font-size:clamp(14px,3.8vw,20px);
 }
 
 :where(html.css-home) .index2-page .home-hero h1 {
