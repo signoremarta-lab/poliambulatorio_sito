@@ -222,6 +222,9 @@ if ((equipeGrid || bookingList) && typeof equipe !== 'undefined') {
   const consentInput = document.getElementById("newsletterConsent");
   const message = document.getElementById("newsletterMessage");
   const button = form.querySelector('button[type="submit"]');
+  if (!emailInput || !consentInput || !message || !button) return;
+
+  let submitting = false;
 
   const APPS_SCRIPT_URL =
     "https://script.google.com/macros/s/AKfycbxqGK99Ns9e2EjOwh5d7qVnQplO9iL9NSz9K1AFBmY2zsu3UF-p9ajbPROoWFRXvx4l-Q/exec";
@@ -235,6 +238,7 @@ if ((equipeGrid || bookingList) && typeof equipe !== 'undefined') {
 
   form.addEventListener("submit", async (event) => {
     event.preventDefault();
+    if (submitting) return;
 
     const email = emailInput.value.trim().toLowerCase();
 
@@ -255,6 +259,7 @@ if ((equipeGrid || bookingList) && typeof equipe !== 'undefined') {
 
     const originalText = button.textContent;
 
+    submitting = true;
     button.disabled = true;
     emailInput.disabled = true;
     consentInput.disabled = true;
@@ -292,6 +297,7 @@ if ((equipeGrid || bookingList) && typeof equipe !== 'undefined') {
       );
 
     } finally {
+      submitting = false;
       button.disabled = false;
       emailInput.disabled = false;
       consentInput.disabled = false;
