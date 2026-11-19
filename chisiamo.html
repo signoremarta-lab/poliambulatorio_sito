@@ -10,12 +10,12 @@
   <script src="home.js" defer></script>
   <link rel="stylesheet" href="style.css">
 </head>
-<body class="devitis-home about-page">
+<body class="devitis-home about-restyled">
 <header class="home-header">
   <a class="home-logo" href="home.html#home" aria-label="De Vitis Poliambulatorio — Home"><img src="assets/logo_poliambulatorio_vettoriale.svg" alt="De Vitis Poliambulatorio"></a>
   <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="home-menu">Menu <span aria-hidden="true">☰</span></button>
   <nav id="home-menu" class="home-menu" aria-label="Menu principale">
-    <a href="home.html#home">Home</a><a href="chisiamo.html" aria-current="page">Chi siamo</a><a href="specializzazioni.html">Specializzazioni</a><a href="home.html#contatti">Contatti</a><a href="home.html#collabora">Collabora con noi</a><a class="home-book" href="prenota.html">Prenota</a>
+    <a href="home.html#home">Home</a><a href="chisiamo.html" aria-current="page">Chi siamo</a><a href="specializzazioni.html">Specializzazioni</a><a href="home.html#contatti">Contatti</a><a class="home-book" href="prenota.html">Prenota</a>
   </nav>
 </header>
 <main>
@@ -36,23 +36,11 @@
   </section>
   <section class="home-section home-specialties about-section about-structure" aria-labelledby="about-structure-title">
     <div class="home-section-heading"><h2 id="about-structure-title">La nostra struttura</h2></div>
-    <div class="about-rooms">
-        <figure class="about-room">
-          <!-- Fotografia originale di accettazione da fornire. -->
-          <div class="about-room-photo about-photo-placeholder" role="img" aria-label="Fotografia accettazione non disponibile"><span aria-hidden="true">Fotografia in arrivo</span></div>
-          <figcaption>ACCETTAZIONE</figcaption>
-        </figure>
-        <figure class="about-room">
-          <!-- Fotografia originale di sala d’attesa da fornire. -->
-          <div class="about-room-photo about-photo-placeholder" role="img" aria-label="Fotografia sala d’attesa non disponibile"><span aria-hidden="true">Fotografia in arrivo</span></div>
-          <figcaption>SALA D’ATTESA</figcaption>
-        </figure>
-        <figure class="about-room">
-          <!-- Fotografia originale di ambulatori da fornire. -->
-          <div class="about-room-photo about-photo-placeholder" role="img" aria-label="Fotografia ambulatori non disponibile"><span aria-hidden="true">Fotografia in arrivo</span></div>
-          <figcaption>AMBULATORI</figcaption>
-        </figure>
-    </div>
+    <ul class="about-rooms">
+      <li>Accettazione</li>
+      <li>Sala d’attesa</li>
+      <li>Ambulatori</li>
+    </ul>
     <div class="about-copy about-structure-copy">
       <p>Il Poliambulatorio De Vitis è situato a Lecce, in Via Cicolella n. 3, al sesto piano di un edificio dotato di ascensore.</p>
       <p>La struttura, priva di barriere architettoniche e facilmente raggiungibile, dispone di un'area dedicata all'accettazione e all'accoglienza dei pazienti, con annessa sala d'attesa, quattro ambulatori medici destinati allo svolgimento delle attività sanitarie e servizi igienici.</p>
@@ -62,13 +50,17 @@
   <section class="home-section about-section about-team" aria-labelledby="about-team-title">
     <div class="home-section-heading"><h2 id="about-team-title">Equipè</h2><span class="diagonal-arrow" aria-hidden="true"></span></div>
     <noscript><p>Attiva JavaScript per visualizzare l’équipe.</p></noscript>
-    <div class="about-team-grid" id="equipe-grid"></div>
+    <div class="about-team-grid" id="equipe-grid">
+      <a class="about-booking" href="prenota.html">
+        <span class="about-booking-label">Prenota una visita <span class="diagonal-arrow" aria-hidden="true"></span></span>
+      </a>
+    </div>
   </section>
 </main>
 <footer class="home-footer">
   <div class="home-footer-grid">
     <a class="footer-logo" href="home.html#home" aria-label="De Vitis Poliambulatorio — torna all’inizio"><img src="assets/logo_poliambulatorio_vettoriale.svg" alt="De Vitis Poliambulatorio"></a>
-    <div class="footer-menu"><a href="home.html#home">Home</a><a href="chisiamo.html">Chi siamo</a><a href="specializzazioni.html">Specializzazioni</a><a href="home.html#contatti">Contatti</a><a href="home.html#collabora">Collabora con noi</a></div>
+    <div class="footer-menu"><a href="home.html#home">Home</a><a href="chisiamo.html">Chi siamo</a><a href="specializzazioni.html">Specializzazioni</a><a href="home.html#contatti">Contatti</a></div>
     <div><h3>CONTATTI</h3><a href="mailto:info@poliambulatoriodevitis.it">info@poliambulatoriodevitis.it</a><br><a href="tel:+390832453967">0832 453967</a><br><a href="https://www.google.com/maps/search/?api=1&amp;query=Poliambulatorio+De+Vitis+Via+Cicolella+3+Lecce" target="_blank" rel="noopener">Via Cicolella, 3 Lecce(LE) 73100</a></div>
     <div><h3>ORARI</h3><p>Lun-Sab: 9.00 - 19.00<br>(si riceve solo su appuntamento)</p></div>
   </div>

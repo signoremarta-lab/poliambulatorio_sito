@@ -114,7 +114,9 @@ if ((equipeGrid || bookingList) && typeof equipe !== 'undefined') {
     const card = element('article', booking ? 'booking-card' : 'about-person');
     const name = element('h3', '', person.nome);
     const role = element('p', '', person.specializzazione);
-    card.append(portrait(person, booking ? 'booking-card-image' : 'about-portrait'));
+    if (booking || person.immagine) {
+      card.append(portrait(person, booking ? 'booking-card-image' : 'about-portrait'));
+    }
     if (booking) {
       const content = element('div', 'booking-card-content');
       content.append(name, role);
@@ -133,7 +135,12 @@ if ((equipeGrid || bookingList) && typeof equipe !== 'undefined') {
   function renderPeople(container, people, booking = false) {
     container.replaceChildren(...people.map(person => personCard(person, booking)));
   }
-  if (equipeGrid) renderPeople(equipeGrid, equipe);
+  if (equipeGrid) {
+    const booking = equipeGrid.querySelector('.about-booking');
+    renderPeople(equipeGrid, equipe);
+    equipeGrid.append(booking);
+    equipeGrid.style.setProperty('--about-people', equipe.length);
+  }
   if (bookingList) {
     const doctors = equipe.filter(person => person.categoria === 'medico');
     const search = document.querySelector('#doctor-search');
