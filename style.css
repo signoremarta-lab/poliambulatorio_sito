@@ -2678,7 +2678,23 @@ html.css-home:has(.about-restyled) {
   aspect-ratio:230 / 271;
   border-radius:calc(var(--about-radius) - 2px);
   object-fit:cover;
-  object-position:center;
+  object-position:center var(--portrait-y, 15%);
+}
+
+.about-restyled .about-portrait:is(
+  [src$="/dottssa_camilla_de_vitis.png"],
+  [src$="/dottssa_giorgia_lerario.png"],
+  [src$="/dottssa_stefania_leone.png"]
+) {
+  --portrait-y:0%;
+}
+
+.about-restyled .about-portrait[src$="/dottssa_laura_crispino.png"] {
+  --portrait-y:100%;
+}
+
+.about-restyled .about-portrait[src$="/dottssa_erminia_de_vitis.png"] {
+  object-fit:contain;
 }
 
 .about-restyled .about-person h3 {
