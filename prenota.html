@@ -20,20 +20,21 @@
 </header>
 <main>
   <section class="about-hero" aria-labelledby="booking-title">
-    <!-- Manca la fotografia originale dell’incontro con tablet: nessun asset sostitutivo. -->
-    <h1 id="booking-title">Prenota</h1>
+    <!-- Immagine temporanea in attesa della foto con il calendario. -->
+    <img src="assets/card1.png" alt="" width="1920" height="1080" fetchpriority="high">
+    <h1 id="booking-title">Prenota una visita</h1>
   </section>
-  <section class="home-section about-section booking-search-panel" aria-labelledby="booking-search-title">
-    <div class="home-section-heading"><h2 id="booking-search-title">Cerca una prestazione o un medico</h2></div>
+  <section class="booking-search-panel" aria-labelledby="booking-search-title">
+    <h2 id="booking-search-title">Cerca un medico, una prestazione o una specializzazione</h2>
     <form class="booking-search-form" id="doctor-search" role="search">
       <label class="sr-only" for="doctor-query">Cerca per nome o specializzazione</label>
-      <input id="doctor-query" name="q" type="search" autocomplete="off" aria-controls="booking-list">
+      <span class="booking-search-icon" aria-hidden="true"></span>
+      <input id="doctor-query" name="q" type="search" autocomplete="off" aria-controls="booking-list" placeholder="es. nome del medico, specializzazione, visita">
       <button type="submit">Cerca</button>
     </form>
   </section>
-  <section class="home-section home-specialties about-section booking-doctors" aria-labelledby="booking-doctors-title">
-    <div class="home-section-heading"><h2 id="booking-doctors-title">I nostri medici</h2></div>
-    <p class="booking-subtitle">Seleziona uno specialista per visualizzare il profilo e prenotare una visita.</p>
+  <section class="booking-doctors" aria-labelledby="booking-doctors-title">
+    <h2 id="booking-doctors-title">I nostri specialisti</h2>
     <noscript><p>Attiva JavaScript per visualizzare e cercare i medici.</p></noscript>
     <p class="sr-only" id="booking-results-status" role="status" aria-live="polite" aria-atomic="true"></p>
     <p class="booking-empty" id="booking-empty" hidden>Nessun medico trovato. Prova con un altro nome o una specializzazione.</p>

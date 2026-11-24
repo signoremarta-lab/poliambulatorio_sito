@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="it" class="css-base css-home">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profilo medico | De Vitis Poliambulatorio</title>
+  <meta name="description" content="Consulta il profilo e le informazioni sulle visite degli specialisti del Poliambulatorio De Vitis.">
+  <link rel="icon" href="assets/favicon-google.png" type="image/png">
+  <script src="medici.js" defer></script>
+  <script src="home.js" defer></script>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="devitis-home about-page doctor-profile-page">
+<header class="home-header">
+  <a class="home-logo" href="home.html#home" aria-label="De Vitis Poliambulatorio — Home"><img src="assets/logo_poliambulatorio_vettoriale.svg" alt="De Vitis Poliambulatorio"></a>
+  <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="home-menu">Menu <span aria-hidden="true">☰</span></button>
+  <nav id="home-menu" class="home-menu" aria-label="Menu principale">
+    <a href="home.html#home">Home</a><a href="chisiamo.html">Chi siamo</a><a href="specializzazioni.html">Specializzazioni</a><a href="home.html#contatti">Contatti</a><a href="home.html#collabora">Collabora con noi</a><a class="home-book" href="prenota.html">Prenota</a>
+  </nav>
+</header>
+<main>
+  <div id="doctor-profile" class="doctor-profile-content" hidden>
+    <div class="doctor-profile-grid">
+      <div class="doctor-profile-details">
+        <section class="doctor-panel" aria-labelledby="doctor-information-title">
+          <h2 id="doctor-information-title">Informazioni</h2>
+          <p id="doctor-information"></p>
+        </section>
+        <section class="doctor-panel" aria-labelledby="doctor-services-title">
+          <h2 id="doctor-services-title">Prestazioni</h2>
+          <p id="doctor-services">Per informazioni sulle prestazioni disponibili, contatta il poliambulatorio.</p>
+        </section>
+      </div>
+
+      <section class="doctor-panel doctor-booking" aria-labelledby="doctor-booking-title">
+        <h2 id="doctor-booking-title">Prenota una visita</h2>
+        <form aria-describedby="doctor-availability">
+          <div class="doctor-field">
+            <label for="doctor-first-name">Nome*</label>
+            <input id="doctor-first-name" type="text" autocomplete="given-name" required>
+          </div>
+          <div class="doctor-field">
+            <label for="doctor-last-name">Cognome*</label>
+            <input id="doctor-last-name" type="text" autocomplete="family-name" required>
+          </div>
+          <div class="doctor-field">
+            <label for="doctor-email">Indirizzo e-mail*</label>
+            <input id="doctor-email" type="email" autocomplete="email" required>
+          </div>
+          <div class="doctor-field">
+            <label for="doctor-phone">Numero di telefono*</label>
+            <input id="doctor-phone" type="tel" autocomplete="tel" required>
+          </div>
+
+          <div>
+            <p>Seleziona un giorno</p>
+            <div class="doctor-days" aria-hidden="true">
+              <span class="doctor-day-arrow"></span>
+              <span>—</span><span>—</span><span>—</span>
+              <span class="doctor-day-arrow"></span>
+            </div>
+          </div>
+          <div>
+            <p>Orari disponibili</p>
+            <p class="doctor-availability" id="doctor-availability">
+              Disponibilità online non pubblicata. Per fissare una visita, chiama il poliambulatorio al <a href="tel:+390832453967">0832 453967</a>.
+            </p>
+          </div>
+          <button class="doctor-submit" type="submit" disabled>Prenota</button>
+        </form>
+      </section>
+    </div>
+  </div>
+  <div id="doctor-profile-unavailable" class="doctor-profile-content doctor-panel">
+    <h1>Profilo non disponibile</h1>
+    <p><a href="prenota.html">Torna a Prenota</a> per scegliere uno specialista.</p>
+  </div>
+</main>
+<footer class="home-footer">
+  <div class="home-footer-grid">
+    <a class="footer-logo" href="home.html#home" aria-label="De Vitis Poliambulatorio — torna all’inizio"><img src="assets/logo_poliambulatorio_vettoriale.svg" alt="De Vitis Poliambulatorio"></a>
+    <div class="footer-menu"><a href="home.html#home">Home</a><a href="chisiamo.html">Chi siamo</a><a href="specializzazioni.html">Specializzazioni</a><a href="home.html#contatti">Contatti</a><a href="home.html#collabora">Collabora con noi</a></div>
+    <div><h3>CONTATTI</h3><a href="mailto:info@poliambulatoriodevitis.it">info@poliambulatoriodevitis.it</a><br><a href="tel:+390832453967">0832 453967</a><br><a href="https://www.google.com/maps/search/?api=1&amp;query=Poliambulatorio+De+Vitis+Via+Cicolella+3+Lecce" target="_blank" rel="noopener">Via Cicolella, 3 Lecce(LE) 73100</a></div>
+    <div><h3>ORARI</h3><p>Lun-Sab: 9.00 - 19.00<br>(si riceve solo su appuntamento)</p></div>
+  </div>
+  <div class="home-copyright">
+    <span>© 2026 TUMARE S.R.L. - Tutti i diritti riservati.</span>
+    <span>P. IVA 05465060753 · <a href="privacy-policy.html">Privacy Policy</a> · <a href="cookie-policy.html">Cookie Policy</a></span>
+  </div>
+</footer>
+</body>
+</html>

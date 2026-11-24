@@ -2630,11 +2630,20 @@ html.css-home:has(.about-restyled) {
   grid-template-columns:repeat(3,minmax(0,1fr));
   gap:24px;
   margin:40px 0 24px;
-  list-style:none;
-  text-align:center;
-  font-size:clamp(14px,1.76vw,24px);
-  font-weight:700;
   text-transform:uppercase;
+}
+
+.about-restyled .about-rooms .about-room::after {
+  background:#0005;
+}
+
+.about-restyled .about-rooms .about-room-photo {
+  height:auto;
+}
+
+.about-restyled .about-rooms figcaption {
+  font-size:clamp(16px,1.76vw,24px);
+  font-weight:700;
 }
 
 .about-restyled .about-structure-copy p+p {
@@ -2684,17 +2693,14 @@ html.css-home:has(.about-restyled) {
 .about-restyled .about-portrait:is(
   [src$="/dottssa_camilla_de_vitis.png"],
   [src$="/dottssa_giorgia_lerario.png"],
-  [src$="/dottssa_stefania_leone.png"]
+  [src$="/dottssa_stefania_leone.png"],
+  [src$="/dottssa_erminia_de_vitis.png"]
 ) {
   --portrait-y:0%;
 }
 
 .about-restyled .about-portrait[src$="/dottssa_laura_crispino.png"] {
   --portrait-y:100%;
-}
-
-.about-restyled .about-portrait[src$="/dottssa_erminia_de_vitis.png"] {
-  object-fit:contain;
 }
 
 .about-restyled .about-person h3 {
@@ -2832,28 +2838,11 @@ html.css-home:has(.about-restyled) {
   min-width:0;
   min-height:400px;
   aspect-ratio:8/9;
-  padding:0;
-  border:0;
   border-radius:20px;
-  background:none;
   color:var(--home-blue);
   text-align:left;
   line-height:inherit;
-  cursor:pointer;
   perspective:1200px;
-}
-
-:where(html.css-home) .specialty-flip-inner {
-  position:absolute;
-  inset:0;
-  display:block;
-  border-radius:inherit;
-  transform-style:preserve-3d;
-  transition:transform 650ms ease-in-out;
-}
-
-:where(html.css-home) .specialty-flip.is-flipped .specialty-flip-inner {
-  transform:rotateY(180deg);
 }
 
 :where(html.css-home) .specialty-flip-front,
@@ -2864,14 +2853,27 @@ html.css-home:has(.about-restyled) {
   overflow:hidden;
   backface-visibility:hidden;
   -webkit-backface-visibility:hidden;
+  transition:transform 650ms ease-in-out, opacity 0s 325ms;
 }
 
 :where(html.css-home) .specialty-flip-front {
   display:grid;
   place-items:center;
-  padding:28px;
+  padding:0;
+  border:0;
   background:var(--home-blue);
   color:var(--home-bg);
+  cursor:pointer;
+  transform:rotateY(0deg);
+}
+
+:where(html.css-home) .specialty-flip-front:focus-visible {
+  outline-offset:-5px;
+}
+
+:where(html.css-home) .specialty-flip.is-flipped .specialty-flip-front {
+  opacity:0;
+  transform:rotateY(180deg);
 }
 
 :where(html.css-home) .specialty-flip-front img {
@@ -2892,6 +2894,7 @@ html.css-home:has(.about-restyled) {
 :where(html.css-home) .specialty-flip-title {
   position:relative;
   z-index:1;
+  padding-inline:28px;
   font-size:25px;
   font-weight:700;
   text-align:center;
@@ -2917,11 +2920,17 @@ html.css-home:has(.about-restyled) {
 :where(html.css-home) .specialty-flip-back {
   display:flex;
   flex-direction:column;
-  gap:20px;
+  gap:16px;
   padding:32px;
   border:1px solid var(--border);
   background:var(--home-bg);
-  transform:rotateY(180deg);
+  opacity:0;
+  transform:rotateY(-180deg);
+}
+
+:where(html.css-home) .specialty-flip.is-flipped .specialty-flip-back {
+  opacity:1;
+  transform:rotateY(0deg);
 }
 
 :where(html.css-home) .specialty-flip-back strong {
@@ -2940,10 +2949,29 @@ html.css-home:has(.about-restyled) {
   line-height:1.6;
 }
 
-:where(html.css-home) .specialty-flip-return {
+:where(html.css-home) .specialty-flip-actions {
+  display:grid;
+  justify-items:start;
+  gap:6px;
   margin-top:auto;
+}
+
+:where(html.css-home) .specialty-flip-actions .specialty-flip-book {
+  justify-self:center;
+  padding:8px 20px;
+  border-radius:999px;
+  background:var(--home-green);
+  color:var(--home-bg);
+  text-decoration:none;
+}
+
+:where(html.css-home) .specialty-flip-back .specialty-flip-return {
+  padding:0;
+  border:0;
+  background:none;
   font-size:15px;
   color:var(--home-green);
+  cursor:pointer;
 }
 
 :where(html.css-home) .specialties-booking {
@@ -3008,6 +3036,16 @@ html.css-home:has(.about-restyled) {
   grid-template-columns:1fr;
 }
 
+:where(html.css-home) .specialty-flip-back {
+  gap:12px;
+  padding:20px;
+}
+
+:where(html.css-home) .specialty-flip-description {
+  font-size:clamp(16px,4.6vw,18px);
+  line-height:1.5;
+}
+
 :where(html.css-home) .specialties-booking {
   grid-column:span 1;
 }
@@ -3015,132 +3053,220 @@ html.css-home:has(.about-restyled) {
 }
 
 @media(prefers-reduced-motion:reduce) {
-:where(html.css-home) .specialty-flip-inner {
+:where(html.css-home) :is(.specialty-flip-front,.specialty-flip-back) {
   transition:none;
 }
 
 }
 
-/* Prenota — the team source and internal hero are shared with Chi siamo. */
-:where(html.css-home) .booking-page {
-  background:var(--home-blue);
-}
-
-:where(html.css-home) .booking-page main {
-  background:var(--home-bg);
+/* Prenota and shared doctor card */
+:where(html.css-home) :is(.booking-page,.doctor-profile-page) {
+  --booking-gutter:clamp(20px,3.55vw,50px);
+  --booking-portrait-size:clamp(128px,14.6vw,200px);
 }
 
 :where(html.css-home) .booking-page .about-hero {
+  align-items:flex-start;
+  height:271px;
+  margin:43px 24px 0;
+  padding-top:34px;
   background:var(--home-blue);
 }
 
-:where(html.css-home) .booking-page .booking-search-panel {
-  padding-top:80px;
-  padding-bottom:72px;
+:where(html.css-home) .booking-page .about-hero::after {
+  background:#0006;
 }
 
-:where(html.css-home) .booking-search-panel .home-section-heading {
-  border:0;
-  padding-bottom:0;
+:where(html.css-home) .booking-page .about-hero h1 {
+  margin-inline:clamp(22px,4.55vw,62px);
+  font-size:clamp(40px,5.7vw,78px);
+  font-weight:300;
+  letter-spacing:-.055em;
+}
+
+:where(html.css-home) .booking-search-panel {
+  position:relative;
+  margin:-125px var(--booking-gutter) 0;
+  padding:28px clamp(16px,6.8vw,94px) 38px;
+  border-radius:20px;
+  background:var(--home-bg);
+  box-shadow:0 16px 48px #0003;
+  color:var(--home-blue);
+}
+
+:where(html.css-home) .booking-search-panel h2 {
+  margin:0;
+  font-size:clamp(22px,2.35vw,32px);
+  font-weight:500;
+  line-height:1.25;
+  letter-spacing:-.045em;
+  text-align:center;
 }
 
 :where(html.css-home) .booking-search-form {
   display:flex;
+  align-items:center;
+  gap:10px;
   width:100%;
-  max-width:1000px;
-  height:54px;
-  margin-top:28px;
+  min-height:54px;
+  margin-top:24px;
   padding:3px;
-  border:2px solid var(--home-blue);
+  border:2px solid #d3d4ce;
   border-radius:999px;
   background:var(--white);
 }
 
-:where(html.css-home) .booking-search-form input {
+:where(html.css-home) .booking-search-icon {
+  position:relative;
+  flex:none;
+  width:22px;
+  height:22px;
+  margin-inline:15px 8px;
+  border:2px solid currentColor;
+  border-radius:50%;
+  color:var(--home-green);
+}
+
+:where(html.css-home) .booking-search-icon::after {
+  content:'';
+  position:absolute;
+  top:86%;
+  left:86%;
+  width:10px;
+  height:2px;
+  border-radius:1px;
+  background:currentColor;
+  transform-origin:left center;
+  transform:rotate(45deg);
+}
+
+:where(html.css-home) .booking-page .booking-search-form input {
   flex:1;
   min-width:0;
-  padding:0 18px;
+  height:40px;
+  padding:0 7px;
   border:0;
   border-radius:inherit;
   background:transparent;
   color:var(--home-blue);
-  font-size:20px;
+  font-size:clamp(16px,1.47vw,20px);
 }
 
-:where(html.css-home) .booking-search-form button {
-  padding:0 20px;
+:where(html.css-home) .booking-search-form input::placeholder {
+  color:#73786d;
+}
+
+:where(html.css-home) .booking-page .booking-search-form button {
+  align-self:stretch;
+  padding:0 clamp(14px,1.75vw,24px);
   border:0;
   border-radius:999px;
-  background:var(--home-blue);
+  background:var(--home-green);
   color:var(--home-bg);
-  font-size:24px;
+  font-size:clamp(17px,1.76vw,24px);
   cursor:pointer;
 }
 
-:where(html.css-home) .booking-subtitle {
-  margin-top:40px;
-  font-size:24px;
-  line-height:1.5;
+:where(html.css-home) .booking-doctors {
+  margin:59px var(--booking-gutter) 0;
+  padding:0 0 clamp(64px,11.7vw,160px);
+  color:var(--home-blue);
+}
+
+:where(html.css-home) .booking-doctors h2 {
+  margin:0;
+  border-bottom:2px solid;
+  font-size:clamp(32px,3.37vw,46px);
+  font-weight:300;
+  line-height:1.22;
+  letter-spacing:-.055em;
 }
 
 :where(html.css-home) .booking-list {
   display:grid;
-  gap:46px;
-  margin-top:46px;
+  grid-auto-rows:1fr;
+  gap:clamp(22px,3.1vw,42px);
+  margin-top:clamp(24px,3.1vw,42px);
 }
 
 :where(html.css-home) .booking-card {
+  --booking-left-radius:calc(var(--booking-portrait-size) / 2);
   display:grid;
-  grid-template-columns:144px minmax(0,1fr);
-  grid-template-rows:1fr auto;
-  gap:0 36px;
-  min-height:200px;
-  padding:14px 20px 14px 16px;
-  border-radius:20px;
-  background:var(--home-bg);
-  color:var(--home-blue);
+  grid-template-columns:var(--booking-portrait-size) minmax(0,1fr);
+  align-items:center;
+  column-gap:clamp(16px,1.75vw,24px);
+  min-height:var(--booking-portrait-size);
+  padding-right:18px;
+  border-radius:var(--booking-left-radius) 20px 20px var(--booking-left-radius);
+  background:var(--home-light);
+  box-shadow:0 12px 48px #0003;
 }
 
 :where(html.css-home) .booking-card-image {
-  grid-row:1/span 2;
-  width:144px;
-  height:172px;
-  border-radius:18px;
+  grid-column:1;
+  grid-row:1;
+  display:block;
+  width:var(--booking-portrait-size);
+  height:var(--booking-portrait-size);
+  border-radius:50%;
   object-fit:cover;
+  object-position:center top;
 }
 
 :where(html.css-home) .booking-card-content {
+  grid-column:2;
+  grid-row:1;
   min-width:0;
-  padding-top:16px;
+  padding-block:10px;
 }
 
-:where(html.css-home) .booking-card-content h3 {
-  font-size:42px;
+:where(html.css-home) .booking-card-content :is(h1,h3) {
+  margin:0;
+  font-size:clamp(22px,2.93vw,40px);
   font-weight:700;
   line-height:1.2;
   overflow-wrap:anywhere;
 }
 
 :where(html.css-home) .booking-card-content p {
-  font-size:28px;
-  color:var(--home-light);
-  line-height:1.4;
+  margin:4px 0 0;
+  color:var(--home-bg);
+  font-size:clamp(16px,1.98vw,27px);
+  line-height:1.3;
+  overflow-wrap:anywhere;
+}
+
+:where(html.css-home) .booking-card:has(.booking-profile) {
+  grid-template-rows:1fr auto 1fr;
+}
+
+:where(html.css-home) .booking-card:has(.booking-profile) .booking-card-image {
+  grid-row:1/-1;
+}
+
+:where(html.css-home) .booking-card:has(.booking-profile) .booking-card-content {
+  grid-row:2;
+  padding:0;
 }
 
 :where(html.css-home) .booking-card .booking-profile {
   grid-column:2;
+  grid-row:3;
   justify-self:end;
+  align-self:end;
   display:flex;
   align-items:center;
-  gap:50px;
-  color:var(--home-green);
-  font-size:21px;
-}
-
-:where(html.css-home) .booking-profile[href] {
+  gap:clamp(20px,4.9vw,66px);
+  margin-bottom:18px;
   padding-bottom:5px;
   border-bottom:2px solid;
+  color:var(--home-bg);
+  font-size:clamp(16px,1.54vw,21px);
   text-decoration:none;
+}
+
+:where(html.css-home) .booking-card .booking-profile:focus-visible {
+  outline-color:var(--home-blue);
 }
 
 :where(html.css-home) .booking-profile .diagonal-arrow {
@@ -3148,106 +3274,227 @@ html.css-home:has(.about-restyled) {
   height:24px;
 }
 
+:where(html.css-home) .booking-profile .diagonal-arrow::before {
+  border-width:1px;
+}
+
+:where(html.css-home) .booking-profile .diagonal-arrow::after {
+  height:1px;
+}
+
 :where(html.css-home) .booking-empty {
-  margin-top:40px;
-  font-size:20px;
-}
-
-:where(html.css-home) .booking-page .booking-doctors {
-  padding-bottom:160px;
-}
-
-@media(max-width:1000px) {
-:where(html.css-home) .booking-page .booking-search-panel {
-  padding-top:40px;
-  padding-bottom:40px;
-}
-
-:where(html.css-home) .booking-subtitle {
-  margin-top:28px;
-  font-size:19px;
-}
-
-:where(html.css-home) .booking-list {
-  gap:28px;
   margin-top:32px;
-}
-
-:where(html.css-home) .booking-card {
-  grid-template-columns:110px minmax(0,1fr);
-  gap:0 24px;
-  min-height:170px;
-}
-
-:where(html.css-home) .booking-card-image {
-  width:110px;
-  height:142px;
-}
-
-:where(html.css-home) .booking-card-content {
-  padding-top:8px;
-}
-
-:where(html.css-home) .booking-card-content h3 {
-  font-size:30px;
-}
-
-:where(html.css-home) .booking-card-content p {
-  font-size:21px;
-}
-
-:where(html.css-home) .booking-card .booking-profile {
-  font-size:17px;
-  gap:24px;
-}
-
-:where(html.css-home) .booking-page .booking-doctors {
-  padding-bottom:64px;
-}
-
-}
-
-@media(max-width:640px) {
-:where(html.css-home) .booking-search-form input {
-  padding:0 12px;
-  font-size:16px;
-}
-
-:where(html.css-home) .booking-search-form button {
-  padding:0 14px;
   font-size:18px;
 }
 
-:where(html.css-home) .booking-card {
-  grid-template-columns:80px minmax(0,1fr);
-  gap:16px;
-  padding:16px;
+@media(max-width:1100px) {
+  :where(html.css-home) .booking-page .about-hero {
+    height:230px;
+    margin-top:24px;
+  }
+
+  :where(html.css-home) .booking-search-panel {
+    margin-top:-95px;
+  }
+
+  :where(html.css-home) .booking-doctors {
+    margin-top:42px;
+  }
+
+  :where(html.css-home) .booking-card:has(.booking-profile) {
+    grid-template-rows:1fr auto;
+  }
+
+  :where(html.css-home) .booking-card:has(.booking-profile) .booking-card-content {
+    grid-row:1;
+    padding-block:10px 6px;
+  }
+
+  :where(html.css-home) .booking-card .booking-profile {
+    grid-row:2;
+  }
 }
 
-:where(html.css-home) .booking-card-image {
-  grid-row:1;
-  width:80px;
-  height:108px;
-  font-size:11px;
+@media(max-width:640px) {
+  :where(html.css-home) :is(.booking-page,.doctor-profile-page) {
+    --booking-portrait-size:clamp(80px,24vw,110px);
+  }
+
+  :where(html.css-home) .booking-page .about-hero {
+    height:195px;
+    margin:18px 16px 0;
+    padding-top:22px;
+  }
+
+  :where(html.css-home) .booking-search-panel {
+    margin-top:-68px;
+    padding-block:20px;
+  }
+
+  :where(html.css-home) .booking-search-form {
+    gap:5px;
+    margin-top:14px;
+  }
+
+  :where(html.css-home) .booking-search-icon {
+    width:17px;
+    height:17px;
+    margin-inline:8px 5px;
+  }
+
+  :where(html.css-home) .booking-doctors {
+    margin-top:32px;
+  }
+
+  :where(html.css-home) .booking-card {
+    padding-right:12px;
+  }
+
+  :where(html.css-home) .booking-card .booking-profile {
+    margin-bottom:9px;
+  }
+
+  :where(html.css-home) .booking-profile .diagonal-arrow {
+    width:16px;
+    height:16px;
+  }
 }
 
-:where(html.css-home) .booking-card-content {
-  padding-top:0;
+/* Individual doctor profile */
+:where(html.css-home) .doctor-profile-page main {
+  padding-bottom:42px;
+  color:var(--home-blue);
 }
 
-:where(html.css-home) .booking-card-content h3 {
-  font-size:22px;
+:where(html.css-home) .doctor-profile-content {
+  margin:clamp(24px,6.22vw,85px) var(--booking-gutter) 0;
 }
 
-:where(html.css-home) .booking-card-content p {
-  margin-top:6px;
-  font-size:16px;
+:where(html.css-home) .doctor-profile-grid {
+  display:grid;
+  grid-template-columns:minmax(0,1.325fr) minmax(0,1fr);
+  align-items:start;
+  gap:clamp(24px,5.27vw,72px);
+  margin-top:clamp(28px,3.44vw,47px);
 }
 
-:where(html.css-home) .booking-card .booking-profile {
-  grid-column:1/-1;
+:where(html.css-home) .doctor-profile-details {
+  display:grid;
+  gap:26px;
 }
 
+:where(html.css-home) .doctor-panel {
+  min-width:0;
+  padding:clamp(20px,2.5vw,34px);
+  border:1px solid #d3d4ce;
+  border-radius:20px;
+  background:var(--white);
+}
+
+:where(html.css-home) .doctor-profile-details h2 {
+  margin:0 0 20px;
+  color:var(--home-light);
+  font-size:clamp(24px,2.35vw,32px);
+  letter-spacing:-.04em;
+  text-transform:uppercase;
+}
+
+:where(html.css-home) .doctor-profile-details :is(p,ul) {
+  font-size:clamp(16px,1.46vw,20px);
+  line-height:1.5;
+}
+
+:where(html.css-home) .doctor-profile-details ul {
+  padding-inline-start:1.65em;
+}
+
+:where(html.css-home) .doctor-panel.doctor-booking {
+  padding:20px;
+  border-radius:16px;
+}
+
+:where(html.css-home) .doctor-booking h2 {
+  margin:0 0 clamp(20px,2.5vw,34px);
+  font-size:clamp(24px,2.35vw,32px);
+  font-weight:400;
+}
+
+:where(html.css-home) .doctor-booking form {
+  display:grid;
+  gap:clamp(20px,2.2vw,30px);
+}
+
+:where(html.css-home) .doctor-field {
+  display:grid;
+  gap:8px;
+}
+
+:where(html.css-home) .doctor-booking .doctor-field input {
+  width:100%;
+  min-width:0;
+  min-height:42px;
+  padding:8px 10px;
+  border:1px solid #8c9dae;
+  border-radius:6px;
+  background:transparent;
+  color:inherit;
+}
+
+:where(html.css-home) .doctor-days {
+  display:grid;
+  grid-template-columns:auto repeat(3,minmax(0,1fr)) auto;
+  align-items:center;
+  gap:clamp(6px,.73vw,10px);
+  margin-top:12px;
+  color:#667589;
+}
+
+:where(html.css-home) .doctor-days span:not(.doctor-day-arrow) {
+  display:grid;
+  min-height:clamp(58px,5.7vw,78px);
+  place-items:center;
+  border:1px solid #8c9dae;
+  border-radius:4px;
+}
+
+:where(html.css-home) .doctor-day-arrow {
+  width:14px;
+  height:14px;
+  margin-inline:4px;
+  border:solid currentColor;
+  border-width:0 3px 3px 0;
+  transform:rotate(135deg);
+}
+
+:where(html.css-home) .doctor-day-arrow:last-child {
+  transform:rotate(-45deg);
+}
+
+:where(html.css-home) .doctor-availability {
+  margin-top:10px;
+  font-size:15px;
+}
+
+:where(html.css-home) .doctor-booking .doctor-submit {
+  min-height:46px;
+  padding:8px 16px;
+  border:0;
+  border-radius:16px;
+  background:var(--home-blue);
+  color:var(--white);
+  opacity:.65;
+}
+
+@media(min-width:441px) and (max-width:1000px) {
+  :where(html.css-home) .doctor-profile-page .home-footer-grid {
+    grid-template-columns:repeat(2,minmax(0,1fr));
+  }
+}
+
+@media(max-width:760px) {
+  :where(html.css-home) .doctor-profile-grid {
+    grid-template-columns:1fr;
+  }
 }
 
 /* index.html — current homepage; the original index2-page class is preserved. */
