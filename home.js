@@ -26,21 +26,21 @@ if (menuToggle && menu) {
   menu.addEventListener('click', event => { if (event.target.closest('a')) closeMenu(); });
   document.addEventListener('keydown', event => { if (event.key === 'Escape' && menu.classList.contains('is-open')) { closeMenu(); menuToggle.focus(); } });
 }
-// Specialty cards share one template and one delegated click handler.
+// Specialty names are shared by the card links and the booking filter.
+const specialties = [
+  { name: 'Allergologia e Immunologia', image: 'allergologia_immunologia.png', description: 'Si occupa della diagnosi e della gestione delle allergie e delle alterazioni del sistema immunitario, attraverso visite specialistiche e percorsi di valutazione personalizzati.' },
+  { name: 'Cardiologia', image: 'cardiologia.png', description: "Si dedica alla prevenzione, alla diagnosi e al monitoraggio delle patologie del cuore e dell'apparato cardiovascolare, attraverso valutazioni e controlli specialistici." },
+  { name: 'Medicina del Dolore', image: 'medicina_del_dolore.png', description: 'Si occupa della valutazione e del trattamento del dolore, con percorsi mirati al miglioramento della qualità della vita e del benessere della persona.' },
+  { name: 'Ginecologia e Ostetricia', image: 'ginecologia_ostetricia.png', description: 'Si occupa della salute della donna nelle diverse fasi della vita, attraverso visite, controlli e percorsi di prevenzione ginecologica.' },
+  { name: 'Otorinolaringoiatria', image: 'otorinolaringoiatria.png', description: 'Si dedica alla diagnosi e alla gestione dei disturbi di orecchio, naso e gola, attraverso valutazioni specialistiche e controlli mirati.' },
+  { name: 'Endocrinologia e Diabetologia', image: 'endocrinologia_diabetologia.png', description: 'Si occupa delle alterazioni ormonali, metaboliche e del diabete, attraverso valutazioni specialistiche e percorsi di monitoraggio.' },
+  { name: 'Dermatologia', image: 'dermatologia.png', description: 'Si occupa della salute della pelle, dei capelli e delle unghie, attraverso visite dermatologiche, prevenzione e controlli specialistici.' },
+  { name: 'Medicina Interna e Ecografia', image: 'medicina_interna_ecografia.png', description: 'Utilizza gli ultrasuoni per ottenere immagini degli organi e dei tessuti interni, fornendo un supporto diagnostico non invasivo.' },
+  { name: 'Ortopedia', image: 'ortopedia.png', description: 'Si dedica alla diagnosi e alla gestione delle problematiche di ossa, articolazioni, muscoli e apparato muscolo-scheletrico.' },
+  { name: 'Reumatologia', image: 'reumatologia.png', description: 'Si occupa delle patologie reumatiche e infiammatorie che interessano articolazioni e tessuti connettivi, attraverso valutazioni specialistiche.' }
+];
 const specialtiesGrid = document.querySelector('#specialties-grid');
 if (specialtiesGrid) {
-  const specialties = [
-    { name: 'Allergologia e Immunologia', image: 'allergologia_immunologia.png', description: 'Si occupa della diagnosi e della gestione delle allergie e delle alterazioni del sistema immunitario, attraverso visite specialistiche e percorsi di valutazione personalizzati.' },
-    { name: 'Cardiologia', image: 'cardiologia.png', description: "Si dedica alla prevenzione, alla diagnosi e al monitoraggio delle patologie del cuore e dell'apparato cardiovascolare, attraverso valutazioni e controlli specialistici." },
-    { name: 'Medicina del Dolore', image: 'medicina_del_dolore.png', description: 'Si occupa della valutazione e del trattamento del dolore, con percorsi mirati al miglioramento della qualità della vita e del benessere della persona.' },
-    { name: 'Ginecologia e Ostetricia', image: 'ginecologia_ostetricia.png', description: 'Si occupa della salute della donna nelle diverse fasi della vita, attraverso visite, controlli e percorsi di prevenzione ginecologica.' },
-    { name: 'Otorinolaringoiatria', image: 'otorinolaringoiatria.png', description: 'Si dedica alla diagnosi e alla gestione dei disturbi di orecchio, naso e gola, attraverso valutazioni specialistiche e controlli mirati.' },
-    { name: 'Endocrinologia e Diabetologia', image: 'endocrinologia_diabetologia.png', description: 'Si occupa delle alterazioni ormonali, metaboliche e del diabete, attraverso valutazioni specialistiche e percorsi di monitoraggio.' },
-    { name: 'Dermatologia', image: 'dermatologia.png', description: 'Si occupa della salute della pelle, dei capelli e delle unghie, attraverso visite dermatologiche, prevenzione e controlli specialistici.' },
-    { name: 'Medicina Interna e Ecografia', image: 'medicina_interna_ecografia.png', description: 'Utilizza gli ultrasuoni per ottenere immagini degli organi e dei tessuti interni, fornendo un supporto diagnostico non invasivo.' },
-    { name: 'Ortopedia', image: 'ortopedia.png', description: 'Si dedica alla diagnosi e alla gestione delle problematiche di ossa, articolazioni, muscoli e apparato muscolo-scheletrico.' },
-    { name: 'Reumatologia', image: 'reumatologia.png', description: 'Si occupa delle patologie reumatiche e infiammatorie che interessano articolazioni e tessuti connettivi, attraverso valutazioni specialistiche.' }
-  ];
   const booking = specialtiesGrid.querySelector('.specialties-booking');
   const cards = specialties.map(({ name, image, description }, index) => {
     const card = document.createElement('div');
@@ -53,10 +53,8 @@ if (specialtiesGrid) {
       <div class="specialty-flip-back" id="specialty-back-${index}" aria-hidden="true" inert>
         <strong>${name}</strong>
         <p class="specialty-flip-description">${description}</p>
-        <div class="specialty-flip-actions">
-          <a class="specialty-flip-book" href="prenota.html">Prenota</a>
-          <button type="button" class="specialty-flip-return">↶ Torna indietro</button>
-        </div>
+        <a class="specialty-flip-book" href="prenota.html?specializzazione=${encodeURIComponent(name)}">Prenota</a>
+        <button type="button" class="specialty-flip-return">Torna al fronte</button>
       </div>`;
     return card;
   });
@@ -72,15 +70,19 @@ if (specialtiesGrid) {
     front.setAttribute('aria-hidden', String(flipped));
     back.setAttribute('aria-hidden', String(!flipped));
   }
-  specialtiesGrid.addEventListener('click', event => {
-    const control = event.target.closest('.specialty-flip-front, .specialty-flip-return');
-    if (!control) return;
-    const card = control.closest('.specialty-flip');
-    const flipped = control.classList.contains('specialty-flip-front');
+  function turnCard(card, flipped) {
     if (opened && opened !== card) setFlipped(opened, false);
     setFlipped(card, flipped);
     opened = flipped ? card : null;
-    card.querySelector(flipped ? '.specialty-flip-return' : '.specialty-flip-front').focus({ preventScroll: true });
+    card.querySelector(flipped ? '.specialty-flip-book' : '.specialty-flip-front').focus({ preventScroll: true });
+  }
+  specialtiesGrid.addEventListener('click', event => {
+    const front = event.target.closest('.specialty-flip-front');
+    if (front) turnCard(front.closest('.specialty-flip'), true);
+    else if (opened && event.target.matches('.specialty-flip-back, .specialty-flip-return')) turnCard(opened, false);
+  });
+  specialtiesGrid.addEventListener('keydown', event => {
+    if (event.key === 'Escape' && opened?.contains(event.target)) turnCard(opened, false);
   });
 }
 
@@ -155,9 +157,14 @@ if ((equipeGrid || bookingList || doctorProfile) && typeof equipe !== 'undefined
     const status = document.querySelector('#booking-results-status');
     const empty = document.querySelector('#booking-empty');
     const normalize = text => text.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLocaleLowerCase('it').trim();
+    const specialtyKey = text => normalize(text).replace(/\bed\b/g, 'e').replace(/\s+/g, ' ');
+    const specialtyKeys = new Set(specialties.map(({ name }) => specialtyKey(name)));
     function filterDoctors() {
-      const terms = normalize(input.value).split(/\s+/).filter(Boolean);
+      const query = normalize(input.value);
+      const terms = query.split(/\s+/).filter(Boolean);
+      const key = specialtyKey(query);
       const matches = doctors.filter(person => {
+        if (specialtyKeys.has(key)) return specialtyKey(person.specializzazionePrenota || '') === key;
         const searchable = normalize([
           person.nome, person.specializzazione, person.specializzazionePrenota,
           ...(person.paroleChiave || []), ...(person.prestazioni || [])
@@ -170,6 +177,7 @@ if ((equipeGrid || bookingList || doctorProfile) && typeof equipe !== 'undefined
     }
     search.addEventListener('submit', event => { event.preventDefault(); filterDoctors(); });
     input.addEventListener('input', filterDoctors);
+    input.value = new URLSearchParams(location.search).get('specializzazione') ?? input.value;
     filterDoctors();
   }
   if (doctorProfile) {

@@ -2827,6 +2827,8 @@ html.css-home:has(.about-restyled) {
   text-align:left;
   line-height:inherit;
   perspective:1200px;
+  transform-style:preserve-3d;
+  container-type:inline-size;
 }
 
 :where(html.css-home) .specialty-flip-front,
@@ -2902,12 +2904,16 @@ html.css-home:has(.about-restyled) {
 }
 
 :where(html.css-home) .specialty-flip-back {
+  --specialty-back-padding:clamp(18px,6.4cqi,40px);
+  --specialty-back-gap:clamp(10px,3.2cqi,20px);
   display:flex;
   flex-direction:column;
-  gap:16px;
-  padding:32px;
-  border:1px solid var(--border);
-  background:var(--home-bg);
+  gap:var(--specialty-back-gap);
+  padding:var(--specialty-back-padding);
+  border:1px solid #d0d0cc;
+  border-radius:clamp(14px,4.8cqi,28px);
+  background:#fff;
+  cursor:pointer;
   opacity:0;
   transform:rotateY(-180deg);
 }
@@ -2918,44 +2924,57 @@ html.css-home:has(.about-restyled) {
 }
 
 :where(html.css-home) .specialty-flip-back strong {
-  display:block;
-  padding-bottom:14px;
+  flex-shrink:0;
+  padding-bottom:var(--specialty-back-gap);
   border-bottom:1px solid var(--home-light);
-  font-size:24px;
-  line-height:1.3;
+  font-size:clamp(18px,5.93cqi,36px);
+  line-height:1.15;
   overflow-wrap:anywhere;
 }
 
 :where(html.css-home) .specialty-flip-description {
   min-height:0;
   overflow:auto;
-  font-size:18px;
-  line-height:1.6;
+  cursor:text;
+  font-size:clamp(16px,4.7cqi,28px);
+  line-height:1.22;
 }
 
-:where(html.css-home) .specialty-flip-actions {
+:where(html.css-home) .specialty-flip-back .specialty-flip-book {
   display:grid;
-  justify-items:start;
-  gap:6px;
+  place-items:center;
+  flex-shrink:0;
+  min-height:clamp(44px,11.6cqi,68px);
   margin-top:auto;
-}
-
-:where(html.css-home) .specialty-flip-actions .specialty-flip-book {
-  justify-self:center;
-  padding:8px 20px;
+  padding:6px 12px;
   border-radius:999px;
   background:var(--home-green);
-  color:var(--home-bg);
+  color:#fff;
+  font-family:Arial,sans-serif;
+  font-size:clamp(18px,5.7cqi,34px);
+  font-weight:400;
+  line-height:1.15;
   text-decoration:none;
 }
 
 :where(html.css-home) .specialty-flip-back .specialty-flip-return {
+  position:absolute;
+  inset-inline:0;
+  bottom:3px;
+  width:max-content;
+  margin-inline:auto;
   padding:0;
   border:0;
   background:none;
-  font-size:15px;
+  font-size:12px;
+  line-height:1;
+  outline-offset:1px;
   color:var(--home-green);
   cursor:pointer;
+}
+
+:where(html.css-home) .specialty-flip-return:not(:focus-visible) {
+  clip-path:inset(50%);
 }
 
 :where(html.css-home) .specialties-booking {
@@ -3000,10 +3019,6 @@ html.css-home:has(.about-restyled) {
   font-size:22px;
 }
 
-:where(html.css-home) .specialty-flip-back {
-  padding:24px;
-}
-
 :where(html.css-home) .specialties-booking {
   min-height:300px;
   padding:28px;
@@ -3018,16 +3033,6 @@ html.css-home:has(.about-restyled) {
 @media(max-width:640px) {
 :where(html.css-home) .specialties-grid {
   grid-template-columns:1fr;
-}
-
-:where(html.css-home) .specialty-flip-back {
-  gap:12px;
-  padding:20px;
-}
-
-:where(html.css-home) .specialty-flip-description {
-  font-size:clamp(16px,4.6vw,18px);
-  line-height:1.5;
 }
 
 :where(html.css-home) .specialties-booking {
